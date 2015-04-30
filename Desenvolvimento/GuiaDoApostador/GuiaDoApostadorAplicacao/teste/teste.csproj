@@ -2,18 +2,20 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{153E5282-C079-4EB7-A626-6CF4A79AB2AC}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{AFB29644-E1E6-40FE-8833-75EA1E4B1234}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GuiaDoApostadorDominio</RootNamespace>
-    <AssemblyName>GuiaDoApostadorDominio</AssemblyName>
+    <RootNamespace>teste</RootNamespace>
+    <AssemblyName>teste</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,31 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ConcursoController.cs" />
-    <Compile Include="Entities\JogoLotogol.cs" />
-    <Compile Include="Entities\JogoTimePadrao.cs" />
-    <Compile Include="Entities\Concurso.cs" />
-    <Compile Include="Entities\Loterias\DuplaSena.cs" />
-    <Compile Include="Entities\Loterias\Federal.cs" />
-    <Compile Include="Entities\JogoLoteca.cs" />
-    <Compile Include="Entities\Loterias\Loteca.cs" />
-    <Compile Include="Entities\Enumerators.cs" />
-    <Compile Include="Entities\Loterias\Lotogol.cs" />
-    <Compile Include="Entities\Loterias\Lotomania.cs" />
-    <Compile Include="Entities\PremioFederal.cs" />
-    <Compile Include="Entities\ProximoConcurso.cs" />
-    <Compile Include="Entities\Loterias\Quina.cs" />
-    <Compile Include="Entities\Loterias\Lotofacil.cs" />
-    <Compile Include="Entities\Loterias\MegaSena.cs" />
-    <Compile Include="Entities\PremioPadrao.cs" />
-    <Compile Include="Entities\TimeCoracao.cs" />
-    <Compile Include="Entities\Loterias\Timemania.cs" />
-    <Compile Include="Interfaces\IConcursoController.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\" />
+    <ProjectReference Include="..\..\GuiaDoApostadorDominio\GuiaDoApostadorDominio.csproj">
+      <Project>{153E5282-C079-4EB7-A626-6CF4A79AB2AC}</Project>
+      <Name>GuiaDoApostadorDominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
