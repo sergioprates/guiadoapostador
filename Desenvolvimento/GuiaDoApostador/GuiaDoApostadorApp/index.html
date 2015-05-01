@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/Bootstrap/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/Jquery/jquery.mobile.css">
+    <link rel="stylesheet" type="text/css" href="css/Jquery/jquery.mobile.theme-1.3.1.css">
+    <link rel="stylesheet" type="text/css" href="css/Jquery/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/Jquery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/Jquery/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/Bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/Jquery/jquery.blockUI.js"></script>
+    <script src="js/Jquery/jquery-validate.js" type="text/javascript"></script>
+    <script src="js/Jquery/jquery.maskedinput.js" type="text/javascript"></script>
+    <script src="js/Bootstrap/collapse.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/default.js"></script>
+    <script type="text/javascript" src="js/cadastroCorretor.js"></script>
+    <script src="js/home.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <!--
+            Página principal, precisa ficar aqui, as outras devem ficar em arquivos
+            separados
+-->
+        <div data-role="page" id="default" class="corrigeEspacamento">
+          
+            <div class="row">
+                <div class="col-xs-12 col-md-12 text-center">
+                    <h3>
+                        Sistema de Imóveis
+                        <br/>
+                        Vendedores</h3>
+                </div>
+            </div>
+           <div class="row"><br/></div>
+            <form id="frmLoginCorretor">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="txtLoginCorretor" class="col-xs-2 col-md-2 control-label">
+                            Login:</label>
+                        <div class="col-xs-10 col-md-10">
+                            <input type="text" class="form-control" maxlength="100" id="txtLoginCorretor" name="txtLoginCorretor" placeholder="Login"</input>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"><br/></div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="txtSenhaCorretor" class="col-xs-2 col-md-2 control-label">
+                            Senha:</label>
+                        <div class="col-xs-10 col-md-10">
+                            <input type="password" class="form-control" maxlength="100" id="txtSenhaCorretor" name="txtSenhaCorretor" placeholder="Senha"></input>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row"><br/></div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 text-center">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="logar();">
+                            Entrar</button>
+                    </div>
+                     <div class="row"><br/><br/></div>
+                    <div class="col-xs-12 col-md-12 text-center">
+                        <a href="#" onclick="redirectComVoltar('#cadastroCorretor','#default','CadastroCorretor')"
+                            class="btn btn-primary btn-lg active" data-role="button">É novo por aqui? Cadastre-se!</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--Fim da página principal -->
+        <!--Cadastro -->
+        <div data-role="page" id="cadastroCorretor" class="corrigeEspacamento">
+        </div>
+         <!--Home-->
+        <div data-role="page" id="home" class="corrigeEspacamento">
+        </div>
+    </div>
+   
+</body>
+</html>

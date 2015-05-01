@@ -44,6 +44,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiaDoApostadorLogs", "Guia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiaDoApostador_Processo", "GuiaDoApostador_Processo\GuiaDoApostador_Processo.csproj", "{4C8047DA-30C6-4E63-AAE1-A5AFF5A2DD86}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Apresentacao", "0 - Apresentacao", "{CAF654E2-50DC-45B0-80B2-1E606394D036}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GuiaDoApostadorApp", "GuiaDoApostadorApp\", "{E47E408A-4D66-42CE-9B99-1FB8333A4E95}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/GuiaDoApostadorApp"
+		Debug.AspNetCompiler.PhysicalPath = "GuiaDoApostadorApp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\GuiaDoApostadorApp\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/GuiaDoApostadorApp"
+		Release.AspNetCompiler.PhysicalPath = "GuiaDoApostadorApp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\GuiaDoApostadorApp\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "11563"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,18 +136,29 @@ Global
 		{4C8047DA-30C6-4E63-AAE1-A5AFF5A2DD86}.Release|Mixed Platforms.Build.0 = Release|x86
 		{4C8047DA-30C6-4E63-AAE1-A5AFF5A2DD86}.Release|x86.ActiveCfg = Release|x86
 		{4C8047DA-30C6-4E63-AAE1-A5AFF5A2DD86}.Release|x86.Build.0 = Release|x86
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{153E5282-C079-4EB7-A626-6CF4A79AB2AC} = {EA1D135E-57FB-4108-BABD-77423A99CA0F}
 		{E5AB35E0-7C58-42EA-AA48-FEFD41D17E3B} = {3D6F4754-D5B0-4CBA-9DB7-2E693578A241}
 		{4C8047DA-30C6-4E63-AAE1-A5AFF5A2DD86} = {3D6F4754-D5B0-4CBA-9DB7-2E693578A241}
 		{0F350562-D5B1-49A2-9B86-733D104ACC9D} = {DACE5586-ADF5-422A-8F1B-3794BD621379}
-		{153E5282-C079-4EB7-A626-6CF4A79AB2AC} = {EA1D135E-57FB-4108-BABD-77423A99CA0F}
 		{654A4104-57D4-4E61-9D26-DA87EDD21F3B} = {95FFDE17-E4FF-4528-9272-D6FE74D2A654}
 		{002F7861-7905-4503-AB54-23B8E89156D5} = {95FFDE17-E4FF-4528-9272-D6FE74D2A654}
 		{C142EA5F-F50B-49D1-904B-E4195AC20B3D} = {654A4104-57D4-4E61-9D26-DA87EDD21F3B}
 		{24C0C5CB-2CCB-409B-8523-08E99ACCFB43} = {002F7861-7905-4503-AB54-23B8E89156D5}
+		{E47E408A-4D66-42CE-9B99-1FB8333A4E95} = {CAF654E2-50DC-45B0-80B2-1E606394D036}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,31 @@
+body
+{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Tahoma' , sans-serif, Calibri, Arial;
+    font-size: 18px;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=tel] {
+    height: 45px !important;
+}
+
+.corrigeEspacamento
+{
+    padding: 10px;
+    overflow: hidden;
+}
+
+.headerHome
+{
+    position: relative;
+}
+.headerContentHome
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%
+}
