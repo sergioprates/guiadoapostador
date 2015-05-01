@@ -7,8 +7,8 @@ namespace GuiaDoApostadorDominio.Entities
 {
     public class PremioFederal
     {
-        public byte premio { get; set; }
-        public int bilhete { get; set; }
-        public decimal valorPago { get; set; }
+        public byte Premio { get; set; }
+        public int Bilhete { get; set; }
+        public decimal ValorPago { get; set; }
     }
 }

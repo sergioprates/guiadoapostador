@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Controllers;
 using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Interfaces.Controllers;
 
 namespace GuiaDoApostadorDominio.Interfaces
 {
@@ -26,19 +27,19 @@ namespace GuiaDoApostadorDominio.Interfaces
                 case Loteria.DuplaSena:
                     con = new DuplaSena()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.Federal:
                     con = new Federal()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.Loteca:
                     con = new Loteca()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.Lotofacil:
@@ -46,52 +47,52 @@ namespace GuiaDoApostadorDominio.Interfaces
                     #region Dados Lotofacil
 		            con = new Lotofacil()
                     {
-                        idConcurso = idConcurso,
-                        data = DateTime.Now,
-                        cidade = "São Paulo",
-                        local = "Caminhão da Sorte",
-                        valorAcumulado = 0,
-                        proximoConcursoData = new ProximoConcurso()
+                        ConcursoID = idConcurso,
+                        Data = DateTime.Now,
+                        Cidade = "São Paulo",
+                        Local = "Caminhão da Sorte",
+                        ValorAcumulado = 0,
+                        ProximoConcursoData = new ProximoConcurso()
                         {
-                            data = DateTime.Now.AddDays(7),
-                            valorEstimado = 2800000
+                            Data = DateTime.Now.AddDays(7),
+                            ValorEstimado = 2800000
                         },
-                        especialValorAcumulado = 1500000,
-                        dezenas = new List<byte>()
+                        EspecialValorAcumulado = 1500000,
+                        Dezenas = new List<byte>()
                         {
                             1,25,21,3,6,7,10,12,13,16,17,19,22,24,9
                         },
-                        premios = new List<PremioPadrao>()
+                        Premios = new List<PremioPadrao>()
                         {
                             new PremioPadrao()
                             {
-                                acertos = 15,
-                                ganhadores = 1,
-                                valorPago = 1643460.78m
+                                Acertos = 15,
+                                Ganhadores = 1,
+                                ValorPago = 1643460.78m
                             },
                             new PremioPadrao()
                             {
-                                acertos = 14,
-                                ganhadores = 1,
-                                valorPago = 660.93m
+                                Acertos = 14,
+                                Ganhadores = 1,
+                                ValorPago = 660.93m
                             },
                             new PremioPadrao()
                             {
-                                acertos = 13,
-                                ganhadores = 1,
-                                valorPago = 12.50m
+                                Acertos = 13,
+                                Ganhadores = 1,
+                                ValorPago = 12.50m
                             },
                             new PremioPadrao()
                             {
-                                acertos = 12,
-                                ganhadores = 1,
-                                valorPago = 5
+                                Acertos = 12,
+                                Ganhadores = 1,
+                                ValorPago = 5
                             },
                             new PremioPadrao()
                             {
-                                acertos = 11,
-                                ganhadores = 1,
-                                valorPago = 2.50m
+                                Acertos = 11,
+                                Ganhadores = 1,
+                                ValorPago = 2.50m
                             },
                         }
                     }; 
@@ -101,31 +102,31 @@ namespace GuiaDoApostadorDominio.Interfaces
                 case Loteria.Lotogol:
                     con = new Lotogol()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.Lotomania:
                     con = new Lotomania()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.MegaSena:
                     con = new MegaSena()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.Quina:
                     con = new Quina()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 case Loteria.Timemania:
                     con = new Timemania()
                     {
-                        idConcurso = idConcurso
+                        ConcursoID = idConcurso
                     };
                     break;
                 default:

@@ -7,8 +7,8 @@ namespace GuiaDoApostadorDominio.Entities
 {
     public class JogoLotogol
     {
-        public JogoTimePadrao time1 { get; set; }
-        public JogoTimePadrao time2 { get; set; }
-        public Semana diaDaSemana { get; set; }
+        public JogoTimePadrao Time1 { get; set; }
+        public JogoTimePadrao Time2 { get; set; }
+        public Semana DiaDaSemana { get; set; }
     }
 }

@@ -59,11 +59,12 @@
     <Compile Include="Entities\PremioPadrao.cs" />
     <Compile Include="Entities\TimeCoracao.cs" />
     <Compile Include="Entities\Loterias\Timemania.cs" />
-    <Compile Include="Interfaces\IConcursoController.cs" />
+    <Compile Include="Interfaces\Controllers\IConcursoController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaces\Repository\" />
     <Folder Include="Repository\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

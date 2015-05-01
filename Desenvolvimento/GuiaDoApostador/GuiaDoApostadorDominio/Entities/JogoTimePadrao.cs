@@ -7,7 +7,7 @@ namespace GuiaDoApostadorDominio.Entities
 {
     public class JogoTimePadrao
     {
-        public string time { get; set; }
-        public byte gols { get; set; }
+        public string Time { get; set; }
+        public byte Gols { get; set; }
     }
 }

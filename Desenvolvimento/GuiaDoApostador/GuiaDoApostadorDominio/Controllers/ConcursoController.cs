@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces;
+using GuiaDoApostadorDominio.Interfaces.Controllers;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
@@ -18,7 +19,7 @@ namespace GuiaDoApostadorDominio.Controllers
         {
             Concurso con = null;
 
-            con.idConcurso = concurso;
+            con.ConcursoID = concurso;
 
             // acessar banco ou api para receber os dados
 

@@ -9,9 +9,9 @@ namespace GuiaDoApostadorDominio.Entities
     {
         public Federal()
         {
-            base.tipoConcurso = Loteria.Federal;            
+            base.TipoConcurso = Loteria.Federal;            
         }
 
-        public List<PremioFederal> premios { get; set; }        
+        public List<PremioFederal> Premios { get; set; }        
     }
 }

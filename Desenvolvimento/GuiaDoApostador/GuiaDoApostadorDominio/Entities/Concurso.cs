@@ -7,14 +7,14 @@ namespace GuiaDoApostadorDominio.Entities
 {
     public abstract class Concurso
     {
-        public int idConcurso { get; set; }
-        public Loteria tipoConcurso { get; protected set; }
-        public DateTime data { get; set; }
-        public string cidade { get; set; }
-        public string local { get; set; }
-        public decimal valorAcumulado { get; set; }
-        public decimal? arrecadacaoTotal { get; set; }
-        public ProximoConcurso proximoConcursoData { get; set; }
-        public decimal? especialValorAcumulado { get; set; }
+        public int ConcursoID { get; set; }
+        public Loteria TipoConcurso { get; protected set; }
+        public DateTime Data { get; set; }
+        public string Cidade { get; set; }
+        public string Local { get; set; }
+        public decimal ValorAcumulado { get; set; }
+        public decimal? ArrecadacaoTotal { get; set; }
+        public ProximoConcurso ProximoConcursoData { get; set; }
+        public decimal? EspecialValorAcumulado { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using GuiaDoApostadorDominio.Controllers;
 using GuiaDoApostadorDominio.Entities;
 
-namespace GuiaDoApostadorDominio.Interfaces
+namespace GuiaDoApostadorDominio.Interfaces.Controllers
 {
     public interface IConcursoController
     {

@@ -7,7 +7,7 @@ namespace GuiaDoApostadorDominio.Entities
 {
     public class ProximoConcurso
     {
-        public DateTime data { get; set; }
-        public decimal valorEstimado { get; set; }
+        public DateTime Data { get; set; }
+        public decimal ValorEstimado { get; set; }
     }
 }

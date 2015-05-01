@@ -9,10 +9,10 @@ namespace GuiaDoApostadorDominio.Entities
     {
         public Lotofacil()
         {
-            base.tipoConcurso = Loteria.Lotofacil;
+            base.TipoConcurso = Loteria.Lotofacil;
         }
 
-        public List<byte> dezenas { get; set; }
-        public List<PremioPadrao> premios { get; set; }
+        public List<byte> Dezenas { get; set; }
+        public List<PremioPadrao> Premios { get; set; }
     }
 }
