@@ -10,20 +10,75 @@ namespace GuiaDoApostadorDominio.Controllers
 {
     public class ConcursoController : IConcursoController
     {
-        /// <summary>
-        /// Apenas um método de exemplo
-        /// </summary>
-        /// <param name="loteria"></param>
-        /// <returns></returns>
-        public Concurso BuscaConcurso(Loteria loteria, int concurso)
+        private readonly IConcursoController _controller;
+
+        public ConcursoController(Loteria loteria)
         {
-            Concurso con = null;
+            switch (loteria)
+            {
+                case Loteria.DuplaSena:
+                    _controller = new DuplaSenaController();
+                    break;
+                case Loteria.Federal:
+                    _controller = new FederalController();
+                    break;
+                case Loteria.Loteca:
+                    _controller = new LotecaController();
+                    break;
+                case Loteria.Lotofacil:
+                    _controller = new LotofacilController();
+                    break;
+                case Loteria.Lotogol:
+                    _controller = new LotogolController();
+                    break;
+                case Loteria.Lotomania:
+                    _controller = new LotomaniaController();
+                    break;
+                case Loteria.MegaSena:
+                    _controller = new MegaSenaController();
+                    break;
+                case Loteria.Quina:
+                    _controller = new QuinaController();
+                    break;
+                case Loteria.Timemania:
+                    _controller = new TimemaniaController();
+                    break;
+                default:
+                    //testes
+                    _controller = new ConcursoControllerMock();
+                    break;
+            }
+        }
 
-            con.ConcursoID = concurso;
+        
+        public Concurso Buscar(int id)
+        {
+            return _controller.Buscar(id);
+        }
 
-            // acessar banco ou api para receber os dados
+        public int Inserir(Concurso entidade)
+        {
+            return _controller.Inserir(entidade);
+        }
 
-            return con;
+        public IList<Concurso> Listar()
+        {
+            return _controller.Listar();
+        }
+
+        /// <summary>
+        /// Método deverá ser implementado em todas as classes filhas
+        /// </summary>
+        /// <returns></returns>
+        public virtual Concurso ConsultaApi()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool Existe(int id)
+        {
+            return _controller.Existe(id);
         }
     }
 }

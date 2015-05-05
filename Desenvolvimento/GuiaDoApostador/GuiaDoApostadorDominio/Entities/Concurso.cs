@@ -7,7 +7,7 @@ namespace GuiaDoApostadorDominio.Entities
 {
     public abstract class Concurso
     {
-        public int ConcursoID { get; set; }
+        public int ID { get; set; }
         public Loteria TipoConcurso { get; protected set; }
         public DateTime Data { get; set; }
         public string Cidade { get; set; }

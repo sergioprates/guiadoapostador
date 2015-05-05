@@ -27,19 +27,19 @@ namespace GuiaDoApostadorDominio.Interfaces
                 case Loteria.DuplaSena:
                     con = new DuplaSena()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.Federal:
                     con = new Federal()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.Loteca:
                     con = new Loteca()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.Lotofacil:
@@ -47,7 +47,7 @@ namespace GuiaDoApostadorDominio.Interfaces
                     #region Dados Lotofacil
 		            con = new Lotofacil()
                     {
-                        ConcursoID = idConcurso,
+                        ID = idConcurso,
                         Data = DateTime.Now,
                         Cidade = "São Paulo",
                         Local = "Caminhão da Sorte",
@@ -102,31 +102,31 @@ namespace GuiaDoApostadorDominio.Interfaces
                 case Loteria.Lotogol:
                     con = new Lotogol()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.Lotomania:
                     con = new Lotomania()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.MegaSena:
                     con = new MegaSena()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.Quina:
                     con = new Quina()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 case Loteria.Timemania:
                     con = new Timemania()
                     {
-                        ConcursoID = idConcurso
+                        ID = idConcurso
                     };
                     break;
                 default:
@@ -134,6 +134,32 @@ namespace GuiaDoApostadorDominio.Interfaces
             }
 
             return con;
+        }
+
+        public Concurso Buscar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Inserir(Concurso entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Concurso> Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Concurso ConsultaApi()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool Existe(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

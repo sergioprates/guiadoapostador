@@ -41,6 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ConcursoController.cs" />
+    <Compile Include="Controllers\DuplaSenaController.cs" />
+    <Compile Include="Controllers\FederalController.cs" />
+    <Compile Include="Controllers\LotecaController.cs" />
+    <Compile Include="Controllers\LotofacilController.cs" />
+    <Compile Include="Controllers\LotogolController.cs" />
+    <Compile Include="Controllers\LotomaniaController.cs" />
+    <Compile Include="Controllers\MegaSenaController.cs" />
+    <Compile Include="Controllers\QuinaController.cs" />
+    <Compile Include="Controllers\TimemaniaController.cs" />
     <Compile Include="Entities\JogoLotogol.cs" />
     <Compile Include="Entities\JogoTimePadrao.cs" />
     <Compile Include="Entities\Concurso.cs" />
@@ -60,13 +69,21 @@
     <Compile Include="Entities\TimeCoracao.cs" />
     <Compile Include="Entities\Loterias\Timemania.cs" />
     <Compile Include="Interfaces\Controllers\IConcursoController.cs" />
+    <Compile Include="Interfaces\Controllers\IControllerBase.cs" />
+    <Compile Include="Interfaces\Controllers\IDuplaSenaController.cs" />
+    <Compile Include="Interfaces\Controllers\IFederalController.cs" />
+    <Compile Include="Interfaces\Controllers\ILotecaController.cs" />
+    <Compile Include="Interfaces\Controllers\ILotofacilController.cs" />
+    <Compile Include="Interfaces\Controllers\ILotogolController.cs" />
+    <Compile Include="Interfaces\Controllers\ILotomaniaController.cs" />
+    <Compile Include="Interfaces\Controllers\IMegaSenaController.cs" />
+    <Compile Include="Interfaces\Controllers\IQuinaController.cs" />
+    <Compile Include="Interfaces\Controllers\ITimemaniaController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\Repository\" />
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
