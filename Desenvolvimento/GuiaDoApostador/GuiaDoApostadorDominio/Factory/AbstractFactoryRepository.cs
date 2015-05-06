@@ -5,7 +5,7 @@ namespace GuiaDoApostadorDominio.Factory
 {
     public static class AbstractFactoryRepository
     {
-        private static bool _isTeste = true;
+        private static bool _isTeste = false;
 
         public static IMegaSenaRepository InstanciarMegaSena()
         {
