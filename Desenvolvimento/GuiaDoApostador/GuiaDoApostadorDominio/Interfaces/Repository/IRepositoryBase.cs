@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace GuiaDoApostadorDominio.Repository
+namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface IRepositorioBase<TEntity>
+    public interface IRepositoryBase<TEntity>
          where TEntity : class
     {
         int Inserir(TEntity obj);

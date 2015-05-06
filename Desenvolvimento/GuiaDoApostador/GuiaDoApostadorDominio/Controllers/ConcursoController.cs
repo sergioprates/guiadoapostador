@@ -5,6 +5,7 @@ using System.Text;
 using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Interfaces.Controllers;
+using GuiaDoApostadorDominio.Factory;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
@@ -35,7 +36,7 @@ namespace GuiaDoApostadorDominio.Controllers
                     _controller = new LotomaniaController();
                     break;
                 case Loteria.MegaSena:
-                    _controller = new MegaSenaController();
+                    _controller = new MegaSenaController(AbstractFactoryRepository.InstanciarMegaSena());
                     break;
                 case Loteria.Quina:
                     _controller = new QuinaController();
@@ -44,7 +45,6 @@ namespace GuiaDoApostadorDominio.Controllers
                     _controller = new TimemaniaController();
                     break;
                 default:
-                    //testes
                     _controller = new ConcursoControllerMock();
                     break;
             }
@@ -70,9 +70,9 @@ namespace GuiaDoApostadorDominio.Controllers
         /// Método deverá ser implementado em todas as classes filhas
         /// </summary>
         /// <returns></returns>
-        public virtual Concurso ConsultaApi()
+        public Concurso ConsultaApi()
         {
-            throw new NotImplementedException();
+            return _controller.ConsultaApi();
         }
 
 
