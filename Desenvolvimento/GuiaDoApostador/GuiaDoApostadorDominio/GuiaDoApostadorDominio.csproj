@@ -35,6 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>dll\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +73,7 @@
     <Compile Include="Entities\Loterias\Timemania.cs" />
     <Compile Include="Factory\AbstractFactoryController.cs" />
     <Compile Include="Factory\AbstractFactoryRepository.cs" />
+    <Compile Include="Factory\WebRequestFactory.cs" />
     <Compile Include="Interfaces\Controllers\IConcursoController.cs" />
     <Compile Include="Interfaces\Controllers\IControllerBase.cs" />
     <Compile Include="Interfaces\Controllers\IDuplaSenaController.cs" />
@@ -86,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
     <Compile Include="Repository\MegaSenaRepository.cs" />
+    <Compile Include="UnitTest\MegaSenaUnitTest.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
     <Compile Include="UnitTest\Mock\MegaSenaRepositoryMock.cs" />
   </ItemGroup>

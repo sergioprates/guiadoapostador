@@ -52,7 +52,7 @@ namespace GuiaDoApostadorDominio.Interfaces
                         Cidade = "São Paulo",
                         Local = "Caminhão da Sorte",
                         ValorAcumulado = 0,
-                        ProximoConcursoData = new ProximoConcurso()
+                        ProximoConcurso = new ProximoConcurso()
                         {
                             Data = DateTime.Now.AddDays(7),
                             ValorEstimado = 2800000

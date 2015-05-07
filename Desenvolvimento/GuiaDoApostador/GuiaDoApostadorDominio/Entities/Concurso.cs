@@ -14,7 +14,7 @@ namespace GuiaDoApostadorDominio.Entities
         public string Local { get; set; }
         public decimal ValorAcumulado { get; set; }
         public decimal? ArrecadacaoTotal { get; set; }
-        public ProximoConcurso ProximoConcursoData { get; set; }
+        public ProximoConcurso ProximoConcurso { get; set; }
         public decimal? EspecialValorAcumulado { get; set; }
     }
 }

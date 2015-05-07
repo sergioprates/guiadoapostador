@@ -19,7 +19,7 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
             loteria.Premios.Add(new PremioPadrao(6, 100000, 10));
             loteria.Premios.Add(new PremioPadrao(4, 100000, 5));
             loteria.Premios.Add(new PremioPadrao(5, 100000, 3));
-            loteria.ProximoConcursoData = new ProximoConcurso(DateTime.Now.AddDays(2), 500000);
+            loteria.ProximoConcurso = new ProximoConcurso(DateTime.Now.AddDays(2), 500000);
             loteria.ValorAcumulado = 3122222;
             loteria.ArrecadacaoTotal = 500000;
             loteria.Dezenas = 
