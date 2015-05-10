@@ -2,24 +2,22 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
 
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.guiadoapostador.software"
+        id          = "com.osen.teste"
         version     = "1.0.0"
         versionCode = "10" >
 
         <!-- versionCode is optional and Android only -->
 
-        <preference name="phonegap-version" value="3.7.0" />
+        <preference name="phonegap-version" value="3.5.0" />
 
-        <name>GuiaDoApostador</name>
+        <name>Teste Osen</name>
 
         <description>
-        Guia de Apostas
+        Teste de descricao
         </description>
 
-        <author href="http://yoursite.com" email="sergioprates.student@gmail.com">
-        Sergio Prates dos Santos
+        <author href="http://yoursite.com" email="you@youremail.com">
+       Sergio
         </author>
-        <gap:plugin name="org.apache.cordova.device" />
-        <gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
-        
+ <gap:plugin name="org.apache.cordova.device" />
     </widget>
