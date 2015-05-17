@@ -15,5 +15,6 @@ namespace GuiaDoApostadorDominio.Entities
         public List<byte> Dezenas { get; set; }
         public List<PremioPadrao> Premios { get; set; }
         public TimeCoracao TimeCoracao { get; set; }
+        public ConcursoFinalCinco ProximoConcursoFinalCinco { get; set; }
     }
 }

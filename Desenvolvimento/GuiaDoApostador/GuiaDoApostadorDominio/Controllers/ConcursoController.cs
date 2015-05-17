@@ -18,31 +18,31 @@ namespace GuiaDoApostadorDominio.Controllers
             switch (loteria)
             {
                 case Loteria.DuplaSena:
-                    _controller = new DuplaSenaController();
+                    _controller = new DuplaSenaController(AbstractFactoryRepository.InstanciarDuplaSena());
                     break;
                 case Loteria.Federal:
-                    _controller = new FederalController();
+                    _controller = new FederalController(AbstractFactoryRepository.InstanciarFederal());
                     break;
                 case Loteria.Loteca:
-                    _controller = new LotecaController();
+                    _controller = new LotecaController(AbstractFactoryRepository.InstanciarLoteca());
                     break;
                 case Loteria.Lotofacil:
-                    _controller = new LotofacilController();
+                    _controller = new LotofacilController(AbstractFactoryRepository.InstanciarLotofacil());
                     break;
                 case Loteria.Lotogol:
-                    _controller = new LotogolController();
+                    _controller = new LotogolController(AbstractFactoryRepository.InstanciarLotogol());
                     break;
                 case Loteria.Lotomania:
-                    _controller = new LotomaniaController();
+                    _controller = new LotomaniaController(AbstractFactoryRepository.InstanciarLotomania());
                     break;
                 case Loteria.MegaSena:
                     _controller = new MegaSenaController(AbstractFactoryRepository.InstanciarMegaSena());
                     break;
                 case Loteria.Quina:
-                    _controller = new QuinaController();
+                    _controller = new QuinaController(AbstractFactoryRepository.InstanciarQuina());
                     break;
                 case Loteria.Timemania:
-                    _controller = new TimemaniaController();
+                    _controller = new TimemaniaController(AbstractFactoryRepository.InstanciarTimemania());
                     break;
                 default:
                     _controller = new ConcursoControllerMock();

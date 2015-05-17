@@ -14,5 +14,6 @@ namespace GuiaDoApostadorDominio.Entities
 
         public List<JogoLoteca> Jogos { get; set; }
         public List<PremioPadrao> Premios { get; set; }
+        public ConcursoFinalCinco ProximoConcursoFinalCinco { get; set; }
     }
 }

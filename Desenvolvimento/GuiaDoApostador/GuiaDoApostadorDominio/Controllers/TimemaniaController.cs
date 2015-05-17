@@ -2,35 +2,46 @@
 using System.Collections.Generic;
 using GuiaDoApostadorDominio.Interfaces.Controllers;
 using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Interfaces.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class TimemaniaController : ITimemaniaController
     {
+        private readonly ITimemaniaRepository _repository;
+
+        public TimemaniaController(ITimemaniaRepository repository)
+        {
+            if (_repository == null)
+            {
+                _repository = repository;
+            }
+        }
+
         public Concurso ConsultaApi()
         {
-            throw new NotImplementedException();
+            return _repository.ConsultaApi();
         }
 
-        public Concurso Buscar(int id)
+        public Entities.Concurso Buscar(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Buscar(id);
         }
 
-        public int Inserir(Concurso entidade)
+        public int Inserir(Entities.Concurso entidade)
         {
-            throw new NotImplementedException();
+            return _repository.Inserir(entidade);
         }
 
-        public IList<Concurso> Listar()
+        public System.Collections.Generic.IList<Entities.Concurso> Listar()
         {
-            throw new NotImplementedException();
+            return _repository.Listar();
         }
 
 
         public bool Existe(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Existe(id);
         }
     }
 }

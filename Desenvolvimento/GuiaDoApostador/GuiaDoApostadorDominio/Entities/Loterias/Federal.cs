@@ -12,6 +12,8 @@ namespace GuiaDoApostadorDominio.Entities
             base.TipoConcurso = Loteria.Federal;            
         }
 
-        public List<PremioFederal> Premios { get; set; }        
+        public List<PremioFederal> Premios { get; set; }
+
+        public string CidadePrimeiroPremio { get; set; }
     }
 }

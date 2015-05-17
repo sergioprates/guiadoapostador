@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces.Repository;
-using System.Net;
-using Newtonsoft.Json;
-using System.IO;
 using System.Globalization;
-using Newtonsoft.Json.Linq;
-using GuiaDoApostadorDominio.Factory;
+using GuiaDoApostadorInfra.Util;
 
 namespace GuiaDoApostadorDominio.Repository
 {
@@ -37,9 +31,7 @@ namespace GuiaDoApostadorDominio.Repository
 
         public Concurso ConsultaApi()
         {
-            string url = "http://developers.agenciaideias.com.br/loterias/megasena/json";
-            dynamic obj = WebRequestFactory.GetWebRequestJson(url);
-
+            dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/megasena/json");
             return deserializaConcurso(obj);
         }
 
@@ -51,9 +43,9 @@ namespace GuiaDoApostadorDominio.Repository
                 Data = DateTime.ParseExact(obj.concurso.data.ToString(), "dd/MM/yyyy", new CultureInfo("pt-BR")),
                 Cidade = obj.concurso.cidade,
                 Local = obj.concurso.local,
-                ValorAcumulado = Convert.ToDecimal(obj.concurso.valor_acumulado.ToString().Replace(",", ".")),
-                ArrecadacaoTotal = Convert.ToDecimal(obj.concurso.arrecadacao_total.ToString().Replace(".", "").Replace(",", ".")),
-                EspecialValorAcumulado = Convert.ToDecimal(obj.mega_virada_valor_acumulado.ToString().Replace(".", "").Replace(",", "."))                
+                ValorAcumulado = Convert.ToDecimal(obj.concurso.valor_acumulado.ToString().Replace(".", "")),
+                ArrecadacaoTotal = Convert.ToDecimal(obj.concurso.arrecadacao_total.ToString().Replace(".", "")),
+                EspecialValorAcumulado = Convert.ToDecimal(obj.mega_virada_valor_acumulado.ToString().Replace(".", ""))                
             };
 
             loteria.Dezenas = new List<byte>();
@@ -67,19 +59,19 @@ namespace GuiaDoApostadorDominio.Repository
                 new PremioPadrao()
                 {
                     Acertos = 6,
-                    ValorPago = Convert.ToDecimal(obj.concurso.premiacao.sena.valor_pago.ToString().Replace(".", "").Replace(",", ".")),
+                    ValorPago = Convert.ToDecimal(obj.concurso.premiacao.sena.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao.sena.ganhadores.ToString().Replace(".", ""))
                 },
                 new PremioPadrao()
                 {
                     Acertos = 5,
-                    ValorPago = Convert.ToDecimal(obj.concurso.premiacao.quina.valor_pago.ToString().Replace(".", "").Replace(",", ".")),
+                    ValorPago = Convert.ToDecimal(obj.concurso.premiacao.quina.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao.quina.ganhadores.ToString().Replace(".", ""))
                 },
                 new PremioPadrao()
                 {
                     Acertos = 4,
-                    ValorPago = Convert.ToDecimal(obj.concurso.premiacao.quadra.valor_pago.ToString().Replace(".", "").Replace(",", ".")),
+                    ValorPago = Convert.ToDecimal(obj.concurso.premiacao.quadra.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao.quadra.ganhadores.ToString().Replace(".", ""))
                 },
             };
@@ -87,7 +79,7 @@ namespace GuiaDoApostadorDominio.Repository
             loteria.ProximoConcurso = new ProximoConcurso()
             {
                 Data = DateTime.ParseExact(obj.proximo_concurso.data.ToString(), "dd/MM/yyyy", new CultureInfo("pt-BR")),
-                ValorEstimado = Convert.ToDecimal(obj.proximo_concurso.valor_estimado.ToString().Replace(".", "").Replace(",", "."))
+                ValorEstimado = Convert.ToDecimal(obj.proximo_concurso.valor_estimado.ToString().Replace(".", ""))
             };
 
             return loteria;

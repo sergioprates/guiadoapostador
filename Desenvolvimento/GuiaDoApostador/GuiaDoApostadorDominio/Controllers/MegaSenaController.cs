@@ -2,7 +2,6 @@
 using System.Net;
 using System.IO;
 using GuiaDoApostadorDominio.Entities;
-using Newtonsoft.Json;
 using GuiaDoApostadorDominio.Repository;
 using GuiaDoApostadorDominio.Interfaces.Repository;
 

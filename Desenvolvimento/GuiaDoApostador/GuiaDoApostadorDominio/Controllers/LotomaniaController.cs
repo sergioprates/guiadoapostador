@@ -1,33 +1,45 @@
-﻿using GuiaDoApostadorDominio.Interfaces.Controllers;
+﻿using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Interfaces.Controllers;
+using GuiaDoApostadorDominio.Interfaces.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class LotomaniaController :  ILotomaniaController
     {
-        public Entities.Concurso ConsultaApi()
+        private readonly ILotomaniaRepository _repository;
+
+        public LotomaniaController(ILotomaniaRepository repository)
         {
-            throw new System.NotImplementedException();
+            if (_repository == null)
+            {
+                _repository = repository;
+            }
+        }
+
+        public Concurso ConsultaApi()
+        {
+            return _repository.ConsultaApi();
         }
 
         public Entities.Concurso Buscar(int id)
         {
-            throw new System.NotImplementedException();
+            return _repository.Buscar(id);
         }
 
         public int Inserir(Entities.Concurso entidade)
         {
-            throw new System.NotImplementedException();
+            return _repository.Inserir(entidade);
         }
 
         public System.Collections.Generic.IList<Entities.Concurso> Listar()
         {
-            throw new System.NotImplementedException();
+            return _repository.Listar();
         }
 
 
         public bool Existe(int id)
         {
-            throw new System.NotImplementedException();
+            return _repository.Existe(id);
         }
     }
 }

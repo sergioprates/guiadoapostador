@@ -3,36 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Interfaces.Controllers;
+using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Interfaces.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class LotecaController :  ILotecaController
     {
 
-        public Entities.Concurso ConsultaApi()
+        private readonly ILotecaRepository _repository;
+
+        public LotecaController(ILotecaRepository repository)
         {
-            throw new NotImplementedException();
+            if (_repository == null)
+            {
+                _repository = repository;
+            }
+        }
+
+        public Concurso ConsultaApi()
+        {
+            return _repository.ConsultaApi();
         }
 
         public Entities.Concurso Buscar(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Buscar(id);
         }
 
         public int Inserir(Entities.Concurso entidade)
         {
-            throw new NotImplementedException();
+            return _repository.Inserir(entidade);
         }
 
-        public IList<Entities.Concurso> Listar()
+        public System.Collections.Generic.IList<Entities.Concurso> Listar()
         {
-            throw new NotImplementedException();
+            return _repository.Listar();
         }
 
 
         public bool Existe(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Existe(id);
         }
     }
 }

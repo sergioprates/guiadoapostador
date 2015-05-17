@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>dll\nunit.framework.dll</HintPath>
     </Reference>
@@ -53,6 +49,7 @@
     <Compile Include="Controllers\MegaSenaController.cs" />
     <Compile Include="Controllers\QuinaController.cs" />
     <Compile Include="Controllers\TimemaniaController.cs" />
+    <Compile Include="Entities\ConcursoFinalCinco.cs" />
     <Compile Include="Entities\JogoLotogol.cs" />
     <Compile Include="Entities\JogoTimePadrao.cs" />
     <Compile Include="Entities\Concurso.cs" />
@@ -73,7 +70,6 @@
     <Compile Include="Entities\Loterias\Timemania.cs" />
     <Compile Include="Factory\AbstractFactoryController.cs" />
     <Compile Include="Factory\AbstractFactoryRepository.cs" />
-    <Compile Include="Factory\WebRequestFactory.cs" />
     <Compile Include="Interfaces\Controllers\IConcursoController.cs" />
     <Compile Include="Interfaces\Controllers\IControllerBase.cs" />
     <Compile Include="Interfaces\Controllers\IDuplaSenaController.cs" />
@@ -86,15 +82,36 @@
     <Compile Include="Interfaces\Controllers\IQuinaController.cs" />
     <Compile Include="Interfaces\Controllers\ITimemaniaController.cs" />
     <Compile Include="Interfaces\Repository\IConcursoRepository.cs" />
+    <Compile Include="Interfaces\Repository\IDuplaSenaRepository.cs" />
+    <Compile Include="Interfaces\Repository\IFederalRepository.cs" />
+    <Compile Include="Interfaces\Repository\ILotecaRepository.cs" />
+    <Compile Include="Interfaces\Repository\ILotofacilRepository.cs" />
+    <Compile Include="Interfaces\Repository\ILotogolRepository.cs" />
+    <Compile Include="Interfaces\Repository\ILotomaniaRepository.cs" />
     <Compile Include="Interfaces\Repository\IMegaSenaRepository.cs" />
+    <Compile Include="Interfaces\Repository\IQuinaRepository.cs" />
+    <Compile Include="Interfaces\Repository\ITimemaniaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Repository\IRepositoryBase.cs" />
+    <Compile Include="Repository\DuplaSenaRepository.cs" />
+    <Compile Include="Repository\FederalRepository.cs" />
+    <Compile Include="Repository\LotecaRepository.cs" />
+    <Compile Include="Repository\LotofacilRepository.cs" />
+    <Compile Include="Repository\LotogolRepository.cs" />
+    <Compile Include="Repository\LotomaniaRepository.cs" />
     <Compile Include="Repository\MegaSenaRepository.cs" />
+    <Compile Include="Repository\QuinaRepository.cs" />
+    <Compile Include="Repository\TimemaniaRepository.cs" />
     <Compile Include="UnitTest\MegaSenaUnitTest.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
     <Compile Include="UnitTest\Mock\MegaSenaRepositoryMock.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\GuiaDoApostadorInfra\GuiaDoApostadorInfra.csproj">
+      <Project>{a9fc9e7c-d3a1-4203-8bb6-3f9e6edde22f}</Project>
+      <Name>GuiaDoApostadorInfra</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
