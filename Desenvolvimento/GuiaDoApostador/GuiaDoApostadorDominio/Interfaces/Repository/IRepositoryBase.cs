@@ -6,8 +6,11 @@ namespace GuiaDoApostadorDominio.Interfaces.Repository
          where TEntity : class
     {
         int Inserir(TEntity obj);
+
         TEntity Buscar(int id);
+
         IList<TEntity> Listar();
+
         bool Existe(int id);
     }
 }

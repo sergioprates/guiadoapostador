@@ -15,18 +15,11 @@ namespace GuiaDoApostadorInfra.Util
         {
             dynamic obj;
 
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
-                WebResponse response = (HttpWebResponse)request.GetResponse();
-                string json = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                obj = JsonConvert.DeserializeObject<dynamic>(json);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            WebResponse response = (HttpWebResponse)request.GetResponse();
+            string json = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            obj = JsonConvert.DeserializeObject<dynamic>(json);
 
             return obj;
         }

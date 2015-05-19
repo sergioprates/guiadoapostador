@@ -9,6 +9,7 @@ namespace GuiaDoApostador_Processo
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
