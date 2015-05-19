@@ -10,6 +10,7 @@ namespace GuiaDoApostadorDominio.Entities
         public MegaSena()
         {
             base.TipoConcurso = Loteria.MegaSena;
+            this.Premios = new List<PremioPadrao>();
         }
 
         public List<byte> Dezenas { get; set; }

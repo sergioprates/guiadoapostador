@@ -31,12 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net40\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>dll\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ConcursoController.cs" />
@@ -89,6 +94,7 @@
     <Compile Include="Interfaces\Repository\ILotogolRepository.cs" />
     <Compile Include="Interfaces\Repository\ILotomaniaRepository.cs" />
     <Compile Include="Interfaces\Repository\IMegaSenaRepository.cs" />
+    <Compile Include="Interfaces\Repository\IPremioPadraoRepository.cs" />
     <Compile Include="Interfaces\Repository\IQuinaRepository.cs" />
     <Compile Include="Interfaces\Repository\ITimemaniaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,7 +106,9 @@
     <Compile Include="Repository\LotogolRepository.cs" />
     <Compile Include="Repository\LotomaniaRepository.cs" />
     <Compile Include="Repository\MegaSenaRepository.cs" />
+    <Compile Include="Repository\PremioPadraoRepository.cs" />
     <Compile Include="Repository\QuinaRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\TimemaniaRepository.cs" />
     <Compile Include="UnitTest\MegaSenaUnitTest.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
@@ -111,6 +119,9 @@
       <Project>{a9fc9e7c-d3a1-4203-8bb6-3f9e6edde22f}</Project>
       <Name>GuiaDoApostadorInfra</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

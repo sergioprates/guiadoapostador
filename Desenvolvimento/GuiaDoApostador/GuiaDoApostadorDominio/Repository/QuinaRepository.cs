@@ -70,5 +70,11 @@ namespace GuiaDoApostadorDominio.Repository
         {
             throw new NotImplementedException();
         }
+
+
+        public Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

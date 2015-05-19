@@ -102,5 +102,11 @@ namespace GuiaDoApostadorDominio.Repository
         {
             throw new System.NotImplementedException();
         }
+
+
+        public Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

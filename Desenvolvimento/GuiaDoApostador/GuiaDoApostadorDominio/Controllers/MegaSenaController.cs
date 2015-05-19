@@ -31,7 +31,15 @@ namespace GuiaDoApostadorDominio.Controllers
 
         public int Inserir(Entities.Concurso entidade)
         {
-            return _repository.Inserir(entidade);
+            MegaSena loteria = (MegaSena)entidade;
+            entidade.ID = _repository.Inserir(entidade);
+
+            for (int i = 0; i < loteria.Premios.Count; i++)
+            {
+                new PremioPadraoRepository().Inserir(loteria.Premios[i], loteria.ID, loteria.TipoConcurso);
+            }
+
+            return entidade.ID;
         }
 
         public System.Collections.Generic.IList<Entities.Concurso> Listar()

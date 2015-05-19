@@ -46,5 +46,11 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
         {
             throw new NotImplementedException();
         }
+
+
+        public Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

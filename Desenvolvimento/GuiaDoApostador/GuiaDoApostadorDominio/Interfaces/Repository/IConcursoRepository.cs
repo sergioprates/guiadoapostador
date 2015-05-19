@@ -9,5 +9,6 @@ namespace GuiaDoApostadorDominio.Interfaces.Repository
     public interface IConcursoRepository : IRepositoryBase<Concurso>
     {
         Concurso ConsultaApi();
+        Concurso BuscarMaisRecente();
     }
 }

@@ -4,14 +4,23 @@ using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces.Repository;
 using System.Globalization;
 using GuiaDoApostadorInfra.Util;
+using Dapper;
+using System.Data;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class MegaSenaRepository : IMegaSenaRepository
+    internal class MegaSenaRepository : RepositoryBase, IMegaSenaRepository
     {
         public int Inserir(Concurso obj)
         {
-            throw new NotImplementedException();
+            object id;
+            using (cn)
+            {
+                cn.Open();
+                id = cn.ExecuteScalar("sp_cadastraPremioPadraoMegaSena", new { obj }, commandType: CommandType.StoredProcedure);
+            }
+
+            return Convert.ToInt32(id);
         }
 
         public Concurso Buscar(int id)
@@ -83,6 +92,12 @@ namespace GuiaDoApostadorDominio.Repository
             };
 
             return loteria;
+        }
+
+
+        public Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
         }
     }
 }
