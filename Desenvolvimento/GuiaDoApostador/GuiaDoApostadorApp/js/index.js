@@ -36,6 +36,7 @@ var guiaDoApostador = angular.module('ionicApp', ['ionic', 'ngCordova'])
         });
 
         window.localStorage.setItem('db', JSON.stringify(_db));
+        navigator.splashscreen.hide();
 
         //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
 
@@ -47,7 +48,8 @@ guiaDoApostador.controller('minhasApostasController', ['$scope', function ($scop
 }]);
 
 function onDeviceReady() {
-    
+    alert('OnDeVicveready');
+    navigator.splashscreen.show();
 
 }
 
