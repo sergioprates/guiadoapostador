@@ -49,4 +49,5 @@
 
   <gap:plugin name="org.apache.cordova.device" />
   <gap:plugin name="io.litehelpers.cordova.sqlitestorage" version="0.7.5" />
+  <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 </widget>
