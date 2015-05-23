@@ -5,7 +5,8 @@
 var _db = null;
 var guiaDoApostador = angular.module('ionicApp', ['ionic', 'ngCordova'])
     .run(function ($ionicPlatform, $cordovaSQLite) {
-    $ionicPlatform.ready(function () {
+        $ionicPlatform.ready(function () {
+            navigator.splashscreen.show();
         //if (window.cordova && window.cordova.plugins.Keyboard) {
          //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
        // }
@@ -49,7 +50,7 @@ guiaDoApostador.controller('minhasApostasController', ['$scope', function ($scop
 
 function onDeviceReady() {
     alert('OnDeVicveready');
-    navigator.splashscreen.show();
+    
 
 }
 
