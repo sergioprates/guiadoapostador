@@ -20,10 +20,13 @@ var guiaDoApostador = angular.module('ionicApp', ['ionic', 'ngCordova'])
         } else {
             _db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
         }
+
+        alert('Banco aberto, criando tabela');
         $cordovaSQLite.execute(_db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
 
 
         var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
+        alert('Tabela criada inserindo registro');
         $cordovaSQLite.execute(_db, query, ['sergio', 'teste']).then(function (res) {
             console.log("INSERT ID -> " + res.insertId);
             alert('idInserido: ' + res.insertId);
