@@ -10,7 +10,6 @@
 
   <name>Guia do Apostador</name>
   <preference name="phonegap-version" value="3.7.0" />
-  <preference name="SplashScreenDelay" value="10000" />
 
 
   <description>

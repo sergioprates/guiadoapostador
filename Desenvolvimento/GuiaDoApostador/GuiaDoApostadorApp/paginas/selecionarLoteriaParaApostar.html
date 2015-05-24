@@ -1,0 +1,16 @@
+﻿<!-- The title of the ion-view will be shown on the navbar -->
+<ion-view title="Selecionar Loteria" ng-controller="selecionarLoteriaParaApostarController">
+   
+    <ion-content class="padding">
+        <!-- The content of the page -->
+
+        <div class="list">
+
+            <a ng-repeat="item in items" class="item item-avatar" ui-sref="cadastrarAposta" ng-click="setaTipoLoteria('{{item.tipo}}')">
+                <img ng-src="{{ item.image }}">
+                <h2>{{ item.loteria }}</h2>
+                <p>Ocorre em: {{ item.proximoSorteio }}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

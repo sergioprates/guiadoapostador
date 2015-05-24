@@ -6,51 +6,43 @@ var _db = null;
 var guiaDoApostador = angular.module('ionicApp', ['ionic', 'ngCordova'])
     .run(function ($ionicPlatform, $cordovaSQLite) {
         $ionicPlatform.ready(function () {
-            navigator.splashscreen.show();
-        //if (window.cordova && window.cordova.plugins.Keyboard) {
-         //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-       // }
-        if (window.StatusBar) {
-            StatusBar.styleDefault();
-        }
 
-        if (window.cordova) {
-            alert('Abrindo o banco de dados');
-            _db = $cordovaSQLite.openDB("my.db"); //device
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
 
-        } else {
-            _db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
-        }
+            if (window.cordova) {
+                _db = $cordovaSQLite.openDB("my.db"); //device
 
-        alert('Banco aberto, criando tabela');
-        $cordovaSQLite.execute(_db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+            } else {
+                _db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+            }
+
+            $cordovaSQLite.execute(_db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
 
 
-        var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
-        alert('Tabela criada inserindo registro');
-        $cordovaSQLite.execute(_db, query, ['sergio', 'teste']).then(function (res) {
-            console.log("INSERT ID -> " + res.insertId);
-            alert('idInserido: ' + res.insertId);
-        }, function (err) {
-            alert('Erro na hora de inserir: ' + JSON.stringify(err));
-            console.error(err);
+            var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
+            $cordovaSQLite.execute(_db, query, ['sergio', 'teste']).then(function (res) {
+                console.log("INSERT ID -> " + res.insertId);
+                //alert('idInserido: ' + res.insertId);
+            }, function (err) {
+                alert('Erro na hora de inserir: ' + JSON.stringify(err));
+                console.error(err);
+            });
+
+            window.localStorage.setItem('db', JSON.stringify(_db));
+
+            //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+
         });
-
-        window.localStorage.setItem('db', JSON.stringify(_db));
-        navigator.splashscreen.hide();
-
-        //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
-
-     });
-});
+    })
+;
 
 guiaDoApostador.controller('minhasApostasController', ['$scope', function ($scope) {
     //$('[page=true]').load('paginas/minhasApostas.html', function () { });
 }]);
 
 function onDeviceReady() {
-    alert('OnDeVicveready');
-    
 
 }
 
@@ -63,5 +55,19 @@ function inicializaAmbiente() {
 
 function replaceAll(find, replace, str) {
     return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function padLeft(str, chr, n) {
+    var texto = new String(str);
+    for (var i = 0; i < n; i++) {
+        if (texto.length < n) {
+            texto = chr + texto;
+        }
+        else {
+            break;
+        }
+    }
+
+    return texto.toString();
 }
 
