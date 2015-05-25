@@ -1,7 +1,7 @@
 ﻿<!-- The title of the ion-view will be shown on the navbar -->
 <ion-view title="Cadastrar Aposta" ngController="cadastrarApostaController">
     <ion-nav-buttons side="right">
-        <button class="button" ng-click="gravarAposta()">
+        <button class="button" ng-click="apostar()">
             <i class="icon ion-ios-filing"></i>
         </button>
     </ion-nav-buttons>
@@ -15,18 +15,19 @@
                 <h2>{{loteria.tipo}}</h2>
                 <br />
                 <label class="item item-input">
-                    <input type="text" placeholder="Digite o Concurso">
+                    <input type="text" ng-model="aposta.Loteria.ID" placeholder="Digite o Concurso">
                 </label>
             </div>
         </div>
         <div id='dadosAposta' class="list card">
-            <div class='row' style="text-align:center" ng-repeat="linha in linhas">
+            <div class='row responsive-sm' style="text-align:center" ng-repeat="linha in linhas">
                 <div class='col'>
                     <label class='checkbox' style='text-align:center' ng-repeat="checkbox in linha.CheckBoxes">
-                        <input type='checkbox' value={{checkbox.Value}}> {{checkbox.Value}}
+                        <input type='checkbox' value={{checkbox.Value}} ng-model="checkbox.Checked"> {{checkbox.Value}}
                     </label>
                 </div>
             </div>
+
         </div>
     </ion-content>
 </ion-view>

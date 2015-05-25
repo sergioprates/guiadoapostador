@@ -1,7 +1,6 @@
-﻿guiaDoApostador.controller('selecionarLoteriaParaApostarController', ['$scope', function ($scope) {
+﻿guiaDoApostador.controller('selecionarLoteriaParaApostarController', ['$scope', '$ionicLoading', function ($scope, $ionicLoading) {
 
     $scope.setaTipoLoteria = function(tipo){
-      
         window.localStorage.setItem("tipoLoteriaClicada",tipo);
     };
 

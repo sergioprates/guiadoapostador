@@ -1,6 +1,19 @@
 ﻿var _db;
 guiaDoApostador.controller('homeController', ['$scope', '$cordovaSQLite', function ($scope, $cordovaSQLite) {
+   
+    $scope.executaDB = function(){
+        var aposta =
+            {
+                Dezenas: [01, 02, 03, 04, 05, 06],
+                Loteria:
+                    {
+                        ID: 1,
+                        Tipo: 7
+                    }
+            };
 
+        cadastraAposta(aposta, $cordovaSQLite);
+    };
 
     $scope.items = [
     {
