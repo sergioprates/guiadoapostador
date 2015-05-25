@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace GuiaDoApostadorDominio.Entities
 {
     public enum Loteria
     {
-        DuplaSena,
+        DuplaSena = 1,
         Federal,
         Loteca,
         Lotofacil,
