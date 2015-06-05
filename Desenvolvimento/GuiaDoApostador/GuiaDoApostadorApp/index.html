@@ -7,24 +7,29 @@
     <script type="text/javascript" src="frameworks/ionic/js/ionic.bundle.min.js"></script>
     <script src="js/Scripts/_underscore.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-
     <!--Plugins-->
     <script src="js/Plugins/ng-cordova.js"></script>
     <script src="js/Plugins/cordova.js"></script>
     <script src="js/Plugins/sqlite.js"></script>
     <!--FimPlugins-->
+    <script src="js/Services/ionicServices.js"></script>
+    <script src="js/Services/generalServices.js"></script>
 
+
+    <!--Factorys-->
+    <script src="js/Factorys/repositoryFactory.js"></script>
+    <script src="js/Factorys/apostasFactory.js"></script>
+    <script src="js/Factorys/dezenasFactory.js"></script>
+    <!--Fim Factorys-->
     <!--Controllers-->
     <script src="js/Controllers/homeController.js"></script>
     <script src="js/Controllers/minhasApostasController.js"></script>
     <script src="js/Controllers/selecionarLoteriaParaApostarController.js"></script>
     <script src="js/Controllers/cadastrarApostaController.js"></script>
     <!--FimControllers-->
-
     <!--Routes-->
     <script src="js/Routes/guiaDoApostadorRoutes.js" type="text/javascript"></script>
     <!--FimRoutes-->
-
 </head>
 <body>
     <ion-nav-bar class="bar-balanced nav-title-slide-ios7" align-title="center">
@@ -37,25 +42,20 @@
             <ion-content class="padding">
                 <!-- The content of the page -->
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
-                  Minhas Apostas
+                    Minhas Apostas
                 </button>
-                <button class="button button-block button-balanced" ng-click="executaDB()">
-                    Magia
-                </button>
-                 <div class="list">
-                 <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left">
-
-                  <img ng-src="{{ item.image }}">
-                  <h2>{{ item.loteria }}</h2>
-                  <h4>Concurso: {{ item.concurso }}</h4>
-                  <h4>Prêmio: {{ item.premio }}</h4>
-                  <h4>Ocorre em: {{ item.proximoSorteio }}</h4>
-                </a>
-
-            </div>
+                <div class="list">
+                    <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left">
+                        <img ng-src="{{ item.image }}">
+                        <h2>{{ item.loteria }}</h2>
+                        <h4>Concurso: {{ item.concurso }}</h4>
+                        <h4>Prêmio: {{ item.premio }}</h4>
+                        <h4>Ocorre em: {{ item.proximoSorteio }}</h4>
+                    </a>
+                </div>
             </ion-content>
         </ion-view>
     </script>
-    
+
 </body>
 </html>

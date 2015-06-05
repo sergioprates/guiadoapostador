@@ -7,12 +7,21 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="padding">
-        <div class="card">
+    <ion-content class="padding" >
+        <div class="card" ng-show="apostas.length == 0">
             <div class="item item-text-wrap">
                 Ainda não apostou?. Selecione o botão <i class="icon ion-android-add-circle"></i> no topo do app
                 para aumentar suas chances de ganhar!
             </div>
+        </div>
+        <div class="list" ng-show="apostas.length > 0">
+            <a ng-repeat="item in apostas" href="#/{{item.idAposta}}" class="item item-thumbnail-left">
+                <img ng-src="{{ item.ImagemLoteria }}">
+                <h2>{{ item.Nome}} </h2>
+                <h4>Concurso: {{ item.idConcurso }}</h4> 
+                <h4>Dezenas: {{ item.Dezenas.toString() }}</h4>
+                <!--<h4>Ocorre em: {{ item.proximoSorteio }}</h4>-->
+            </a>
         </div>
     </ion-content>
 </ion-view>
