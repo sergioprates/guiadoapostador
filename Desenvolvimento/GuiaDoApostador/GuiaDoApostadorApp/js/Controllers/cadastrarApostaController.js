@@ -1,33 +1,20 @@
 ﻿guiaDoApostador.controller('cadastrarApostaController', ['$scope', 'returnToState', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'mostraMensagemTemporaria', function ($scope, returnToState, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, mostraMensagemTemporaria) {
 
     //OnLoad
+    $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.aposta = new Object();
+        $scope.aposta.Loteria = new Object();
 
-    $scope.aposta = new Object();
-    $scope.aposta.Loteria = new Object();
+        $scope.linhas = retornaLinhasPorConcurso('MegaSena');
+        $scope.loteria = {
+            Nome: retornaTituloLoteria(window.localStorage.getItem('tipoLoteriaClicada')),
+            image: retornaCaminhoDaImagemPorTipoLoteria(window.localStorage.getItem('tipoLoteriaClicada')),
+            tipo: window.localStorage.getItem('tipoLoteriaClicada')
+        };
 
-    $scope.linhas = retornaLinhasPorConcurso('MegaSena');
-    $scope.loteria = {
-        loteria: retornaTituloLoteria(window.localStorage.getItem('tipoLoteriaClicada')),
-        image: retornaCaminhoDaImagemPorTipoLoteria(window.localStorage.getItem('tipoLoteriaClicada')),
-        tipo: window.localStorage.getItem('tipoLoteriaClicada')
-    };   
-
-    ocultaAguarde();
-    //Fim OnLoad
-    
-
-    //Métodos de dezenas
-
-    $scope.cadastrarDezenas = function (result) {
-        $scope.aposta.ID = result.insertId;
-        for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
-            dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
-        }
         ocultaAguarde();
-        mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
-    };
-
-    //Fim Métodos de dezenas
+    });
+    //Fim OnLoad
 
     //Métodos de apostas
     $scope.apostar = function () {
@@ -63,7 +50,14 @@
                 break;
         }
 
-        apostasFactory.add($scope.aposta, $scope.cadastrarDezenas);
+        apostasFactory.add($scope.aposta, function (result) {
+            $scope.aposta.ID = result.insertId;
+            for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
+                dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
+            }
+            ocultaAguarde();
+            mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
+        });
     };
 
     $scope.apostarMegaSena = function () {

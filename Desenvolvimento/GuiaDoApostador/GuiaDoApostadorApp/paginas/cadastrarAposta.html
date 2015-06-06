@@ -1,5 +1,5 @@
 ﻿<!-- The title of the ion-view will be shown on the navbar -->
-<ion-view title="Cadastrar Aposta" ngController="cadastrarApostaController">
+<ion-view title="Cadastrar Aposta" ng-controller="cadastrarApostaController">
     <ion-nav-buttons side="right">
         <button class="button" ng-click="apostar()">
             <i class="icon ion-ios-filing"></i>
@@ -12,7 +12,7 @@
 
             <div class="item item-avatar">
                 <img ng-src="{{loteria.image}}">
-                <h2>{{loteria.tipo}}</h2>
+                <h2>{{loteria.Nome}}</h2>
                 <br />
                 <label class="item item-input">
                     <input type="text" ng-model="aposta.Loteria.ID" placeholder="Digite o Concurso">

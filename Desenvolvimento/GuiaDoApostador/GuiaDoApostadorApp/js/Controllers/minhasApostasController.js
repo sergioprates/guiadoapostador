@@ -44,7 +44,6 @@
                         _.sortBy($scope.apostas, 'idConcurso');
                     }
                     catch (e) {
-                        alert('Erro ao ordenar: ' + JSON.stringify(e));
                     }
                     ocultaAguarde();
                 }
