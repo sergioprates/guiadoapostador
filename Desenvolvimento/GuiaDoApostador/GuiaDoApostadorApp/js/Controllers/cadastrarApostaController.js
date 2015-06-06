@@ -77,13 +77,13 @@
                     //alert('Entrou no filter dezenas');
                 
                     var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
-                    var dezenas = window.localStorage.getItem('dezenas');
+                    var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
 
-                    if (dezenas == undefined) {
+                    if (dezenas == undefined || dezenas =='null') {
                         dezenas = new Array();
                     }
                     else {
-                        JSON.parse(window.localStorage.getItem('dezenas'));
+                        dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
                     }
 
                     for (var i = 0; i < checkbox.length; i++) {
@@ -125,7 +125,7 @@
                     //alert('pegando dezenas do localstorage');
                     var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
 
-                    if (dezenas == undefined) {
+                    if (dezenas == undefined || dezenas == 'null') {
                         dezenas = new Array();
                     }
 

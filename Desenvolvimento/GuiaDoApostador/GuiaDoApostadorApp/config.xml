@@ -49,6 +49,18 @@
 
 
 
+  <feature name="Toast">
+    <param name="android-package" value="nl.xservices.plugins.Toast" />
+  </feature>
+  <!-- for iOS -->
+  <feature name="Toast">
+    <param name="ios-package" value="Toast" />
+  </feature>
+
+  <!-- for WP8 -->
+  <feature name="Toast">
+    <param name="wp-package" value="Toast"/>
+  </feature>
 
 
   <gap:plugin name="org.apache.cordova.device" />
