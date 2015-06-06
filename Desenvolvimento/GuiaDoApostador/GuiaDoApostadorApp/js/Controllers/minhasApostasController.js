@@ -12,8 +12,11 @@
                     alert('Resultados de consulta apostas: ' + JSON.stringify(results.rows));
                     for (var i = 0; i < results.rows.length; i++) {
                         //Armazenando apostas no escopo
+                        alert('Pegando item: ' + i);
                         $scope.apostasAux.push(results.rows.item(i));
 
+                        alert('Consultando dezenas: ' + i);
+                        alert('Consultando dezenas, idaposta: ' + results.rows.item(i)['idAposta']);
                         //buscando as dezenas de cada aposta
                         dezenasFactory.get(results.rows.item(i)['idAposta'],
                             function (results) {
@@ -35,8 +38,14 @@
                                 }
                             });
                     }
-
-                    _.sortBy($scope.apostas, 'idConcurso');
+                    try
+                    {
+                        alert('Ordenando');
+                        _.sortBy($scope.apostas, 'idConcurso');
+                    }
+                    catch (e) {
+                        alert('Erro ao ordenar: ' + JSON.stringify(e));
+                    }
                     ocultaAguarde();
                 }
                 catch (e) {
