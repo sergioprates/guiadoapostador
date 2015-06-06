@@ -48,14 +48,16 @@
     return function (mensagem, duracao, posicao) {
         try
         {
+            alert('Exibindo mensagem temporaria');
             $cordovaToast.show(mensagem, duracao, posicao).then(function (success) {
-                // success
+                alert('Exibiu');
             }, function (error) {
                 // error
             });
         }
         catch(e)
         {
+            alert('Erro em mensagem temporaria: ' + JSON.stringify(e));
             mostraPopUpErro(mensagem);
         }
     }

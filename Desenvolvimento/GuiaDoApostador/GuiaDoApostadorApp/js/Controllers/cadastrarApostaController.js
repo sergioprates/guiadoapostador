@@ -96,7 +96,8 @@
 
 
     $scope.validaQuantidadeDezenas = function (check) {
-        try{
+        try {
+            alert('Validando linhas');
             var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
             window.localStorage.setItem('dezenas', null);
 
@@ -119,7 +120,8 @@
 
             if ($scope.aposta.Dezenas.length > retornaQuantidadeDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada'))) {
                 check.checkbox.Checked = false;
-                try{
+                try {
+                    alert('Mostrando mensagem temporaia');
                     mostraMensagemTemporaria('Nos concursos da ' + window.localStorage.getItem('tipoLoteriaClicada') + ' você só pode selecionar ' + retornaQuantidadeDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada')) + ' dezenas por aposta.', 'short', 'bottom');
                 }
                 catch (e) {
