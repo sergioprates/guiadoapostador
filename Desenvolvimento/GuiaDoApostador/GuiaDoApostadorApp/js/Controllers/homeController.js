@@ -1,6 +1,9 @@
 ﻿var _db;
-guiaDoApostador.controller('homeController', ['$scope', function ($scope) {
-   
+guiaDoApostador.controller('homeController', ['$scope', '$cordovaStatusbar', function ($scope, $cordovaStatusbar) {
+    try {
+        $cordovaStatusbar.hide();
+    }
+    catch (e) { }
     $scope.items = [
     {
         id: 1, concurso: '1234',
@@ -10,11 +13,10 @@ guiaDoApostador.controller('homeController', ['$scope', function ($scope) {
         proximoSorteio: 'dois dias'
     }];
 
-    try
-    {
+    try {
         navigator.splashscreen.hide();
     }
-    catch(e){
+    catch (e) {
 
     }
 }]);

@@ -1,7 +1,7 @@
 ﻿guiaDoApostador.service('mostraAguarde', function ($ionicLoading) {
     return function () {
         $ionicLoading.show({
-            template: "<img src='img/aguarde.gif' /> <b>Loading...</b>"
+            template: "<img src='img/aguarde.gif' /> <b>Carregando...</b>"
         });
     }
 })
@@ -33,10 +33,10 @@
     return function () {
         var db;
         if (window.cordova) {
-            db = $cordovaSQLite.openDB("guiadoapostador.db"); //device
+            db = $cordovaSQLite.openDB({ name: "guiadoapostador.db", bgType: 1 }); //device
 
         } else {
-            db = window.openDatabase("guiadoapostador.db", '1', 'my', 1024 * 1024 * 100); // browser
+            db = window.openDatabase("guiadoapostador.db", '1', 'guiadoapostador', 1024 * 1024 * 100); // browser
         }
 
         $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS apostas (idAposta integer primary key, idConcurso integer, TipoConcurso TEXT, Verificado integer,  datCadastro datetime default current_timestamp, datSorteio datetime)");
