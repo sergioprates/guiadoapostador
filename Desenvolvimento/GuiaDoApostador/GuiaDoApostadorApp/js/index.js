@@ -1,23 +1,17 @@
-﻿document.addEventListener("deviceready", onDeviceReady, false);
-
-
-//variavel da base de dados
+﻿//variavel da base de dados
 var _db = null;
 var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaSQLite) {
+    .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                $ionicPlatform.showStatusBar(false);
             }
-            if (window.StatusBar) {
-                StatusBar.hide();
-            }
-
+            $ionicPlatform.on('deviceready', onDeviceReady);
         });
     });
 
 function onDeviceReady() {
-
+    alert('Device Ready!');
 }
 
 function replaceAll(find, replace, str) {

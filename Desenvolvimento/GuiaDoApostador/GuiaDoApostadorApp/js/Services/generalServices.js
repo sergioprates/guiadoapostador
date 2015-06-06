@@ -19,53 +19,27 @@
         });
     }
 })
-.service('mostraPopUpErro', function ($ionicPopup) {
-        return function (texto) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Ops... Ocorreu um erro',
-                template: texto
-            });
-            alertPopup.then(function (res) {
-            });
-        }
-})
-.service('openDb', function ($cordovaSQLite, mostraPopUpErro) {
-    return function () {
-        var db;
-        try
-        {
-           // if (window.cordova) {
-                alert('Criando base de dados cordova');
-                db = $cordovaSQLite.openDB({ name: "testenovovooo.db" }); //device
-
-            //} else {
-            //    alert('Criando base de dados web');
-            //    db = window.openDatabase("blabla.db", '1', 'blabla', 1024 * 1024 * 100); // browser
-            //}
-            alert('Base de dados criada, criando as tables');
-
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS apostas (idAposta integer primary key, idConcurso integer, TipoConcurso TEXT, Verificado integer,  datCadastro datetime default current_timestamp, datSorteio datetime)");
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS dezenas (idAposta integer, dezena integer)");
-            alert('tables criadas');
-        }
-        catch (e) {
-            mostraPopUpErro('Não foi possível conectar à base de dados, openDb. Erro: ' + JSON.stringify(e));
-        }
-        return db;
+.service('mostraPopUpErro', function ($ionicPopup, ocultaAguarde) {
+    return function (texto) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Ops... Ocorreu um erro',
+            template: texto
+        });
+        ocultaAguarde();
+        alertPopup.then(function (res) {
+        });
     }
 })
 .service('mostraMensagemTemporaria', function ($cordovaToast, mostraPopUpErro) {
     return function (mensagem, duracao, posicao) {
-        try
-        {
+        try {
             $cordovaToast.show(mensagem, duracao, posicao).then(function (success) {
                 // success
             }, function (error) {
                 // error
             });
         }
-        catch(e)
-        {
+        catch (e) {
             mostraPopUpErro(mensagem);
         }
     }
