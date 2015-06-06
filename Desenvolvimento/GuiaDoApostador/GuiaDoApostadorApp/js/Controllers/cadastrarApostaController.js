@@ -114,6 +114,7 @@
             catch (e) {
                 alert('Algum problema com o underscore: ' + JSON.stringify(e) + JSON.stringify($scope.linhas));
             }
+            alert('Setando localstorage como null dezenas');
             window.localStorage.setItem('dezenas', null);
             alert('Filtrando dezenas');
             _.filter(linhasCheckBoxes, function (checkboxes) {
