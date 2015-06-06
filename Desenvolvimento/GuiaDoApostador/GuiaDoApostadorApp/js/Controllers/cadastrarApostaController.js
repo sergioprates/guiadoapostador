@@ -18,101 +18,117 @@
 
     //Métodos de apostas
     $scope.apostar = function () {
-        mostraAguarde();
-        switch (window.localStorage.getItem('tipoLoteriaClicada'))
-        {
-            case 'MegaSena':
-                $scope.apostarMegaSena();
-                break;
-            case 'Timemania':
-                return "Timemania";
-                break;
-            case 'Quina':
-                return "Quina";
-                break;
-            case 'Lotomania':
-                return "Lotomania";
-                break;
-            case 'DuplaSena':
-                return "Dupla Sena";
-                break;
-            case 'LoteriaFederal':
-                return "Loteria Federal";
-                break;
-            case 'Loteca':
-                return "Loteca";
-                break;
-            case 'Lotogol':
-                return "Lotogol";
-                break;
-            case 'Lotofacil':
-                return "Lotofácil";
-                break;
-        }
-
-        apostasFactory.add($scope.aposta, function (result) {
-            $scope.aposta.ID = result.insertId;
-            for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
-                dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
+        try{
+            mostraAguarde();
+            switch (window.localStorage.getItem('tipoLoteriaClicada'))
+            {
+                case 'MegaSena':
+                    $scope.apostarMegaSena();
+                    break;
+                case 'Timemania':
+                    return "Timemania";
+                    break;
+                case 'Quina':
+                    return "Quina";
+                    break;
+                case 'Lotomania':
+                    return "Lotomania";
+                    break;
+                case 'DuplaSena':
+                    return "Dupla Sena";
+                    break;
+                case 'LoteriaFederal':
+                    return "Loteria Federal";
+                    break;
+                case 'Loteca':
+                    return "Loteca";
+                    break;
+                case 'Lotogol':
+                    return "Lotogol";
+                    break;
+                case 'Lotofacil':
+                    return "Lotofácil";
+                    break;
             }
-            ocultaAguarde();
-            mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
-        });
+
+            $scope.aposta.TipoLoteria = window.localStorage.getItem('tipoLoteriaClicada');
+
+            apostasFactory.add($scope.aposta, function (result) {
+                $scope.aposta.ID = result.insertId;
+                for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
+                    dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
+                }
+                ocultaAguarde();
+                mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
+            });
+        }
+        catch (e) {
+            alert('Erro ao apostar: ' + JSON.stringfy(e));
+        }
     };
 
     $scope.apostarMegaSena = function () {
-        var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
-        window.localStorage.setItem('dezenas', null);
+        try{
+            var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
+            window.localStorage.setItem('dezenas', null);
 
-        _.filter(linhasCheckBoxes, function (checkboxes) {
-            var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
-            var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
+            _.filter(linhasCheckBoxes, function (checkboxes) {
+                var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
+                var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
 
-            if (dezenas == undefined) {
-                dezenas = new Array();
-            }
+                if (dezenas == undefined) {
+                    dezenas = new Array();
+                }
 
-            for (var i = 0; i < checkbox.length; i++) {
-                dezenas.push(parseInt(checkbox[i].Value));
-            }
+                for (var i = 0; i < checkbox.length; i++) {
+                    dezenas.push(parseInt(checkbox[i].Value));
+                }
 
-            window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
-        });
+                window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
+            });
 
-        $scope.aposta.Dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
-        $scope.aposta.TipoLoteria = window.localStorage.getItem('tipoLoteriaClicada');
+            $scope.aposta.Dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
+        }
+        catch (e) {
+            alert('Erro ao apostarMegaSena: ' + JSON.stringfy(e));
+        }
     };
 
 
     $scope.validaQuantidadeDezenas = function (check) {
-        var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
-        window.localStorage.setItem('dezenas', null);
+        try{
+            var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
+            window.localStorage.setItem('dezenas', null);
 
-        _.filter(linhasCheckBoxes, function (checkboxes) {
-            var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
-            var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
+            _.filter(linhasCheckBoxes, function (checkboxes) {
+                var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
+                var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
 
-            if (dezenas == undefined) {
-                dezenas = new Array();
+                if (dezenas == undefined) {
+                    dezenas = new Array();
+                }
+
+                for (var i = 0; i < checkbox.length; i++) {
+                    dezenas.push(parseInt(checkbox[i].Value));
+                }
+
+                window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
+            });
+
+            $scope.aposta.Dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
+
+            if ($scope.aposta.Dezenas.length > retornaQuantidadeDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada'))) {
+                check.checkbox.Checked = false;
+                try{
+                    mostraMensagemTemporaria('Nos concursos da ' + window.localStorage.getItem('tipoLoteriaClicada') + ' você só pode selecionar ' + retornaQuantidadeDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada')) + ' dezenas por aposta.', 'short', 'bottom');
+                }
+                catch (e) {
+                    alert('Erro ao mostrar mensagem: ' + JSON.stringfy(e));
+                } 
             }
-
-            for (var i = 0; i < checkbox.length; i++) {
-                dezenas.push(parseInt(checkbox[i].Value));
-            }
-
-            window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
-        });
-
-        $scope.aposta.Dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
-
-        if ($scope.aposta.Dezenas.length > retornaQuantidadeDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada'))) {
-            check.checkbox.Checked = false;
-            try{
-                mostraMensagemTemporaria('Nos concursos da ' + window.localStorage.getItem('tipoLoteriaClicada') + ' você só pode selecionar ' + retornaQuantidadeDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada')) + ' dezenas por aposta.', 'short', 'bottom');
-            }
-            catch (e) {
-
-            }
+        }
+        catch(e){
+            alert('Erro ao validar: ' + JSON.stringfy(e));
         }
     };
 
