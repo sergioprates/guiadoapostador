@@ -6,18 +6,15 @@
     })
     .state('minhasApostas', {
         url: '/2',
-        templateUrl: 'paginas/minhasApostas.html',
-        controller: "minhasApostasController"
+        templateUrl: 'paginas/minhasApostas.html'
     })
     .state('selecionarLoteriaParaApostar', {
         url: '/3',
-        templateUrl: 'paginas/selecionarLoteriaParaApostar.html',
-        controller: "selecionarLoteriaParaApostarController"
+        templateUrl: 'paginas/selecionarLoteriaParaApostar.html'
     })
     .state('cadastrarAposta', {
         url: '/4',
-        templateUrl: 'paginas/cadastrarAposta.html',
-        controller: "cadastrarApostaController"
+        templateUrl: 'paginas/cadastrarAposta.html'
     })
 
     $urlRouterProvider.otherwise("/1");
