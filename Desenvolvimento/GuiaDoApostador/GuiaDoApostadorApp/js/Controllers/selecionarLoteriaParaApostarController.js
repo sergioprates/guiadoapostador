@@ -1,4 +1,4 @@
-﻿guiaDoApostador.controller('selecionarLoteriaParaApostarController', ['$scope', '$ionicLoading', function ($scope, $ionicLoading) {
+﻿guiaDoApostador.controller('selecionarLoteriaParaApostarController', ['$scope', function ($scope) {
 
     $scope.setaTipoLoteria = function(tipo){
         window.localStorage.setItem("tipoLoteriaClicada",tipo);
@@ -6,19 +6,48 @@
 
     $scope.items = [
     {
-        id: 1, concurso: '1234',
-        loteria: 'Mega-Sena',
-        image: 'img/loteriaslogo/megasena.png',
-        premio: 'R$ 25 milhões',
-        proximoSorteio: 'dois dias',
+        loteria: 'Mega Sena',
+        image: retornaCaminhoDaImagemPorTipoLoteria('MegaSena'),
         tipo: 'MegaSena'
     },
     {
-        id: 2, concurso: '1244',
         loteria: 'Quina',
-        image: 'img/loteriaslogo/quina.png',
-        premio: 'R$ 25 milhões',
-        proximoSorteio: 'cinco dias',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Quina'),
         tipo: 'Quina'
+    },
+    {
+        loteria: 'Timemania',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Timemania'),
+        tipo: 'Timemania'
+    },
+    {
+        loteria: 'Lotomania',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Lotomania'),
+        tipo: 'Lotomania'
+    },
+    {
+        loteria: 'Dupla Sena',
+        image: retornaCaminhoDaImagemPorTipoLoteria('DuplaSena'),
+        tipo: 'DuplaSena'
+    },
+    {
+        loteria: 'Loteria Federal',
+        image: retornaCaminhoDaImagemPorTipoLoteria('LoteriaFederal'),
+        tipo: 'LoteriaFederal'
+    },
+    {
+        loteria: 'Loteca',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Loteca'),
+        tipo: 'Loteca'
+    },
+    {
+        loteria: 'Lotofácil',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Lotofacil'),
+        tipo: 'Lotofacil'
+    },
+    {
+        loteria: 'Lotogol',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Lotogol'),
+        tipo: 'Lotogol'
     }];
 }]);

@@ -9,7 +9,6 @@
             <a ng-repeat="item in items" class="item item-avatar" ui-sref="cadastrarAposta" ng-click="setaTipoLoteria('{{item.tipo}}')">
                 <img ng-src="{{ item.image }}">
                 <h2>{{ item.loteria }}</h2>
-                <p>Ocorre em: {{ item.proximoSorteio }}</p>
             </a>
         </div>
     </ion-content>

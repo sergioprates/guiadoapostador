@@ -53,6 +53,30 @@ function retornaCaminhoDaImagemPorTipoLoteria(Tipo) {
         case 'MegaSena':
             return "img/loteriaslogo/megasena.png";
             break;
+        case 'Timemania':
+            return "img/loteriaslogo/timemania.png";
+            break;
+        case 'Quina':
+            return "img/loteriaslogo/quina.png";
+            break;
+        case 'Lotomania':
+            return "img/loteriaslogo/lotomania.png";
+            break;
+        case 'DuplaSena':
+            return "img/loteriaslogo/duplasena.png";
+            break;
+        case 'LoteriaFederal':
+            return "img/loteriaslogo/federal.png";
+            break;
+        case 'Loteca':
+            return "img/loteriaslogo/loteca.png";
+            break;
+        case 'Lotogol':
+            return "img/loteriaslogo/lotogol.png";
+            break;
+        case 'Lotofacil':
+            return "img/loteriaslogo/lotoFacil.png";
+            break;
         default:
 
     }
@@ -62,6 +86,30 @@ function retornaTituloLoteria(Tipo) {
     switch (Tipo) {
         case 'MegaSena':
             return "Mega Sena";
+            break;
+        case 'Timemania':
+            return "Timemania";
+            break;
+        case 'Quina':
+            return "Quina";
+            break;
+        case 'Lotomania':
+            return "Lotomania";
+            break;
+        case 'DuplaSena':
+            return "Dupla Sena";
+            break;
+        case 'LoteriaFederal':
+            return "Loteria Federal";
+            break;
+        case 'Loteca':
+            return "Loteca";
+            break;
+        case 'Lotogol':
+            return "Lotogol";
+            break;
+        case 'Lotofacil':
+            return "Lotofácil";
             break;
         default:
 

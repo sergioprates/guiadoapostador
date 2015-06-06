@@ -23,7 +23,7 @@
             <div class='row responsive-sm' style="text-align:center" ng-repeat="linha in linhas">
                 <div class='col'>
                     <label class='checkbox' style='text-align:center' ng-repeat="checkbox in linha.CheckBoxes">
-                        <input type='checkbox' value={{checkbox.Value}} ng-model="checkbox.Checked"> {{checkbox.Value}}
+                        <input type='checkbox' value={{checkbox.Value}} ng-model="checkbox.Checked" ng-click="validaQuantidadeDezenas(this)"> {{checkbox.Value}}
                     </label>
                 </div>
             </div>

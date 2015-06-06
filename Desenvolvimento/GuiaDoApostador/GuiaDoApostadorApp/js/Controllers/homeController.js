@@ -1,20 +1,6 @@
 ﻿var _db;
-guiaDoApostador.controller('homeController', ['$scope', '$cordovaSQLite', function ($scope, $cordovaSQLite) {
+guiaDoApostador.controller('homeController', ['$scope', function ($scope) {
    
-    $scope.executaDB = function(){
-        var aposta =
-            {
-                Dezenas: [01, 02, 03, 04, 05, 06],
-                Loteria:
-                    {
-                        ID: 1,
-                        Tipo: 7
-                    }
-            };
-
-        cadastraAposta(aposta, $cordovaSQLite);
-    };
-
     $scope.items = [
     {
         id: 1, concurso: '1234',
@@ -23,6 +9,14 @@ guiaDoApostador.controller('homeController', ['$scope', '$cordovaSQLite', functi
         premio: 'R$ 25 milhões',
         proximoSorteio: 'dois dias'
     }];
+
+    try
+    {
+        navigator.splashscreen.hide();
+    }
+    catch(e){
+
+    }
 }]);
 
 
