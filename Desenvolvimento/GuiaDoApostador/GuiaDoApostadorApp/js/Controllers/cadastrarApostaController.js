@@ -108,7 +108,12 @@
     $scope.validaQuantidadeDezenas = function (check) {
         try {
             alert('Validando linhas');
-            var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
+            try{
+                var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
+            }
+            catch (e) {
+                alert('Algum problema com o underscore: ' + JSON.stringify(e) + JSON.stringify($scope.linhas));
+            }
             window.localStorage.setItem('dezenas', null);
             alert('Filtrando dezenas');
             _.filter(linhasCheckBoxes, function (checkboxes) {
