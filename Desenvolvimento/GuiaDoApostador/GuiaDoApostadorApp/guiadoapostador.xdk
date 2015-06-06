@@ -216,5 +216,8 @@
     "gameAssetDirectory": "asset",
     "gameMetadata": {},
     "projectTags": []
+  },
+  "emulator": {
+    "mediaCache": []
   }
 }

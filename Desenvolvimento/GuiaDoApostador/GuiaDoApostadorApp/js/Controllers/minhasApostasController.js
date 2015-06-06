@@ -17,7 +17,7 @@
                         function (results) {
                             //armazenando as dezenas em cada aposta.
                             if (results.rows.length > 0) {
-                                var a = _.find($scope.apostasAux, function (aposta) { return aposta.idAposta == results.rows.item(i)['idAposta']; });
+                                var a = _.find($scope.apostasAux, function (aposta) { return aposta.idAposta == results.rows.item(0)['idAposta']; });
                                 a.Dezenas = new Array();
                                 for (var i = 0; i < results.rows.length; i++) {
                                     a.Dezenas.push(results.rows.item(i).dezena);

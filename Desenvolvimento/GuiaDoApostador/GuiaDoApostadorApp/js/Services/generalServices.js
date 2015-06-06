@@ -33,10 +33,10 @@
     return function () {
         var db;
         if (window.cordova) {
-            db = $cordovaSQLite.openDB({ name: "guiadoapostador.db", bgType: 1 }); //device
+            db = $cordovaSQLite.openDB({ name: "test.db", bgType: 1 }); //device
 
         } else {
-            db = window.openDatabase("guiadoapostador.db", '1', 'guiadoapostador', 1024 * 1024 * 100); // browser
+            db = window.openDatabase("test.db", '1', 'test', 1024 * 1024 * 100); // browser
         }
 
         $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS apostas (idAposta integer primary key, idConcurso integer, TipoConcurso TEXT, Verificado integer,  datCadastro datetime default current_timestamp, datSorteio datetime)");
