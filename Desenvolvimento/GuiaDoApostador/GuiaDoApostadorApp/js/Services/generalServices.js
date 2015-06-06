@@ -36,7 +36,7 @@
         {
            // if (window.cordova) {
                 alert('Criando base de dados cordova');
-                db = $cordovaSQLite.openDB({ name: "blabla.db" }); //device
+                db = $cordovaSQLite.openDB({ name: "testenovovooo.db" }); //device
 
             //} else {
             //    alert('Criando base de dados web');

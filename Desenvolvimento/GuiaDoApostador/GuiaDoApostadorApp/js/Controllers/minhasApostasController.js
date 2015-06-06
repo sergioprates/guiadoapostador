@@ -9,6 +9,7 @@
             apostasFactory.all(function (results) {
                 try
                 {
+                    alert('Resultados de consulta apostas: ' + JSON.stringify(results));
                     for (var i = 0; i < results.rows.length; i++) {
                         //Armazenando apostas no escopo
                         $scope.apostasAux.push(results.rows.item(i));
