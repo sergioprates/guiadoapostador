@@ -73,18 +73,28 @@
             window.localStorage.setItem('dezenas', null);
 
             _.filter(linhasCheckBoxes, function (checkboxes) {
-                var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
-                var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
+                try{
+                    alert('Entrou no filter dezenas');
+                
+                    var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
+                    var dezenas = window.localStorage.getItem('dezenas');
 
-                if (dezenas == undefined) {
-                    dezenas = new Array();
+                    if (dezenas == undefined) {
+                        dezenas = new Array();
+                    }
+                    else {
+                        JSON.parse(window.localStorage.getItem('dezenas'));
+                    }
+
+                    for (var i = 0; i < checkbox.length; i++) {
+                        dezenas.push(parseInt(checkbox[i].Value));
+                    }
+
+                    window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
                 }
-
-                for (var i = 0; i < checkbox.length; i++) {
-                    dezenas.push(parseInt(checkbox[i].Value));
+                catch(e){
+                    alert('Erro no metodo filter de apostar megasena. ' + JSON.stringify(e));
                 }
-
-                window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
             });
 
             $scope.aposta.Dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
@@ -100,20 +110,31 @@
             alert('Validando linhas');
             var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
             window.localStorage.setItem('dezenas', null);
-
+            alert('Filtrando dezenas');
             _.filter(linhasCheckBoxes, function (checkboxes) {
-                var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
-                var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
 
-                if (dezenas == undefined) {
-                    dezenas = new Array();
+                try {
+                    alert('Entrou no filter dezenas');
+                    var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
+                    alert('pegando dezenas do localstorage');
+                    var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
+
+                    if (dezenas == undefined) {
+                        dezenas = new Array();
+                    }
+
+                    alert('Adicionar dezenas ao array.');
+
+                    for (var i = 0; i < checkbox.length; i++) {
+                        dezenas.push(parseInt(checkbox[i].Value));
+                    }
+
+                    alert('Adicionar dezenas ao localstorage.');
+                    window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
                 }
-
-                for (var i = 0; i < checkbox.length; i++) {
-                    dezenas.push(parseInt(checkbox[i].Value));
+                catch (e) {
+                    alert('erro no metodo filter: ' + JSON.stringify(e));
                 }
-
-                window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
             });
 
             $scope.aposta.Dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
