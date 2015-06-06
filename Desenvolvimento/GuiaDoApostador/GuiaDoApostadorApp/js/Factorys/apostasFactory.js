@@ -2,7 +2,7 @@
     var self = this;
  
     self.all = function (funcaoCallback) {
-        return DBA.query("SELECT idAposta, idConcurso, TipoConcurso, Verificado FROM apostas", [], funcaoCallback);
+        DBA.query("SELECT idAposta, idConcurso, TipoConcurso, Verificado FROM apostas", [], funcaoCallback);
     }
  
     self.get = function (memberId, funcaoCallback) {

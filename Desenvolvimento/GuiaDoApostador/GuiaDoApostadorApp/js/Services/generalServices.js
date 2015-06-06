@@ -29,18 +29,24 @@
             });
         }
 })
-.service('openDb', function ($cordovaSQLite) {
+.service('openDb', function ($cordovaSQLite, mostraPopUpErro) {
     return function () {
         var db;
-        if (window.cordova) {
-            db = $cordovaSQLite.openDB({ name: "test.db", bgType: 1 }); //device
+        try
+        {
+            if (window.cordova) {
+                db = $cordovaSQLite.openDB({ name: "guiadoapostador.db", bgType: 1 }); //device
 
-        } else {
-            db = window.openDatabase("test.db", '1', 'test', 1024 * 1024 * 100); // browser
+            } else {
+                db = window.openDatabase("guiadoapostador.db", '1', 'guiadoapostador', 1024 * 1024 * 100); // browser
+            }
+
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS apostas (idAposta integer primary key, idConcurso integer, TipoConcurso TEXT, Verificado integer,  datCadastro datetime default current_timestamp, datSorteio datetime)");
+            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS dezenas (idAposta integer, dezena integer)");
         }
-
-        $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS apostas (idAposta integer primary key, idConcurso integer, TipoConcurso TEXT, Verificado integer,  datCadastro datetime default current_timestamp, datSorteio datetime)");
-        $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS dezenas (idAposta integer, dezena integer)");
+        catch (e) {
+            mostraPopUpErro('Não foi possível conectar à base de dados, openDb. Erro: ' + JSON.stringify(e));
+        }
         return db;
     }
 })

@@ -1,14 +1,19 @@
-﻿guiaDoApostador.factory('DBA', function ($cordovaSQLite, $ionicPlatform, openDb) {
+﻿guiaDoApostador.factory('DBA', function ($cordovaSQLite, openDb, mostraPopUpErro) {
     var self = this;
     var db = openDb();
     // Handle query's and potential errors
     self.query = function (query, parameters, funcaoCallback) {
-        parameters = parameters || [];
+        try
+        {
+            parameters = parameters || [];
 
-        $cordovaSQLite.execute(db, query, parameters).then(funcaoCallback, function (err) {
-            console.warn('I found an error');
-            console.warn(err);
-        });
+            $cordovaSQLite.execute(db, query, parameters).then(funcaoCallback, function (err) {
+                mostraPopUpErro('Não foi possível conectar à base de dados, Repositorio. Erro: ' + JSON.stringify(err));
+            });
+        }
+        catch(e){
+
+        }
     }
 
     // Proces a result set
