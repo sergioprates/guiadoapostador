@@ -74,7 +74,7 @@
 
             _.filter(linhasCheckBoxes, function (checkboxes) {
                 try{
-                    alert('Entrou no filter dezenas');
+                    //alert('Entrou no filter dezenas');
                 
                     var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
                     var dezenas = window.localStorage.getItem('dezenas');
@@ -107,35 +107,35 @@
 
     $scope.validaQuantidadeDezenas = function (check) {
         try {
-            alert('Validando linhas');
+            //alert('Validando linhas');
             try{
                 var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
             }
             catch (e) {
                 alert('Algum problema com o underscore: ' + JSON.stringify(e) + JSON.stringify($scope.linhas));
             }
-            alert('Setando localstorage como null dezenas');
+            //alert('Setando localstorage como null dezenas');
             window.localStorage.setItem('dezenas', null);
-            alert('Filtrando dezenas');
+            //alert('Filtrando dezenas');
             _.filter(linhasCheckBoxes, function (checkboxes) {
 
                 try {
-                    alert('Entrou no filter dezenas');
+                    //alert('Entrou no filter dezenas');
                     var checkbox = _.filter(checkboxes, function (checkbox) { return checkbox.Checked == true });
-                    alert('pegando dezenas do localstorage');
+                    //alert('pegando dezenas do localstorage');
                     var dezenas = JSON.parse(window.localStorage.getItem('dezenas'));
 
                     if (dezenas == undefined) {
                         dezenas = new Array();
                     }
 
-                    alert('Adicionar dezenas ao array.');
+                    //alert('Adicionar dezenas ao array.');
 
                     for (var i = 0; i < checkbox.length; i++) {
                         dezenas.push(parseInt(checkbox[i].Value));
                     }
 
-                    alert('Adicionar dezenas ao localstorage.');
+                    //alert('Adicionar dezenas ao localstorage.');
                     window.localStorage.setItem('dezenas', JSON.stringify(dezenas));
                 }
                 catch (e) {
