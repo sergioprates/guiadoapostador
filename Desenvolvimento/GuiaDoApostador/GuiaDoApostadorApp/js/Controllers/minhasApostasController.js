@@ -4,7 +4,6 @@
 
     $scope.$on('$ionicView.beforeEnter', function () {
         try {
-            mostraAguarde();
             $scope.apostasAux = new Array();
             $scope.apostas = new Array();
             apostasFactory.all(function (results) {
@@ -40,7 +39,6 @@
                     }
                     catch (e) {
                     }
-                    ocultaAguarde();
                 }
                 catch (e) {
                     alert('apostasFactory.all: ' + JSON.stringify(e));
