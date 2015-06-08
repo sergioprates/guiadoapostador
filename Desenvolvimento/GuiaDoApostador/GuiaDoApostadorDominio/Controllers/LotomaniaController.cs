@@ -4,7 +4,7 @@ using GuiaDoApostadorDominio.Interfaces.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
-    public class LotomaniaController :  ILotomaniaController
+    public class LotomaniaController : ILotomaniaController
     {
         private readonly ILotomaniaRepository _repository;
 
@@ -16,26 +16,25 @@ namespace GuiaDoApostadorDominio.Controllers
             }
         }
 
-        public Concurso ConsultaApi()
+        public Lotomania ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Lotomania Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Entities.Concurso entidade)
+        public int Inserir(Lotomania entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Entities.Concurso> Listar()
+        public System.Collections.Generic.IList<Lotomania> Listar()
         {
             return _repository.Listar();
         }
-
 
         public bool Existe(int id)
         {

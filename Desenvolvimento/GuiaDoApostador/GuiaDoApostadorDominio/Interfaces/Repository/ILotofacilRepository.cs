@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface ILotofacilRepository : IConcursoRepository
+    public interface ILotofacilRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.Lotofacil>
     {
     }
 }

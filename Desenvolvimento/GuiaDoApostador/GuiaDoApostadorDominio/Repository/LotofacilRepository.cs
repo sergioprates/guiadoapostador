@@ -11,14 +11,14 @@ namespace GuiaDoApostadorDominio.Repository
 {
     public class LotofacilRepository : ILotofacilRepository
     {
-        public Entities.Concurso ConsultaApi()
+        public Lotofacil ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/lotofacil/json");
 
             return deserializaConcurso(obj);
         }
 
-        private Concurso deserializaConcurso(dynamic obj)
+        private Lotofacil deserializaConcurso(dynamic obj)
         {
             Lotofacil loteria = new Lotofacil()
             {
@@ -87,17 +87,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Entities.Concurso obj)
+        public int Inserir(Lotofacil obj)
         {
             throw new NotImplementedException();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Lotofacil Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Entities.Concurso> Listar()
+        public IList<Lotofacil> Listar()
         {
             throw new NotImplementedException();
         }
@@ -108,7 +108,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Concurso BuscarMaisRecente()
+        public Lotofacil BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

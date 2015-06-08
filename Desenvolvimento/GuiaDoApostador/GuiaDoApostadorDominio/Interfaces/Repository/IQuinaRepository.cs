@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public  interface IQuinaRepository : IConcursoRepository
+    public  interface IQuinaRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.Quina>
     {
     }
 }

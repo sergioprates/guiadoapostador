@@ -1,7 +1,7 @@
 ﻿
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface IFederalRepository : IConcursoRepository
+    public interface IFederalRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.Federal>
     {
     }
 }

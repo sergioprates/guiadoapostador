@@ -59,10 +59,6 @@
       <Project>{153e5282-c079-4eb7-a626-6cf4a79ab2ac}</Project>
       <Name>GuiaDoApostadorDominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GuiaDoApostadorInfra\GuiaDoApostadorInfra.csproj">
-      <Project>{a9fc9e7c-d3a1-4203-8bb6-3f9e6edde22f}</Project>
-      <Name>GuiaDoApostadorInfra</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

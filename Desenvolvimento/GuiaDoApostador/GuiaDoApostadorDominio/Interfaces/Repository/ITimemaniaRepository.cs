@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface ITimemaniaRepository : IConcursoRepository
+    public interface ITimemaniaRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.Timemania>
     {
     }
 }

@@ -11,13 +11,13 @@ namespace GuiaDoApostadorDominio.Repository
 {
     public class LotecaRepository : ILotecaRepository
     {
-        public Concurso ConsultaApi()
+        public Loteca ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/loteca/json");
             return deserializaConcurso(obj);
         }
 
-        private Concurso deserializaConcurso(dynamic obj)
+        private Loteca deserializaConcurso(dynamic obj)
         {
             Loteca loteria = new Loteca()
             {
@@ -70,17 +70,17 @@ namespace GuiaDoApostadorDominio.Repository
 
             return loteria;
         }
-        public int Inserir(Entities.Concurso obj)
+        public int Inserir(Loteca obj)
         {
             throw new NotImplementedException();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Loteca Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Entities.Concurso> Listar()
+        public IList<Loteca> Listar()
         {
             throw new NotImplementedException();
         }
@@ -91,7 +91,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Concurso BuscarMaisRecente()
+        public Loteca BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

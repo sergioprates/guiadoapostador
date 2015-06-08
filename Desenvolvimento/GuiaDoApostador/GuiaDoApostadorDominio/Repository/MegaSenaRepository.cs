@@ -6,29 +6,43 @@ using System.Globalization;
 using GuiaDoApostadorInfra.Util;
 using Dapper;
 using System.Data;
+using System.Transactions;
+using System.Data.SqlClient;
 
 namespace GuiaDoApostadorDominio.Repository
 {
     internal class MegaSenaRepository : RepositoryBase, IMegaSenaRepository
     {
-        public int Inserir(Concurso obj)
+        public int Inserir(MegaSena obj)
         {
             object id;
-            using (cn)
+
+            try
             {
-                cn.Open();
-                id = cn.ExecuteScalar("sp_cadastraPremioPadraoMegaSena", new { obj }, commandType: CommandType.StoredProcedure);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+                        id = cadastraConcursoMegaSena(obj, cn);
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {   
+                throw ex;
             }
 
             return Convert.ToInt32(id);
         }
 
-        public Concurso Buscar(int id)
+        public MegaSena Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Concurso> Listar()
+        public IList<MegaSena> Listar()
         {
             throw new NotImplementedException();
         }
@@ -38,11 +52,18 @@ namespace GuiaDoApostadorDominio.Repository
             throw new NotImplementedException();
         }
 
-        public Concurso ConsultaApi()
+        public MegaSena ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/megasena/json");
             return deserializaConcurso(obj);
         }
+
+        public MegaSena BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region Métodos Privados
 
         private Concurso deserializaConcurso(dynamic obj)
         {    
@@ -94,10 +115,53 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-
-        public Concurso BuscarMaisRecente()
+        private int cadastraConcursoMegaSena(MegaSena obj, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoMegaSena", new { obj }, commandType: CommandType.StoredProcedure));
+
+            foreach (var dezena in obj.Dezenas)
+            {
+                cadastraDezenaMegaSena(id, dezena, conn);
+            }
+
+            foreach (var premio in obj.Premios)
+            {
+                cadastraPremioMegaSena(id, premio, conn);
+            }
+
+            return id;
         }
+
+        private void cadastraDezenaMegaSena(int idConcurso, byte dezena, SqlConnection conn)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
+            
+            SqlParameter paramConcurso = new SqlParameter("@idConcurso", idConcurso);
+            SqlParameter paramDezena = new SqlParameter("@dezena", dezena);
+
+            paramList.Add(paramConcurso);
+            paramList.Add(paramDezena);
+
+            cn.Execute("sp_cadastraDezenaMegaSena", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private void cadastraPremioMegaSena(int idConcurso, PremioPadrao premio, SqlConnection conn)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
+
+            SqlParameter paramConcurso = new SqlParameter("@idConcurso", idConcurso);
+            SqlParameter paramAcertos = new SqlParameter("@dezena", premio.Acertos);
+            SqlParameter paramValorPago = new SqlParameter("@dezena", premio.ValorPago);
+            SqlParameter paramGanhadores = new SqlParameter("@dezena", premio.Ganhadores);
+
+            paramList.Add(paramConcurso);
+            paramList.Add(paramAcertos);
+            paramList.Add(paramValorPago);
+            paramList.Add(paramGanhadores);
+
+            cn.Execute("sp_cadastraPremioMegaSena", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        #endregion
     }
 }

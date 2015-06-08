@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Controllers
 {
-    public interface IQuinaController : IConcursoController
+    public interface IQuinaController : IConcursoController<GuiaDoApostadorDominio.Entities.Quina>
     {
     }
 }

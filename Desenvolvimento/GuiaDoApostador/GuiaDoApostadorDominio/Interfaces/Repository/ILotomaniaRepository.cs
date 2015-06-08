@@ -1,7 +1,7 @@
 ﻿
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface ILotomaniaRepository : IConcursoRepository
+    public interface ILotomaniaRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.Lotomania>
     {
     }
 }

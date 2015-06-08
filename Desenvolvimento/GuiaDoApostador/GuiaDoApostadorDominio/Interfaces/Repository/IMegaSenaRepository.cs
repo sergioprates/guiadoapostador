@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface IMegaSenaRepository : IConcursoRepository
+    public interface IMegaSenaRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.MegaSena>
     {
     }
 }

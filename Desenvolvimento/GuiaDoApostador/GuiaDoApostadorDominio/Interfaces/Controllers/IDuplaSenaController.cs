@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Controllers
 {
-    interface IDuplaSenaController : IConcursoController
+    interface IDuplaSenaController : IConcursoController<GuiaDoApostadorDominio.Entities.DuplaSena>
     {
     }
 }

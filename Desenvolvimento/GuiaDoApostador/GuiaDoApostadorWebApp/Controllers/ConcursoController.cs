@@ -14,13 +14,14 @@ namespace GuiaDoApostadorWebApp.Controllers
         // GET: api/Concurso
         public IEnumerable<Concurso> Get()
         {
-            List<Concurso> concurso = new List<Concurso>();
-            concurso.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.MegaSena).ConsultaApi());
-            concurso.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotofacil).ConsultaApi());
-            concurso.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Quina).ConsultaApi());
+            List<Concurso> concursos = new List<Concurso>();
 
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<MegaSena>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotofacil>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Quina>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotomania>().ConsultaApi());
 
-            return concurso;
+            return concursos;
         }
 
         // GET: api/Concurso/5

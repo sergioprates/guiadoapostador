@@ -11,13 +11,13 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class DuplaSenaRepository : IDuplaSenaRepository
     {
-        public Concurso ConsultaApi()
+        public DuplaSena ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/duplasena/json");
             return deserializaConcurso(obj);
         }
 
-        private Concurso deserializaConcurso(dynamic obj)
+        private DuplaSena deserializaConcurso(dynamic obj)
         {
             DuplaSena loteria = new DuplaSena()
             {
@@ -96,17 +96,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Entities.Concurso obj)
+        public int Inserir(DuplaSena obj)
         {
             throw new NotImplementedException();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public DuplaSena Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Entities.Concurso> Listar()
+        public IList<DuplaSena> Listar()
         {
             throw new NotImplementedException();
         }
@@ -117,7 +117,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Concurso BuscarMaisRecente()
+        public DuplaSena BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

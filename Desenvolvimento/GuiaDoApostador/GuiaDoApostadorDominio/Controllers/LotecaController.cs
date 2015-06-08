@@ -21,22 +21,22 @@ namespace GuiaDoApostadorDominio.Controllers
             }
         }
 
-        public Concurso ConsultaApi()
+        public Loteca ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Loteca Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Entities.Concurso entidade)
+        public int Inserir(Loteca entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Entities.Concurso> Listar()
+        public System.Collections.Generic.IList<Loteca> Listar()
         {
             return _repository.Listar();
         }

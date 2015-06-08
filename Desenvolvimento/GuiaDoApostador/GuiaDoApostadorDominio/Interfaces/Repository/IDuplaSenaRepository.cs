@@ -1,7 +1,7 @@
 ﻿
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface IDuplaSenaRepository : IConcursoRepository
+    public interface IDuplaSenaRepository : IConcursoRepository<GuiaDoApostadorDominio.Entities.DuplaSena>
     {
     }
 }

@@ -3,65 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Interfaces.Controllers;
-using GuiaDoApostadorDominio.Factory;
+using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
-    public class ConcursoController : IConcursoController
+    public class ConcursoController<TEntity> where TEntity : class
     {
-        private readonly IConcursoController _controller;
-
-        public ConcursoController(Loteria loteria)
-        {
-            switch (loteria)
-            {
-                case Loteria.DuplaSena:
-                    _controller = new DuplaSenaController(AbstractFactoryRepository.InstanciarDuplaSena());
-                    break;
-                case Loteria.Federal:
-                    _controller = new FederalController(AbstractFactoryRepository.InstanciarFederal());
-                    break;
-                case Loteria.Loteca:
-                    _controller = new LotecaController(AbstractFactoryRepository.InstanciarLoteca());
-                    break;
-                case Loteria.Lotofacil:
-                    _controller = new LotofacilController(AbstractFactoryRepository.InstanciarLotofacil());
-                    break;
-                case Loteria.Lotogol:
-                    _controller = new LotogolController(AbstractFactoryRepository.InstanciarLotogol());
-                    break;
-                case Loteria.Lotomania:
-                    _controller = new LotomaniaController(AbstractFactoryRepository.InstanciarLotomania());
-                    break;
-                case Loteria.MegaSena:
-                    _controller = new MegaSenaController(AbstractFactoryRepository.InstanciarMegaSena());
-                    break;
-                case Loteria.Quina:
-                    _controller = new QuinaController(AbstractFactoryRepository.InstanciarQuina());
-                    break;
-                case Loteria.Timemania:
-                    _controller = new TimemaniaController(AbstractFactoryRepository.InstanciarTimemania());
-                    break;
-                default:
-                    _controller = new ConcursoControllerMock();
-                    break;
-            }
-        }
-
+        private readonly IConcursoController<TEntity> _controller;
         
-        public Concurso Buscar(int id)
+        public TEntity Buscar(int id)
         {
             return _controller.Buscar(id);
         }
 
-        public int Inserir(Concurso entidade)
+        public int Inserir(TEntity entidade)
         {
             return _controller.Inserir(entidade);
         }
 
-        public IList<Concurso> Listar()
+        public IList<TEntity> Listar()
         {
             return _controller.Listar();
         }
@@ -70,7 +32,7 @@ namespace GuiaDoApostadorDominio.Controllers
         /// Método deverá ser implementado em todas as classes filhas
         /// </summary>
         /// <returns></returns>
-        public Concurso ConsultaApi()
+        public TEntity ConsultaApi()
         {
             return _controller.ConsultaApi();
         }

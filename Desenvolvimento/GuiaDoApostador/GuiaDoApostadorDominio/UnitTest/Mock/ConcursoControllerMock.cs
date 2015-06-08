@@ -8,7 +8,7 @@ using GuiaDoApostadorDominio.Interfaces.Controllers;
 
 namespace GuiaDoApostadorDominio.Interfaces
 {
-    public class ConcursoControllerMock : IConcursoController
+    public class ConcursoControllerMock : IConcursoController<Concurso>
     {
         /// <summary>
         /// Apenas um método de mock, 

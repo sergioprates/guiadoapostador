@@ -9,13 +9,13 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class TimemaniaRepository : ITimemaniaRepository
     {
-        public Entities.Concurso ConsultaApi()
+        public Timemania ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/timemania/json");
             return deserializaConcurso(obj);
         }
 
-        private Concurso deserializaConcurso(dynamic obj)
+        private Timemania deserializaConcurso(dynamic obj)
         {
             Timemania loteria = new Timemania()
             {
@@ -85,17 +85,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Entities.Concurso obj)
+        public int Inserir(Timemania obj)
         {
             throw new NotImplementedException();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Timemania Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Entities.Concurso> Listar()
+        public IList<Timemania> Listar()
         {
             throw new NotImplementedException();
         }
@@ -106,7 +106,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Concurso BuscarMaisRecente()
+        public Timemania BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

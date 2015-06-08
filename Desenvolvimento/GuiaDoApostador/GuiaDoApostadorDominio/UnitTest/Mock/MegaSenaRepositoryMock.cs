@@ -9,7 +9,7 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
 {
     public class MegaSenaRepositoryMock : IMegaSenaRepository
     {
-        public Entities.Concurso ConsultaApi()
+        public MegaSena ConsultaApi()
         {
             MegaSena loteria = new MegaSena();
             loteria.ID = 1700;
@@ -27,17 +27,17 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
             return loteria;
         }
 
-        public int Inserir(Entities.Concurso obj)
+        public int Inserir(MegaSena obj)
         {
             throw new NotImplementedException();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public MegaSena Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Entities.Concurso> Listar()
+        public IList<MegaSena> Listar()
         {
             throw new NotImplementedException();
         }
@@ -47,8 +47,7 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
             throw new NotImplementedException();
         }
 
-
-        public Concurso BuscarMaisRecente()
+        public MegaSena BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

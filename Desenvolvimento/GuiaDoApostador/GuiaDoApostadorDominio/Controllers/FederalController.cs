@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Interfaces.Controllers;
 using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Entities;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
@@ -19,22 +20,22 @@ namespace GuiaDoApostadorDominio.Controllers
             }
         }
 
-        public Entities.Concurso ConsultaApi()
+        public Federal ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Federal Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Entities.Concurso entidade)
+        public int Inserir(Federal entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Entities.Concurso> Listar()
+        public System.Collections.Generic.IList<Federal> Listar()
         {
             return _repository.Listar();
         }

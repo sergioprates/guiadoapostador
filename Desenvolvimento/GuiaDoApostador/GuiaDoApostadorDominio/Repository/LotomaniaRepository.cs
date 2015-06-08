@@ -9,7 +9,7 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class LotomaniaRepository : ILotomaniaRepository
     {
-        public Concurso ConsultaApi()
+        public Lotomania ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/lotomania/json");
             return deserializaConcurso(obj);
@@ -83,17 +83,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Entities.Concurso obj)
+        public int Inserir(Lotomania obj)
         {
             throw new System.NotImplementedException();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Lotomania Buscar(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public System.Collections.Generic.IList<Entities.Concurso> Listar()
+        public System.Collections.Generic.IList<Lotomania> Listar()
         {
             throw new System.NotImplementedException();
         }
@@ -104,7 +104,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Concurso BuscarMaisRecente()
+        public Lotomania BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

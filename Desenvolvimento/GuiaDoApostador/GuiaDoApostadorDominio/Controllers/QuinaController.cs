@@ -21,22 +21,22 @@ namespace GuiaDoApostadorDominio.Controllers
         }
 
 
-        public Concurso ConsultaApi()
+        public Quina ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Entities.Concurso Buscar(int id)
+        public Quina Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Entities.Concurso entidade)
+        public int Inserir(Quina entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Entities.Concurso> Listar()
+        public System.Collections.Generic.IList<Quina> Listar()
         {
             return _repository.Listar();
         }

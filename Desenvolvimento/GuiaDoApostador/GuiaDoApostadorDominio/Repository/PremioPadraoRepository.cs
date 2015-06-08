@@ -11,7 +11,6 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class PremioPadraoRepository : RepositoryBase
     {
-
         //chavear método, existirá um método de inserir para cada loteria.
         public void Inserir(Entities.PremioPadrao obj, int idConcurso, Loteria tipo)
         {
