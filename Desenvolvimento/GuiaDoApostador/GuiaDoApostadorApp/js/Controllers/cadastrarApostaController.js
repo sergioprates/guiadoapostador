@@ -1,16 +1,26 @@
-﻿guiaDoApostador.controller('cadastrarApostaController', ['$scope', 'returnToState', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'mostraMensagemTemporaria', function ($scope, returnToState, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, mostraMensagemTemporaria) {
+﻿guiaDoApostador.controller('cadastrarApostaController', ['$scope', 'returnToState', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'mostraMensagemTemporaria', 'bilheteFactory', function ($scope, returnToState, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, mostraMensagemTemporaria, bilheteFactory) {
 
     //OnLoad
     $scope.$on('$ionicView.beforeEnter', function () {
-        $scope.aposta = new Object();
-        $scope.aposta.Loteria = new Object();
-
-        $scope.linhas = retornaLinhasPorConcurso(window.localStorage.getItem('tipoLoteriaClicada'));
         $scope.loteria = {
             Nome: retornaTituloLoteria(window.localStorage.getItem('tipoLoteriaClicada')),
             image: retornaCaminhoDaImagemPorTipoLoteria(window.localStorage.getItem('tipoLoteriaClicada')),
             tipo: window.localStorage.getItem('tipoLoteriaClicada')
         };
+        $scope.aposta = new Object();
+        $scope.aposta.Loteria = new Object();
+        $scope.linhas = new Array();
+        if (loteriaComum($scope.loteria.tipo) == true) {
+            $scope.loteriaComum = 1;
+            $scope.linhas = retornaLinhasPorConcurso(window.localStorage.getItem('tipoLoteriaClicada'));
+        }
+        else {
+            if ($scope.loteria.tipo == 'LoteriaFederal') {
+                $scope.loteriaFederal = 1;
+            }
+        }
+        
+        
 
         ocultaAguarde();
     });
@@ -22,22 +32,19 @@
             mostraAguarde();
             switch (window.localStorage.getItem('tipoLoteriaClicada')) {
                 case 'MegaSena':
-                    $scope.apostarMegaSena();
+                    $scope.mapearApostaComum();
                     break;
                 case 'Timemania':
                     return "Timemania";
                     break;
                 case 'Quina':
-                    return "Quina";
+                    $scope.mapearApostaComum();
                     break;
                 case 'Lotomania':
-                    return "Lotomania";
+                    $scope.mapearApostaComum();
                     break;
                 case 'DuplaSena':
                     return "Dupla Sena";
-                    break;
-                case 'LoteriaFederal':
-                    return "Loteria Federal";
                     break;
                 case 'Loteca':
                     return "Loteca";
@@ -46,36 +53,72 @@
                     return "Lotogol";
                     break;
                 case 'Lotofacil':
-                    return "Lotofácil";
+                    $scope.mapearApostaComum();
                     break;
             }
 
             $scope.aposta.TipoLoteria = window.localStorage.getItem('tipoLoteriaClicada');
-
-            if ($scope.aposta.Dezenas.length >= retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria)) {
-                apostasFactory.add($scope.aposta, function (result) {
-                    $scope.aposta.ID = result.insertId;
-                    for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
-                        dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
-                    }
+            
+            if (loteriaComum($scope.loteria.tipo) == true) {
+                //Loterias com dezenas
+                if ($scope.aposta.Dezenas.length >= retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria)) {
+                    apostasFactory.add($scope.aposta, function (result) {
+                        $scope.aposta.ID = result.insertId;
+                        for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
+                            dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
+                        }
+                        ocultaAguarde();
+                        mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
+                    });
+                }
+                else {
                     ocultaAguarde();
-                    mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
-                });
+                    mostraMensagemTemporaria('O número mínimo de dezenas para esta loteria é de ' + retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria) + ' números.', '', '');
+                }
             }
             else {
-                ocultaAguarde();
-                mostraMensagemTemporaria('O número mínimo de dezenas para esta loteria é de ' + retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria) + ' números.', '', '');
+                switch ($scope.loteria.tipo) {
+                    case 'Timemania':
+                        return "Timemania";
+                        break;
+                    case 'DuplaSena':
+                        return "Dupla Sena";
+                        break;
+                    case 'LoteriaFederal':
+                        if ($scope.aposta.numeroBilhete != '' && $scope.aposta.numeroBilhete != undefined) {
+                            apostasFactory.add($scope.aposta, function (result) {
+                                $scope.aposta.ID = result.insertId;
+                                //Inserindo número do bilhete
+                                bilheteFactory.add($scope.aposta, $scope.aposta.numeroBilhete, function (result) {
+                                    ocultaAguarde();
+                                    mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
+                                });
+                            });
+                        }
+                        else {
+                            ocultaAguarde();
+                            mostraMensagemTemporaria('Preencha o número do bilhete.', '', '');
+                        }
+                        break;
+                    case 'Loteca':
+                        return "Loteca";
+                        break;
+                    case 'Lotogol':
+                        return "Lotogol";
+                        break;
+                }
             }
+
+            
         }
         catch (e) {
             alert('Erro ao apostar: ' + JSON.stringfy(e));
         }
     };
 
-    $scope.apostarMegaSena = function () {
+
+    $scope.mapearApostaComum = function () {
         try {
-
-
             var linhasCheckBoxes = _.pluck($scope.linhas, 'CheckBoxes');
             window.localStorage.setItem('dezenas', null);
 
@@ -110,6 +153,8 @@
             alert('Erro ao apostarMegaSena: ' + JSON.stringfy(e));
         }
     };
+
+    //Fim métodos de apostas.
 
 
     $scope.validaQuantidadeDezenas = function (check) {
@@ -155,7 +200,6 @@
             if ($scope.aposta.Dezenas.length > retornaQuantidadeMaximaDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada'))) {
                 check.checkbox.Checked = false;
                 try {
-                    alert('Mostrando mensagem temporaia');
                     mostraMensagemTemporaria('Nos concursos da ' + window.localStorage.getItem('tipoLoteriaClicada') + ' você só pode selecionar ' + retornaQuantidadeMaximaDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada')) + ' dezenas por aposta.', 'short', 'bottom');
                 }
                 catch (e) {
@@ -176,13 +220,13 @@ function retornaQuantidadeMaximaDezenasPorAposta(tipo) {
             return 15;
             break;
         case 'Timemania':
-            return 7;
+            return 'Timemania';
             break;
         case 'Quina':
-            return "Quina";
+            return 7;
             break;
         case 'Lotomania':
-            return "Lotomania";
+            return 50;
             break;
         case 'DuplaSena':
             return "Dupla Sena";
@@ -197,7 +241,7 @@ function retornaQuantidadeMaximaDezenasPorAposta(tipo) {
             return "Lotogol";
             break;
         case 'Lotofacil':
-            return "Lotofácil";
+            return 18;
         default:
             break;
     }
@@ -215,7 +259,7 @@ function retornaQuantidadeMinimaDezenasPorAposta(tipo) {
             return 5;
             break;
         case 'Lotomania':
-            return "Lotomania";
+            return 50;
             break;
         case 'DuplaSena':
             return "Dupla Sena";
@@ -230,7 +274,7 @@ function retornaQuantidadeMinimaDezenasPorAposta(tipo) {
             return "Lotogol";
             break;
         case 'Lotofacil':
-            return "Lotofácil";
+            return 15;
         default:
             break;
     }
@@ -240,19 +284,22 @@ function retornaQuantidadeIdealPorLinha() {
     return (window.innerWidth * 6) / 320;
 }
 
+
+
 function retornaQuantidadeNumerosNoFormulario(tipoLoteria) {
+    var i = 0;
     switch (tipoLoteria) {
         case 'MegaSena':
-            return 61;
+            i= 60;
             break;
         case 'Timemania':
             return "Timemania";
             break;
         case 'Quina':
-            return 81;
+            i = 80;
             break;
         case 'Lotomania':
-            return "Lotomania";
+            i= 100;
             break;
         case 'DuplaSena':
             return "Dupla Sena";
@@ -267,10 +314,13 @@ function retornaQuantidadeNumerosNoFormulario(tipoLoteria) {
             return "Lotogol";
             break;
         case 'Lotofacil':
-            return "Lotofácil";
+            i = 25;
             break;
         default:
+            break;
     }
+
+    return i + 1;
 }
 
 function retornaLinhasPorConcurso(tipo) {
@@ -290,9 +340,16 @@ function retornaLinhasPorConcurso(tipo) {
             var checkbox = new Object();
             checkbox.Value = padLeft(quantidaderenderizada, '0', 2);
             checkbox.Checked = false;
+
+            if (checkbox.Value == '100') {
+                checkbox.Value = '00';
+            }
+
             linha.CheckBoxes.push(checkbox);
             quantidaderenderizada++;
         }
+
+        
 
         linhas.push(linha);
     }
@@ -304,6 +361,9 @@ function retornaLinhasPorConcurso(tipo) {
         for (var i = 0; i < quantidadeRestante; i++) {
             var checkbox = new Object();
             checkbox.Value = padLeft(quantidaderenderizada.toString(), '0', 2);
+            if (checkbox.Value == '100') {
+                checkbox.Value = '00';
+            }
             linha.CheckBoxes.push(checkbox);
             quantidaderenderizada++;
         }

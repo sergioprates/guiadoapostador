@@ -110,3 +110,35 @@ function retornaTituloLoteria(Tipo) {
     }
 }
 
+function loteriaComum(tipo) {
+    switch (tipo) {
+        case 'MegaSena':
+            return true;
+            break;
+        case 'Timemania':
+            return false;
+            break;
+        case 'Quina':
+            return true;
+            break;
+        case 'Lotomania':
+            return true;
+            break;
+        case 'DuplaSena':
+            return false;
+            break;
+        case 'LoteriaFederal':
+            return false;
+            break;
+        case 'Loteca':
+            return false;
+            break;
+        case 'Lotogol':
+            return false;
+            break;
+        case 'Lotofacil':
+            return true;
+        default:
+            break;
+    }
+}
