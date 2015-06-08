@@ -4,6 +4,7 @@
 
     $scope.$on('$ionicView.beforeEnter', function () {
         try {
+            mostraAguarde();
             $scope.apostasAux = new Array();
             $scope.apostas = new Array();
             apostasFactory.all(function (results) {
@@ -71,17 +72,12 @@
                             }
                         }
                     }
-                    try {
-                        _.sortBy($scope.apostas, 'idConcurso');
-                    }
-                    catch (e) {
-                    }
                 }
                 catch (e) {
                     alert('apostasFactory.all: ' + JSON.stringify(e));
                 }
             });
-
+            ocultaAguarde();
 
         }
         catch (e) {

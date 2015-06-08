@@ -28,7 +28,12 @@
 
     //Métodos de apostas
     $scope.apostar = function () {
-        try {
+        try {     
+            if ($scope.aposta.Loteria.ID == undefined || $scope.aposta.Loteria.ID == "") {
+                mostraMensagemTemporaria('Informe qual o número do concurso.', '', '');
+                return false;
+            }
+
             mostraAguarde();
             switch (window.localStorage.getItem('tipoLoteriaClicada')) {
                 case 'MegaSena':
