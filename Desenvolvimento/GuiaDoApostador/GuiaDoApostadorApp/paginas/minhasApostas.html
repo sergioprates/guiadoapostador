@@ -15,12 +15,13 @@
             </div>
         </div>
         <div class="list" ng-show="apostas.length > 0">
-            <a ng-repeat="item in apostas track by item.idAposta" href="#/{{item.idAposta}}" class="item item-thumbnail-left">
+            <a collection-repeat="item in apostas track by item.idAposta" href="#/{{item.idAposta}}" class="item item-thumbnail-left">
                 <img ng-src="{{ item.ImagemLoteria }}">
                 <h2>{{ item.Nome}} </h2>
                 <h4>Concurso: {{ item.idConcurso }}</h4>
                 <h4 ng-show="item.Dezenas != undefined && item.Dezenas.length > 0">Dezenas: {{ item.Dezenas.toString() }}</h4>
                 <h4 ng-show="item.numeroBilhete != undefined">N&uacute;mero Bilhete: {{ item.numeroBilhete }}</h4>
+                <h4 ng-show="item.TipoConcurso == 'Timemania'">Time do Cora&ccedil;&atilde;o: {{item.time}}</h4>
                 <h4 ng-show="item.Verificado == 0">Aguardando sorteio</h4>
                 <h4 ng-show="item.Verificado == 1">Conferido</h4>
                 <!--<h4>Ocorre em: {{ item.proximoSorteio }}</h4>-->

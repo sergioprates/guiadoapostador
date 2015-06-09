@@ -39,7 +39,27 @@
                         else {
                             switch (results.rows.item(i)['TipoConcurso']) {
                                 case 'Timemania':
-                                    return "Timemania";
+                                    if (results.rows.length > 0) {
+                                        dezenasFactory.get(results.rows.item(i)['idAposta'],
+                                    function (results) {
+                                        try {
+                                            //armazenando as dezenas em cada aposta.
+                                            if (results.rows.length > 0) {
+                                                var a = _.find($scope.apostasAux, function (aposta) { return aposta.idAposta == results.rows.item(0)['idAposta']; });
+                                                a.Dezenas = new Array();
+                                                for (var i = 0; i < results.rows.length; i++) {
+                                                    a.Dezenas.push(results.rows.item(i).dezena);
+                                                }
+                                                a.ImagemLoteria = retornaCaminhoDaImagemPorTipoLoteria(a.TipoConcurso);
+                                                a.Nome = retornaTituloLoteria(a.TipoConcurso);
+                                                $scope.apostas.push(a);
+                                            }
+                                        }
+                                        catch (e) {
+                                            alert('dezenasFactory.get Timemania: ' + JSON.stringify(e));
+                                        }
+                                    });
+                                    }
                                     break;
                                 case 'DuplaSena':
                                     return "Dupla Sena";

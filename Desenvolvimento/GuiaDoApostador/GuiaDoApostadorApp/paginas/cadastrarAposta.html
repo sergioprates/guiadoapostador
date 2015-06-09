@@ -19,7 +19,22 @@
                 </label>
             </div>
         </div>
-        <div id='dadosAposta' class="list card" ng-show="loteriaComum == 1">
+        <div id='dadosApostaTimeMania' class="list card" ng-show="loteriaTimeMania == 1">
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Time do Cora&ccedil;&atilde;o
+                    </div>
+                    <select ng-model="aposta.timeDoCoracao">
+                        <option value="-1" selected>Selecione...</option>
+                        <option value="Time1">Time1</option>
+                        <option value="Time2">Time2</option>
+                    </select>
+                </label>
+
+            </div>
+        </div>
+        <div id='dadosAposta' class="list card" ng-show="loteriaComum == 1 || loteriaTimeMania == 1">
             <div class='row responsive-sm' style="text-align:center" ng-repeat="linha in linhas">
                 <div class='col'>
                     <label class='checkbox' style='text-align:center' ng-repeat="checkbox in linha.CheckBoxes">
@@ -33,5 +48,6 @@
                 <input type="text" ng-model="aposta.numeroBilhete" placeholder="Digite o número do bilhete.">
             </label>
         </div>
+       
     </ion-content>
 </ion-view>

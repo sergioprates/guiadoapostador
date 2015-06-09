@@ -1,4 +1,4 @@
-﻿guiaDoApostador.controller('cadastrarApostaController', ['$scope', 'returnToState', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'mostraMensagemTemporaria', 'bilheteFactory', function ($scope, returnToState, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, mostraMensagemTemporaria, bilheteFactory) {
+﻿guiaDoApostador.controller('cadastrarApostaController', ['$scope', 'returnToState', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'mostraMensagemTemporaria', 'bilheteFactory', 'timeDoCoracaoFactory', function ($scope, returnToState, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, mostraMensagemTemporaria, bilheteFactory, timeDoCoracaoFactory) {
 
     //OnLoad
     $scope.$on('$ionicView.beforeEnter', function () {
@@ -18,9 +18,14 @@
             if ($scope.loteria.tipo == 'LoteriaFederal') {
                 $scope.loteriaFederal = 1;
             }
+            if ($scope.loteria.tipo == 'Timemania') {
+                $scope.loteriaTimeMania = 1;
+                $scope.aposta.timeDoCoracao = '-1';
+                $scope.linhas = retornaLinhasPorConcurso(window.localStorage.getItem('tipoLoteriaClicada'));
+            }
         }
-        
-        
+
+
 
         ocultaAguarde();
     });
@@ -28,7 +33,7 @@
 
     //Métodos de apostas
     $scope.apostar = function () {
-        try {     
+        try {
             if ($scope.aposta.Loteria.ID == undefined || $scope.aposta.Loteria.ID == "") {
                 mostraMensagemTemporaria('Informe qual o número do concurso.', '', '');
                 return false;
@@ -40,7 +45,7 @@
                     $scope.mapearApostaComum();
                     break;
                 case 'Timemania':
-                    return "Timemania";
+                    $scope.mapearApostaComum();
                     break;
                 case 'Quina':
                     $scope.mapearApostaComum();
@@ -63,7 +68,7 @@
             }
 
             $scope.aposta.TipoLoteria = window.localStorage.getItem('tipoLoteriaClicada');
-            
+
             if (loteriaComum($scope.loteria.tipo) == true) {
                 //Loterias com dezenas
                 if ($scope.aposta.Dezenas.length >= retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria)) {
@@ -84,7 +89,29 @@
             else {
                 switch ($scope.loteria.tipo) {
                     case 'Timemania':
-                        return "Timemania";
+                        if ($scope.aposta.Dezenas.length >= retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria)) {
+                            if ($scope.aposta.timeDoCoracao != '' && $scope.aposta.timeDoCoracao != undefined && $scope.aposta.timeDoCoracao != '-1') {
+                                apostasFactory.add($scope.aposta, function (result) {
+                                    $scope.aposta.ID = result.insertId;
+                                    for (var i = 0; i < $scope.aposta.Dezenas.length; i++) {
+                                        dezenasFactory.add($scope.aposta, $scope.aposta.Dezenas[i], function () { });
+                                    }
+                                    //Inserindo time do coração.
+                                    timeDoCoracaoFactory.add($scope.aposta, $scope.aposta.timeDoCoracao, function (result) {
+                                        ocultaAguarde();
+                                        mostraPopUpSucesso('Aposta realizada!', 'Sua aposta foi realizada com sucesso!', 'minhasApostas');
+                                    });
+                                });
+                            }
+                            else {
+                                ocultaAguarde();
+                                mostraMensagemTemporaria('Selecione o time do coração.', '', '');
+                            }
+                        }
+                        else {
+                            ocultaAguarde();
+                            mostraMensagemTemporaria('O número mínimo de dezenas para esta loteria é de ' + retornaQuantidadeMinimaDezenasPorAposta($scope.aposta.TipoLoteria) + ' números.', '', '');
+                        }
                         break;
                     case 'DuplaSena':
                         return "Dupla Sena";
@@ -114,10 +141,10 @@
                 }
             }
 
-            
+
         }
         catch (e) {
-            alert('Erro ao apostar: ' + JSON.stringfy(e));
+            alert('Erro ao apostar: ' + JSON.stringify(e));
         }
     };
 
@@ -225,7 +252,7 @@ function retornaQuantidadeMaximaDezenasPorAposta(tipo) {
             return 15;
             break;
         case 'Timemania':
-            return 'Timemania';
+            return 10;
             break;
         case 'Quina':
             return 7;
@@ -258,7 +285,7 @@ function retornaQuantidadeMinimaDezenasPorAposta(tipo) {
             return 6;
             break;
         case 'Timemania':
-            return "Timemania";
+            return 10;
             break;
         case 'Quina':
             return 5;
@@ -295,16 +322,16 @@ function retornaQuantidadeNumerosNoFormulario(tipoLoteria) {
     var i = 0;
     switch (tipoLoteria) {
         case 'MegaSena':
-            i= 60;
+            i = 60;
             break;
         case 'Timemania':
-            return "Timemania";
+            i = 80;
             break;
         case 'Quina':
             i = 80;
             break;
         case 'Lotomania':
-            i= 100;
+            i = 100;
             break;
         case 'DuplaSena':
             return "Dupla Sena";
@@ -354,7 +381,7 @@ function retornaLinhasPorConcurso(tipo) {
             quantidaderenderizada++;
         }
 
-        
+
 
         linhas.push(linha);
     }

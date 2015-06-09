@@ -2,7 +2,14 @@
     var self = this;
  
     self.all = function (funcaoCallback) {
-        DBA.query("SELECT idAposta, idConcurso, TipoConcurso, Verificado FROM apostas ORDER BY datCadastro desc", [], funcaoCallback);
+
+        var query = new String();
+        query += 'SELECT a.idAposta, a.idConcurso, a.TipoConcurso, a.Verificado, b.time ';
+        query += 'FROM apostas a ';
+        query += 'LEFT JOIN timeDoCoracao b ';
+        query += 'on a.idAposta = b.idAposta ';
+        query += 'ORDER BY a.datCadastro desc';
+        DBA.query(query, [], funcaoCallback);
     }
  
     self.get = function (memberId, funcaoCallback) {

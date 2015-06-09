@@ -42,6 +42,7 @@
         $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS apostas (idAposta integer primary key, idConcurso integer, TipoConcurso TEXT, Verificado integer,  datCadastro datetime default current_timestamp, datSorteio datetime)");
         $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS dezenas (idAposta integer, dezena integer)");
         $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS bilhete (idAposta integer, numeroBilhete integer)");
+        $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS timeDoCoracao (idAposta integer, time TEXT)");
         return db;
     }
 })
