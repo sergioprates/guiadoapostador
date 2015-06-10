@@ -11,7 +11,7 @@ namespace GuiaDoApostadorDominio.Repository
     internal class PremioPadraoRepository : RepositoryBase
     {
         //chavear método, existirá um método de inserir para cada loteria.
-        public void Inserir(Entities.PremioPadrao obj, int idConcurso, Loteria tipo)
+        internal void Inserir(Entities.PremioPadrao obj, int idConcurso, Loteria tipo)
         {
             switch (tipo)
             {
@@ -48,12 +48,12 @@ namespace GuiaDoApostadorDominio.Repository
             }
         }
 
-        public Entities.PremioPadrao Buscar(int id)
+        internal Entities.PremioPadrao Buscar(int id)
         {
              throw new NotImplementedException();
         }
 
-        public IList<Entities.PremioPadrao> Listar()
+        internal IList<Entities.PremioPadrao> Listar()
         {
             using (cn)
             {
@@ -62,7 +62,7 @@ namespace GuiaDoApostadorDominio.Repository
             }
         }
 
-        public IList<Entities.PremioPadrao> Listar(int idConcurso)
+        internal IList<Entities.PremioPadrao> Listar(int idConcurso)
         {
             using (cn)
             {
@@ -71,7 +71,7 @@ namespace GuiaDoApostadorDominio.Repository
             }
         }
 
-        public bool Existe(int id)
+        internal bool Existe(int id)
         {
             throw new NotImplementedException();
         }

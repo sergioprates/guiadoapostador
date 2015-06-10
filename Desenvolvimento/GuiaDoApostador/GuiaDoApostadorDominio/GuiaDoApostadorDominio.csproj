@@ -99,8 +99,10 @@
     <Compile Include="Repository\QuinaRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\TimemaniaRepository.cs" />
+    <Compile Include="UnitTest\LotofacilUnitTest.cs" />
     <Compile Include="UnitTest\MegaSenaUnitTest.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
+    <Compile Include="UnitTest\Mock\LotofacilControllerMock.cs" />
     <Compile Include="UnitTest\Mock\MegaSenaControllerMock.cs" />
   </ItemGroup>
   <ItemGroup>

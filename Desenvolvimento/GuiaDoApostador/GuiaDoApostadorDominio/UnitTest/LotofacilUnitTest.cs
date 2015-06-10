@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
 using GuiaDoApostadorDominio.Interfaces;
-using GuiaDoApostadorDominio.Controllers;
 using GuiaDoApostadorDominio.UnitTest.Mock;
+using NUnit.Framework;
 
 namespace GuiaDoApostadorDominio.UnitTest
 {
     [TestFixture]
-    public class MegaSenaUnitTest
+    public class LotofacilUnitTest
     {
-        IMegaSenaController _repository = new MegaSenaControllerMock();
-        //IMegaSenaController _repository = new MegaSenaController();
+        ILotofacilController _repository = new LotofacilControllerMock();
+        //ILotofacilController _repository = new LotofacilController();
 
         [Test]
         public void ConsultaApi()

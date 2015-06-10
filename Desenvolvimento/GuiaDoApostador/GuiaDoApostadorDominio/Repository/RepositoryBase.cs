@@ -7,7 +7,7 @@ namespace GuiaDoApostadorDominio.Repository
     {
         protected readonly SqlConnection cn;
 
-        public RepositoryBase()
+        internal RepositoryBase()
         {
             cn = new SqlConnection(ConfigurationManager.ConnectionStrings["guiadoapostador"].ToString());
         }

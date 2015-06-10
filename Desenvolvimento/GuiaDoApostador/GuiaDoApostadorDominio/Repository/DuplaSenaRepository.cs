@@ -13,34 +13,34 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class DuplaSenaRepository : RepositoryBase
     {
-        public Concurso ConsultaApi()
+        internal Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/duplasena/json");
             return deserializaConcurso(obj);
         }
 
-        public int Inserir(Concurso obj)
+        internal int Inserir(Concurso obj)
         {
             throw new NotImplementedException();
         }
 
-        public Concurso Buscar(int id)
+        internal Concurso Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Concurso> Listar()
+        internal IList<Concurso> Listar()
         {
             throw new NotImplementedException();
         }
 
-        public bool Existe(int id)
+        internal bool Existe(int id)
         {
             throw new NotImplementedException();
         }
 
 
-        public Concurso BuscarMaisRecente()
+        internal Concurso BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }
