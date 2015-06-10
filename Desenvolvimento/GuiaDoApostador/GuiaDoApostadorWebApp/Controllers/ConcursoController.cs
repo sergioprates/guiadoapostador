@@ -20,7 +20,11 @@ namespace GuiaDoApostadorWebApp.Controllers
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotofacil>().ConsultaApi());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Quina>().ConsultaApi());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotomania>().ConsultaApi());
-
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotogol>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Loteca>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Timemania>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<DuplaSena>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Federal>().ConsultaApi());
             return concursos;
         }
 
