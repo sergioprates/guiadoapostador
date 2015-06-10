@@ -125,7 +125,7 @@ function loteriaComum(tipo) {
             return true;
             break;
         case 'DuplaSena':
-            return false;
+            return true;
             break;
         case 'LoteriaFederal':
             return false;

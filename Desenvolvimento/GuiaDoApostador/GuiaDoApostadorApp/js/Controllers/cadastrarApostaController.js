@@ -54,7 +54,7 @@
                     $scope.mapearApostaComum();
                     break;
                 case 'DuplaSena':
-                    return "Dupla Sena";
+                    $scope.mapearApostaComum();
                     break;
                 case 'Loteca':
                     return "Loteca";
@@ -232,7 +232,7 @@
             if ($scope.aposta.Dezenas.length > retornaQuantidadeMaximaDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada'))) {
                 check.checkbox.Checked = false;
                 try {
-                    mostraMensagemTemporaria('Nos concursos da ' + window.localStorage.getItem('tipoLoteriaClicada') + ' você só pode selecionar ' + retornaQuantidadeMaximaDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada')) + ' dezenas por aposta.', 'short', 'bottom');
+                    mostraMensagemTemporaria('Nos concursos da ' + retornaTituloLoteria(window.localStorage.getItem('tipoLoteriaClicada')) + ' você só pode selecionar ' + retornaQuantidadeMaximaDezenasPorAposta(window.localStorage.getItem('tipoLoteriaClicada')) + ' dezenas por aposta.', 'short', 'bottom');
                 }
                 catch (e) {
                     alert('Erro ao mostrar mensagem: ' + JSON.stringfy(e));
@@ -261,7 +261,7 @@ function retornaQuantidadeMaximaDezenasPorAposta(tipo) {
             return 50;
             break;
         case 'DuplaSena':
-            return "Dupla Sena";
+            return 15;
             break;
         case 'LoteriaFederal':
             return "Loteria Federal";
@@ -294,7 +294,7 @@ function retornaQuantidadeMinimaDezenasPorAposta(tipo) {
             return 50;
             break;
         case 'DuplaSena':
-            return "Dupla Sena";
+            return 6;
             break;
         case 'LoteriaFederal':
             return "Loteria Federal";
@@ -334,7 +334,7 @@ function retornaQuantidadeNumerosNoFormulario(tipoLoteria) {
             i = 100;
             break;
         case 'DuplaSena':
-            return "Dupla Sena";
+            i = 50;
             break;
         case 'LoteriaFederal':
             return "Loteria Federal";
