@@ -16,15 +16,15 @@ namespace GuiaDoApostadorWebApp.Controllers
         {
             List<Concurso> concursos = new List<Concurso>();
 
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<MegaSena>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotofacil>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Quina>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotomania>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Lotogol>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Loteca>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Timemania>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<DuplaSena>().ConsultaApi());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController<Federal>().ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.DuplaSena).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Federal).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Loteca).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotofacil).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotogol).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotomania).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.MegaSena).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Quina).ConsultaApi());
+            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Timemania).ConsultaApi());
             return concursos;
         }
 

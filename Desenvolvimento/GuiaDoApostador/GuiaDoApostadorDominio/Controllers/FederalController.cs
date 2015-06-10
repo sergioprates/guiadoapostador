@@ -12,30 +12,25 @@ namespace GuiaDoApostadorDominio.Controllers
     {
         private readonly IFederalRepository _repository;
 
-        public FederalController(IFederalRepository repository)
-        {
-            if (_repository == null)
-            {
-                _repository = repository;
-            }
-        }
+        public FederalController()
+        { }
 
-        public Federal ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Federal Buscar(int id)
+        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Federal entidade)
+        public int Inserir(Concurso entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Federal> Listar()
+        public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

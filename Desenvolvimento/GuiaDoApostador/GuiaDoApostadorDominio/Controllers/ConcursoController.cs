@@ -6,24 +6,63 @@ using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces.Controllers;
 using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorDominio.Repository;
+using GuiaDoApostadorDominio.Interfaces;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
-    public class ConcursoController<TEntity> where TEntity : class
+    public class ConcursoController
     {
-        private readonly IConcursoController<TEntity> _controller;
-        
-        public TEntity Buscar(int id)
+        private readonly IConcursoController _controller;
+
+        public ConcursoController(Loteria loteria)
+        {
+            switch (loteria)
+            {
+                case Loteria.DuplaSena:
+                    _controller = new DuplaSenaController();
+                    break;
+                case Loteria.Federal:
+                    _controller = new FederalController();
+                    break;
+                case Loteria.Loteca:
+                    _controller = new LotecaController();
+                    break;
+                case Loteria.Lotofacil:
+                    _controller = new LotofacilController();
+                    break;
+                case Loteria.Lotogol:
+                    _controller = new LotogolController();
+                    break;
+                case Loteria.Lotomania:
+                    _controller = new LotomaniaController();
+                    break;
+                case Loteria.MegaSena:
+                    _controller = new MegaSenaController();
+                    break;
+                case Loteria.Quina:
+                    _controller = new QuinaController();
+                    break;
+                case Loteria.Timemania:
+                    _controller = new TimemaniaController();
+                    break;
+                default:
+                    _controller = new ConcursoControllerMock();
+                    break;
+            }
+        }
+
+
+        public Concurso Buscar(int id)
         {
             return _controller.Buscar(id);
         }
 
-        public int Inserir(TEntity entidade)
+        public int Inserir(Concurso entidade)
         {
             return _controller.Inserir(entidade);
         }
 
-        public IList<TEntity> Listar()
+        public IList<Concurso> Listar()
         {
             return _controller.Listar();
         }
@@ -32,7 +71,7 @@ namespace GuiaDoApostadorDominio.Controllers
         /// Método deverá ser implementado em todas as classes filhas
         /// </summary>
         /// <returns></returns>
-        public TEntity ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _controller.ConsultaApi();
         }

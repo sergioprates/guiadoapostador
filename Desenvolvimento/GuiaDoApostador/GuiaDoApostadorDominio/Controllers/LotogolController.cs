@@ -12,30 +12,25 @@ namespace GuiaDoApostadorDominio.Controllers
     {
        private readonly ILotogolRepository _repository;
 
-       public LotogolController(ILotogolRepository repository)
-        {
-            if (_repository == null)
-            {
-                _repository = repository;
-            }
-        }
+       public LotogolController()
+       { }
 
-       public Lotogol ConsultaApi()
+       public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-       public Lotogol Buscar(int id)
+       public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-       public int Inserir(Lotogol entidade)
+       public int Inserir(Concurso entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-       public System.Collections.Generic.IList<Lotogol> Listar()
+       public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

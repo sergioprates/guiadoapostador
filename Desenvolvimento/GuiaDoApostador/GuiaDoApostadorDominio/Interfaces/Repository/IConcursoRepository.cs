@@ -6,13 +6,13 @@ using GuiaDoApostadorDominio.Entities;
 
 namespace GuiaDoApostadorDominio.Interfaces.Repository
 {
-    public interface IConcursoRepository<TEntity> where TEntity : class
+    public interface IConcursoRepository
     {
-        TEntity ConsultaApi();
-        TEntity BuscarMaisRecente();
-        int Inserir(TEntity obj);
-        TEntity Buscar(int id);
-        IList<TEntity> Listar();
+        Concurso ConsultaApi();
+        Concurso BuscarMaisRecente();
+        int Inserir(Concurso obj);
+        Concurso Buscar(int id);
+        IList<Concurso> Listar();
         bool Existe(int id);
     }
 }

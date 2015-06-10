@@ -9,16 +9,16 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    public class LotofacilRepository : ILotofacilRepository
+    internal class LotofacilRepository : RepositoryBase, ILotofacilRepository
     {
-        public Lotofacil ConsultaApi()
+        public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/lotofacil/json");
 
             return deserializaConcurso(obj);
         }
 
-        private Lotofacil deserializaConcurso(dynamic obj)
+        private Concurso deserializaConcurso(dynamic obj)
         {
             Lotofacil loteria = new Lotofacil()
             {
@@ -87,17 +87,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Lotofacil obj)
+        public int Inserir(Concurso obj)
         {
             throw new NotImplementedException();
         }
 
-        public Lotofacil Buscar(int id)
+        public Concurso Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Lotofacil> Listar()
+        public IList<Concurso> Listar()
         {
             throw new NotImplementedException();
         }
@@ -108,7 +108,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Lotofacil BuscarMaisRecente()
+        public Concurso BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

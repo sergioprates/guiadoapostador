@@ -1,23 +1,54 @@
-﻿using GuiaDoApostadorDominio.Entities;
+﻿using Dapper;
+using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class DuplaSenaRepository : IDuplaSenaRepository
+    internal class DuplaSenaRepository : RepositoryBase, IDuplaSenaRepository
     {
-        public DuplaSena ConsultaApi()
+        public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/duplasena/json");
             return deserializaConcurso(obj);
         }
 
-        private DuplaSena deserializaConcurso(dynamic obj)
+        public int Inserir(Concurso obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Concurso Buscar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Concurso> Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Existe(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
+        
+        #region Métodos Privados
+
+        private Concurso deserializaConcurso(dynamic obj)
         {
             DuplaSena loteria = new DuplaSena()
             {
@@ -96,30 +127,47 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(DuplaSena obj)
+        private int cadastraConcursoDuplaSena(DuplaSena obj, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@IdConcurso", obj.ID);
+            paramList.Add("@Data", obj.Data);
+            paramList.Add("@Cidade", obj.Cidade);
+            paramList.Add("@Local", obj.Local);
+            paramList.Add("@ValorAcumulado", obj.ValorAcumulado);
+            paramList.Add("@ArrecadacaoTotal", obj.ArrecadacaoTotal);
+            paramList.Add("@EspecialValorAcumulado", obj.EspecialValorAcumulado);
+            paramList.Add("@ProximoConcursoData", obj.ProximoConcurso.Data);
+            paramList.Add("@ProximoConcursoValorEstimado", obj.ProximoConcurso.ValorEstimado);
+
+            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoMegaSena", paramList, commandType: CommandType.StoredProcedure));
+
+            return id;
         }
 
-        public DuplaSena Buscar(int id)
+        private void cadastraDezenaDuplaSena(int idConcurso, byte dezena, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@dezena", dezena);
+
+            cn.Execute("sp_cadastraDezenaMegaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        public IList<DuplaSena> Listar()
+        private void cadastraPremioDuplaSena(int idConcurso, PremioPadrao premio, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@Acertos", premio.Acertos);
+            paramList.Add("@ValorPago", premio.ValorPago);
+            paramList.Add("@Ganhadores", premio.Ganhadores);
+
+            cn.Execute("sp_cadastraPremioMegaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        public bool Existe(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public DuplaSena BuscarMaisRecente()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

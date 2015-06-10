@@ -7,17 +7,17 @@ using System.Globalization;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class QuinaRepository : IQuinaRepository
+    internal class QuinaRepository : RepositoryBase, IQuinaRepository
     {
 
-        public Quina ConsultaApi()
+        public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/quina/json");
 
             return deserializaConcurso(obj);
         }
 
-        private Quina deserializaConcurso(dynamic obj)
+        private Concurso deserializaConcurso(dynamic obj)
         {
             Quina loteria = new Quina()
             {
@@ -51,17 +51,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Quina obj)
+        public int Inserir(Concurso obj)
         {
             throw new NotImplementedException();
         }
 
-        public Quina Buscar(int id)
+        public Concurso Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Quina> Listar()
+        public IList<Concurso> Listar()
         {
             throw new NotImplementedException();
         }
@@ -72,7 +72,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Quina BuscarMaisRecente()
+        public Concurso BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

@@ -8,30 +8,25 @@ namespace GuiaDoApostadorDominio.Controllers
     {
         private readonly ILotomaniaRepository _repository;
 
-        public LotomaniaController(ILotomaniaRepository repository)
-        {
-            if (_repository == null)
-            {
-                _repository = repository;
-            }
-        }
+        public LotomaniaController()
+        { }
 
-        public Lotomania ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Lotomania Buscar(int id)
+        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Lotomania entidade)
+        public int Inserir(Concurso entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Lotomania> Listar()
+        public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

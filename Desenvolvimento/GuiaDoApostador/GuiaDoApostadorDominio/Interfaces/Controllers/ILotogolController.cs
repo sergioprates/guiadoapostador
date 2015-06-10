@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Controllers
 {
-    interface ILotogolController : IConcursoController<GuiaDoApostadorDominio.Entities.Lotogol>
+    interface ILotogolController : IConcursoController
     {
     }
 }

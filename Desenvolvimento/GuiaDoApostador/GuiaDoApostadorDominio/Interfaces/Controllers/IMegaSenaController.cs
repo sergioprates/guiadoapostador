@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Interfaces.Controllers
 {
-    public interface IMegaSenaController : IConcursoController<GuiaDoApostadorDominio.Entities.MegaSena>
+    public interface IMegaSenaController : IConcursoController
     {
     }
 }

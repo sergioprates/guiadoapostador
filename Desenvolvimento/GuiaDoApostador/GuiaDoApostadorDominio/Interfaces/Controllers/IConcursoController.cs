@@ -7,12 +7,12 @@ using GuiaDoApostadorDominio.Entities;
 
 namespace GuiaDoApostadorDominio.Interfaces.Controllers
 {
-    public interface IConcursoController<TEntity> where TEntity : class
+    public interface IConcursoController
     {
-        TEntity ConsultaApi();
-        TEntity Buscar(int id);
-        int Inserir(TEntity entidade);
-        IList<TEntity> Listar();
+        Concurso ConsultaApi();
+        Concurso Buscar(int id);
+        int Inserir(Concurso entidade);
+        IList<Concurso> Listar();
         bool Existe(int id);
     }
 }

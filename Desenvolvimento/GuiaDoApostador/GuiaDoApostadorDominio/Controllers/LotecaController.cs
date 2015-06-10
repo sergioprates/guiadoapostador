@@ -10,33 +10,27 @@ namespace GuiaDoApostadorDominio.Controllers
 {
     public class LotecaController :  ILotecaController
     {
-
         private readonly ILotecaRepository _repository;
 
-        public LotecaController(ILotecaRepository repository)
-        {
-            if (_repository == null)
-            {
-                _repository = repository;
-            }
-        }
+        public LotecaController()
+        { }
 
-        public Loteca ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Loteca Buscar(int id)
+        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Loteca entidade)
+        public int Inserir(Concurso entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Loteca> Listar()
+        public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

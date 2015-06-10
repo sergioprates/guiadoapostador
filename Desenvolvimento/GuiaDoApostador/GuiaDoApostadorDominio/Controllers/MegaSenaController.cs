@@ -12,29 +12,26 @@ namespace GuiaDoApostadorDominio.Controllers
         private MegaSenaRepository _repository = new MegaSenaRepository();
 
         public MegaSenaController()
-        {
-            
-        }
+        { }
 
-        public MegaSena ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public MegaSena Buscar(int id)
+        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(MegaSena entidade)
+        public int Inserir(Concurso entidade)
         {
-            MegaSena loteria = (MegaSena)entidade;
             entidade.ID = _repository.Inserir(entidade);
 
             return entidade.ID;
         }
 
-        public System.Collections.Generic.IList<MegaSena> Listar()
+        public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

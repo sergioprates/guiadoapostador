@@ -13,7 +13,7 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class MegaSenaRepository : RepositoryBase, IMegaSenaRepository
     {
-        public int Inserir(MegaSena obj)
+        public int Inserir(Concurso obj)
         {
             object id;
 
@@ -24,7 +24,14 @@ namespace GuiaDoApostadorDominio.Repository
                     using (cn)
                     {
                         cn.Open();
-                        id = cadastraConcursoMegaSena(obj, cn);
+                        id = cadastraConcursoMegaSena((MegaSena)obj, cn);
+
+                        foreach (var dezena in ((MegaSena)obj).Dezenas)
+                            cadastraDezenaMegaSena(obj.ID, dezena, cn);
+
+                        foreach (var premio in ((MegaSena)obj).Premios)
+                            cadastraPremioMegaSena(obj.ID, premio, cn);
+                        
                         scope.Complete();
                     }
                 }
@@ -37,28 +44,28 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToInt32(id);
         }
 
-        public MegaSena Buscar(int id)
+        public Concurso Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<MegaSena> Listar()
+        public IList<Concurso> Listar()
         {
             throw new NotImplementedException();
         }
 
         public bool Existe(int id)
         {
-            throw new NotImplementedException();
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoMegaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
-        public MegaSena ConsultaApi()
+        public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/megasena/json");
             return deserializaConcurso(obj);
         }
 
-        public MegaSena BuscarMaisRecente()
+        public Concurso BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }
@@ -117,47 +124,41 @@ namespace GuiaDoApostadorDominio.Repository
 
         private int cadastraConcursoMegaSena(MegaSena obj, SqlConnection conn)
         {
-            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoMegaSena", new { obj }, commandType: CommandType.StoredProcedure));
+            var paramList = new DynamicParameters();
 
-            foreach (var dezena in obj.Dezenas)
-            {
-                cadastraDezenaMegaSena(id, dezena, conn);
-            }
+            paramList.Add("@IdConcurso", obj.ID);
+            paramList.Add("@Data", obj.Data);
+            paramList.Add("@Cidade", obj.Cidade);
+            paramList.Add("@Local", obj.Local);
+            paramList.Add("@ValorAcumulado", obj.ValorAcumulado);
+            paramList.Add("@ArrecadacaoTotal", obj.ArrecadacaoTotal);
+            paramList.Add("@EspecialValorAcumulado", obj.EspecialValorAcumulado);
+            paramList.Add("@ProximoConcursoData", obj.ProximoConcurso.Data);
+            paramList.Add("@ProximoConcursoValorEstimado", obj.ProximoConcurso.ValorEstimado);
 
-            foreach (var premio in obj.Premios)
-            {
-                cadastraPremioMegaSena(id, premio, conn);
-            }
+            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoMegaSena", paramList, commandType: CommandType.StoredProcedure));
 
             return id;
         }
 
         private void cadastraDezenaMegaSena(int idConcurso, byte dezena, SqlConnection conn)
         {
-            List<SqlParameter> paramList = new List<SqlParameter>();
-            
-            SqlParameter paramConcurso = new SqlParameter("@idConcurso", idConcurso);
-            SqlParameter paramDezena = new SqlParameter("@dezena", dezena);
+            var paramList = new DynamicParameters();
 
-            paramList.Add(paramConcurso);
-            paramList.Add(paramDezena);
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@dezena", dezena);
 
             cn.Execute("sp_cadastraDezenaMegaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
         private void cadastraPremioMegaSena(int idConcurso, PremioPadrao premio, SqlConnection conn)
         {
-            List<SqlParameter> paramList = new List<SqlParameter>();
+            var paramList = new DynamicParameters();
 
-            SqlParameter paramConcurso = new SqlParameter("@idConcurso", idConcurso);
-            SqlParameter paramAcertos = new SqlParameter("@dezena", premio.Acertos);
-            SqlParameter paramValorPago = new SqlParameter("@dezena", premio.ValorPago);
-            SqlParameter paramGanhadores = new SqlParameter("@dezena", premio.Ganhadores);
-
-            paramList.Add(paramConcurso);
-            paramList.Add(paramAcertos);
-            paramList.Add(paramValorPago);
-            paramList.Add(paramGanhadores);
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@Acertos", premio.Acertos);
+            paramList.Add("@ValorPago", premio.ValorPago);
+            paramList.Add("@Ganhadores", premio.Ganhadores);
 
             cn.Execute("sp_cadastraPremioMegaSena", paramList, commandType: CommandType.StoredProcedure);
         }

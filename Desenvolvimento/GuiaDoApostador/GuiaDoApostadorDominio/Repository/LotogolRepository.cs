@@ -9,15 +9,15 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    public class LotogolRepository : ILotogolRepository
+    internal class LotogolRepository : RepositoryBase, ILotogolRepository
     {
-        public Lotogol ConsultaApi()
+        public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/lotogol/json");
             return deserializaConcurso(obj);
         }
 
-        private Lotogol deserializaConcurso(dynamic obj)
+        private Concurso deserializaConcurso(dynamic obj)
         {
             Lotogol loteria = new Lotogol()
             {
@@ -135,17 +135,17 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public int Inserir(Lotogol obj)
+        public int Inserir(Concurso obj)
         {
             throw new NotImplementedException();
         }
 
-        public Lotogol Buscar(int id)
+        public Concurso Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Lotogol> Listar()
+        public IList<Concurso> Listar()
         {
             throw new NotImplementedException();
         }
@@ -156,7 +156,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Lotogol BuscarMaisRecente()
+        public Concurso BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }

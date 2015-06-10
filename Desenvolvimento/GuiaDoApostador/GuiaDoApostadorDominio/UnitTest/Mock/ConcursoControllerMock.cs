@@ -8,7 +8,7 @@ using GuiaDoApostadorDominio.Interfaces.Controllers;
 
 namespace GuiaDoApostadorDominio.Interfaces
 {
-    public class ConcursoControllerMock : IConcursoController<Concurso>
+    public class ConcursoControllerMock : IConcursoController
     {
         /// <summary>
         /// Apenas um método de mock, 
@@ -45,7 +45,7 @@ namespace GuiaDoApostadorDominio.Interfaces
                 case Loteria.Lotofacil:
 
                     #region Dados Lotofacil
-		            con = new Lotofacil()
+                    con = new Lotofacil()
                     {
                         ID = idConcurso,
                         Data = DateTime.Now,
@@ -95,9 +95,9 @@ namespace GuiaDoApostadorDominio.Interfaces
                                 ValorPago = 2.50m
                             },
                         }
-                    }; 
-	#endregion
-                    
+                    };
+                    #endregion
+
                     break;
                 case Loteria.Lotogol:
                     con = new Lotogol()

@@ -12,30 +12,25 @@ namespace GuiaDoApostadorDominio.Controllers
     {
         private readonly IDuplaSenaRepository _repository;
 
-        public DuplaSenaController(IDuplaSenaRepository repository)
-        {
-            if (_repository == null)
-            {
-                _repository = repository;
-            }
-        }
+        public DuplaSenaController()
+        { }
 
-        public DuplaSena ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public DuplaSena Buscar(int id)
+        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(DuplaSena entidade)
+        public int Inserir(Concurso entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<DuplaSena> Listar()
+        public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

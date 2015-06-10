@@ -12,30 +12,25 @@ namespace GuiaDoApostadorDominio.Controllers
     {
         private readonly ILotofacilRepository _repository;
 
-        public LotofacilController(ILotofacilRepository repository)
-        {
-            if (_repository == null)
-            {
-                _repository = repository;
-            }
-        }
+        public LotofacilController()
+        { }
 
-        public Lotofacil ConsultaApi()
+        public Concurso ConsultaApi()
         {
             return _repository.ConsultaApi();
         }
 
-        public Lotofacil Buscar(int id)
+        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);
         }
 
-        public int Inserir(Lotofacil entidade)
+        public int Inserir(Concurso entidade)
         {
             return _repository.Inserir(entidade);
         }
 
-        public System.Collections.Generic.IList<Lotofacil> Listar()
+        public System.Collections.Generic.IList<Concurso> Listar()
         {
             return _repository.Listar();
         }

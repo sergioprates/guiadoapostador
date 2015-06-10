@@ -7,16 +7,16 @@ using System.Globalization;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class FederalRepository : IFederalRepository
+    internal class FederalRepository : RepositoryBase, IFederalRepository
     {
-        public Federal ConsultaApi()
+        public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/loteriafederal/json");
 
             return deserializaConcurso(obj);
         }
 
-        private Federal deserializaConcurso(dynamic obj)
+        private Concurso deserializaConcurso(dynamic obj)
         {
             Federal loteria = new Federal();
 
@@ -44,17 +44,17 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        public int Inserir(Federal obj)
+        public int Inserir(Concurso obj)
         {
             throw new NotImplementedException();
         }
 
-        public Federal Buscar(int id)
+        public Concurso Buscar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Federal> Listar()
+        public IList<Concurso> Listar()
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace GuiaDoApostadorDominio.Repository
         }
 
 
-        public Federal BuscarMaisRecente()
+        public Concurso BuscarMaisRecente()
         {
             throw new NotImplementedException();
         }
