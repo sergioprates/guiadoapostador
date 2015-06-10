@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class LotogolController : ILotogolController
     {
-       private readonly ILotogolRepository _repository;
+       private readonly LotogolRepository _repository = new LotogolRepository();
 
        public LotogolController()
        { }

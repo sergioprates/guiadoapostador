@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Interfaces;
+using GuiaDoApostadorDominio.Controllers;
 using GuiaDoApostadorDominio.UnitTest.Mock;
-using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.UnitTest
 {
     [TestFixture]
     public class MegaSenaUnitTest
     {
-        //IMegaSenaRepository _megaRepository = new MegaSenaRepositoryMock();
-        IMegaSenaRepository _megaRepository = new MegaSenaRepository();
+        IMegaSenaController _megaRepository = new MegaSenaControllerMock();
+        //IMegaSenaController _megaRepository = new MegaSenaController();
 
         [Test]
         public void ConsultaApi()

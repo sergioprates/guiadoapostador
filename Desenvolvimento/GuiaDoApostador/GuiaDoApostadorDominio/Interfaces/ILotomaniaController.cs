@@ -1,5 +1,5 @@
 ﻿
-namespace GuiaDoApostadorDominio.Interfaces.Controllers
+namespace GuiaDoApostadorDominio.Interfaces
 {
     public interface ILotomaniaController : IConcursoController
     {

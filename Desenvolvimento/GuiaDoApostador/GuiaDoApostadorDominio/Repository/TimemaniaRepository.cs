@@ -1,5 +1,4 @@
 ﻿using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Globalization;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class TimemaniaRepository : RepositoryBase, ITimemaniaRepository
+    internal class TimemaniaRepository : RepositoryBase
     {
         public Concurso ConsultaApi()
         {

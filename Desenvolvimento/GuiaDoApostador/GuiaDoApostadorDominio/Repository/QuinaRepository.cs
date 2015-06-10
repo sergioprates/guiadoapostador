@@ -1,5 +1,4 @@
 ﻿using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
@@ -7,9 +6,8 @@ using System.Globalization;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class QuinaRepository : RepositoryBase, IQuinaRepository
+    internal class QuinaRepository : RepositoryBase
     {
-
         public Concurso ConsultaApi()
         {
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/quina/json");

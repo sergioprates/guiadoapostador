@@ -1,5 +1,5 @@
 ﻿using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
+using GuiaDoApostadorDominio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

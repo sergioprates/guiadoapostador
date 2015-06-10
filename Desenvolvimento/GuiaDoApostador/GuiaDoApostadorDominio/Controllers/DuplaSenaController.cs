@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class DuplaSenaController : IDuplaSenaController
     {
-        private readonly IDuplaSenaRepository _repository;
+        private readonly DuplaSenaRepository _repository = new DuplaSenaRepository();
 
         public DuplaSenaController()
         { }

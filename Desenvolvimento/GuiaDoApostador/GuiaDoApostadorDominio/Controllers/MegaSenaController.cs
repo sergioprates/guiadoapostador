@@ -1,9 +1,8 @@
-﻿using GuiaDoApostadorDominio.Interfaces.Controllers;
+﻿using GuiaDoApostadorDominio.Interfaces;
 using System.Net;
 using System.IO;
 using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Repository;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {

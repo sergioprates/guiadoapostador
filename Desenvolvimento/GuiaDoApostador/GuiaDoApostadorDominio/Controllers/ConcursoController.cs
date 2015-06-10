@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
-using GuiaDoApostadorDominio.Interfaces.Repository;
-using GuiaDoApostadorDominio.Repository;
 using GuiaDoApostadorDominio.Interfaces;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {

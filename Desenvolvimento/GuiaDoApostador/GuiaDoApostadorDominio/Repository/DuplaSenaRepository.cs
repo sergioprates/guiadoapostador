@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class DuplaSenaRepository : RepositoryBase, IDuplaSenaRepository
+    internal class DuplaSenaRepository : RepositoryBase
     {
         public Concurso ConsultaApi()
         {

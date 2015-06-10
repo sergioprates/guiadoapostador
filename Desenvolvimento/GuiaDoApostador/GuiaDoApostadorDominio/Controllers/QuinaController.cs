@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class QuinaController : IQuinaController
     {
-        private readonly IQuinaRepository _repository;
+        private readonly QuinaRepository _repository = new QuinaRepository();
 
         public QuinaController()
         { }

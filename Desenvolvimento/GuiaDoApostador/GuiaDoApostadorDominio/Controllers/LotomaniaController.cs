@@ -1,12 +1,12 @@
 ﻿using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Interfaces;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class LotomaniaController : ILotomaniaController
     {
-        private readonly ILotomaniaRepository _repository;
+        private readonly LotomaniaRepository _repository = new LotomaniaRepository();
 
         public LotomaniaController()
         { }

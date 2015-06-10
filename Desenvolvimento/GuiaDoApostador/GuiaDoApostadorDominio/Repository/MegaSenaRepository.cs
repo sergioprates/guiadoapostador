@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 using System.Globalization;
 using GuiaDoApostadorInfra.Util;
 using Dapper;
@@ -11,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class MegaSenaRepository : RepositoryBase, IMegaSenaRepository
+    internal class MegaSenaRepository : RepositoryBase
     {
         public int Inserir(Concurso obj)
         {

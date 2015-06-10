@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using GuiaDoApostadorDominio.Controllers;
 using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
+using GuiaDoApostadorDominio.Interfaces;
 
 namespace GuiaDoApostadorDominio.Interfaces
 {

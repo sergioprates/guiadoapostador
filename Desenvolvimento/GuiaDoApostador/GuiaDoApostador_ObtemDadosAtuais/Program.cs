@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using GuiaDoApostadorDominio.Controllers;
 using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 
 namespace ObtemDadosAtuais
 {

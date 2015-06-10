@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using GuiaDoApostadorDominio.Interfaces.Controllers;
+using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+using GuiaDoApostadorDominio.Repository;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class TimemaniaController : ITimemaniaController
     {
-        private readonly ITimemaniaRepository _repository;
+        private readonly TimemaniaRepository _repository = new TimemaniaRepository();
 
         public TimemaniaController()
         { }

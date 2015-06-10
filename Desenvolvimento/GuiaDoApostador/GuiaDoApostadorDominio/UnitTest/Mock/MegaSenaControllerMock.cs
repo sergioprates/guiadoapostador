@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorDominio.Entities;
+using GuiaDoApostadorDominio.Interfaces;
 
 namespace GuiaDoApostadorDominio.UnitTest.Mock
 {
-    public class MegaSenaRepositoryMock : IMegaSenaRepository
+    public class MegaSenaControllerMock : IMegaSenaController
     {
         public Concurso ConsultaApi()
         {

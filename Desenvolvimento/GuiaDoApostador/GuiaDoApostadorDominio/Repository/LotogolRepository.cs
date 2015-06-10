@@ -1,5 +1,4 @@
 ﻿using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class LotogolRepository : RepositoryBase, ILotogolRepository
+    internal class LotogolRepository : RepositoryBase
     {
         public Concurso ConsultaApi()
         {

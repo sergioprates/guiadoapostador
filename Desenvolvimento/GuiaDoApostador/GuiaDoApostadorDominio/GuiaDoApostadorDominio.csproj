@@ -77,26 +77,16 @@
     <Compile Include="Entities\PremioPadrao.cs" />
     <Compile Include="Entities\TimeCoracao.cs" />
     <Compile Include="Entities\Loterias\Timemania.cs" />
-    <Compile Include="Interfaces\Controllers\IConcursoController.cs" />
-    <Compile Include="Interfaces\Controllers\IDuplaSenaController.cs" />
-    <Compile Include="Interfaces\Controllers\IFederalController.cs" />
-    <Compile Include="Interfaces\Controllers\ILotecaController.cs" />
-    <Compile Include="Interfaces\Controllers\ILotofacilController.cs" />
-    <Compile Include="Interfaces\Controllers\ILotogolController.cs" />
-    <Compile Include="Interfaces\Controllers\ILotomaniaController.cs" />
-    <Compile Include="Interfaces\Controllers\IMegaSenaController.cs" />
-    <Compile Include="Interfaces\Controllers\IQuinaController.cs" />
-    <Compile Include="Interfaces\Controllers\ITimemaniaController.cs" />
-    <Compile Include="Interfaces\Repository\IConcursoRepository.cs" />
-    <Compile Include="Interfaces\Repository\IDuplaSenaRepository.cs" />
-    <Compile Include="Interfaces\Repository\IFederalRepository.cs" />
-    <Compile Include="Interfaces\Repository\ILotecaRepository.cs" />
-    <Compile Include="Interfaces\Repository\ILotofacilRepository.cs" />
-    <Compile Include="Interfaces\Repository\ILotogolRepository.cs" />
-    <Compile Include="Interfaces\Repository\ILotomaniaRepository.cs" />
-    <Compile Include="Interfaces\Repository\IMegaSenaRepository.cs" />
-    <Compile Include="Interfaces\Repository\IQuinaRepository.cs" />
-    <Compile Include="Interfaces\Repository\ITimemaniaRepository.cs" />
+    <Compile Include="Interfaces\IConcursoController.cs" />
+    <Compile Include="Interfaces\IDuplaSenaController.cs" />
+    <Compile Include="Interfaces\IFederalController.cs" />
+    <Compile Include="Interfaces\ILotecaController.cs" />
+    <Compile Include="Interfaces\ILotofacilController.cs" />
+    <Compile Include="Interfaces\ILotogolController.cs" />
+    <Compile Include="Interfaces\ILotomaniaController.cs" />
+    <Compile Include="Interfaces\IMegaSenaController.cs" />
+    <Compile Include="Interfaces\IQuinaController.cs" />
+    <Compile Include="Interfaces\ITimemaniaController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DuplaSenaRepository.cs" />
     <Compile Include="Repository\FederalRepository.cs" />
@@ -111,7 +101,7 @@
     <Compile Include="Repository\TimemaniaRepository.cs" />
     <Compile Include="UnitTest\MegaSenaUnitTest.cs" />
     <Compile Include="UnitTest\Mock\ConcursoControllerMock.cs" />
-    <Compile Include="UnitTest\Mock\MegaSenaRepositoryMock.cs" />
+    <Compile Include="UnitTest\Mock\MegaSenaControllerMock.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GuiaDoApostadorInfra\GuiaDoApostadorInfra.csproj">

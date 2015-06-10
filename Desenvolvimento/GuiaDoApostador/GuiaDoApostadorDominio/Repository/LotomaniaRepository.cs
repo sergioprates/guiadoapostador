@@ -1,13 +1,11 @@
-﻿
-using GuiaDoApostadorDominio.Entities;
-using GuiaDoApostadorDominio.Interfaces.Repository;
+﻿using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 namespace GuiaDoApostadorDominio.Repository
 {
-    internal class LotomaniaRepository : RepositoryBase, ILotomaniaRepository
+    internal class LotomaniaRepository : RepositoryBase
     {
         public Concurso ConsultaApi()
         {
