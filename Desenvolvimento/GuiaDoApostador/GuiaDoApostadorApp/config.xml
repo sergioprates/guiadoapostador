@@ -23,7 +23,7 @@
   <preference name="SplashScreenDelay" value="10000" />
 
   <icon src="res/logo.png" />
-
+  <gap:splash src="res/screen/android/splash.png" />
   <platform name="android">
     
     <!-- you can use any density that exists in the Android project -->
