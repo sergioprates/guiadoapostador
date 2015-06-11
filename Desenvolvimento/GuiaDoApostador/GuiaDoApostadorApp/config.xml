@@ -20,7 +20,8 @@
     Sergio
   </author>
 
-  <preference name="SplashScreenDelay" value="10000" />
+  <preference name="SplashScreenDelay" value="3000" />
+  <preference name="fullscreen" value="true" />
 
   <icon src="res/logo.png" />
   <gap:splash src="res/screen/android/splash.png" />

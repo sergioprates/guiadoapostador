@@ -52,7 +52,7 @@
             $cordovaToast.showShortBottom(mensagem).then(function (success) {
                 alert('Exibiu');
             }, function (error) {
-                // error
+                alert('erro na mensagem temporaria: ' + JSON.stringify(error));
             });
         }
         catch (e) {
