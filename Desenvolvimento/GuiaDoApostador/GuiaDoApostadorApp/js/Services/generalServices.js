@@ -20,14 +20,14 @@
     }
 })
 .service('mostraPopUpErro', function ($ionicPopup) {
-        return function (texto) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Ops... Ocorreu um erro',
-                template: texto
-            });
-            alertPopup.then(function (res) {
-            });
-        }
+    return function (texto) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Ops... Ocorreu um erro',
+            template: texto
+        });
+        alertPopup.then(function (res) {
+        });
+    }
 })
 .service('openDb', function ($cordovaSQLite) {
     return function () {
@@ -48,17 +48,20 @@
 })
 .service('mostraMensagemTemporaria', function ($cordovaToast, mostraPopUpErro) {
     return function (mensagem, duracao, posicao) {
-        try
-        {
+        try {
             $cordovaToast.showShortBottom(mensagem).then(function (success) {
                 alert('Exibiu');
             }, function (error) {
                 // error
             });
         }
-        catch(e)
-        {
-            mostraPopUpErro(mensagem);
+        catch (e) {
+            try {
+                window.plugins.toast.showShortBottom(mensagem);
+            }
+            catch (e) {
+                mostraPopUpErro(mensagem);
+            }
         }
     }
 })
