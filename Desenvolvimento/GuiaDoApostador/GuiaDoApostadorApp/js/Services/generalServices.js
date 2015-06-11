@@ -57,6 +57,7 @@
         }
         catch (e) {
             try {
+                alert(JSON.stringify(window.plugins.toast));
                 window.plugins.toast.showShortBottom(mensagem);
             }
             catch (e) {
