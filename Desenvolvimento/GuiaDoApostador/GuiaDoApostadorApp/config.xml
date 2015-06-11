@@ -12,6 +12,7 @@
   <preference name="SplashScreenDelay" value="3000" />
   <preference name="fullscreen" value="true" />
   <preference name="phonegap-version" value="3.7.0" />
+  <preference name="StatusBarOverlaysWebView" value="true" />
   
 
   <description>
@@ -22,6 +23,9 @@
     Sergio
   </author>
 
+  <feature name="StatusBar">
+    <param name="ios-package" value="CDVStatusBar" onload="true" />
+  </feature>
 
 
   <icon src="res/logo.png" />

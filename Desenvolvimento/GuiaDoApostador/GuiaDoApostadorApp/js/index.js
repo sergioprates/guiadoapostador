@@ -1,12 +1,14 @@
 ﻿//variavel da base de dados
 var _db = null;
 var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $cordovaStatusbar) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 $ionicPlatform.showStatusBar(false);
+
+                $cordovaStatusbar.hide();
             }
-            $ionicPlatform.on('deviceready', onDeviceReady);
+            
         });
     });
 
