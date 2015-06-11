@@ -1,8 +1,12 @@
-﻿using GuiaDoApostadorDominio.Entities;
+﻿using Dapper;
+using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
+using System.Transactions;
 
 namespace GuiaDoApostadorDominio.Repository
 {
@@ -13,6 +17,62 @@ namespace GuiaDoApostadorDominio.Repository
             dynamic obj = WebUtil.GetWebRequestJson("http://developers.agenciaideias.com.br/loterias/timemania/json");
             return deserializaConcurso(obj);
         }
+
+        internal int Inserir(Concurso obj)
+        {
+            object id;
+
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+                        id = cadastraConcursoConcurso((Timemania)obj, cn);
+
+                        foreach (var dezena in ((Timemania)obj).Dezenas)
+                            cadastraDezenaConcurso(obj.ID, dezena, cn);
+
+                        foreach (var premio in ((Timemania)obj).Premios)
+                            cadastraPremioConcurso(obj.ID, premio, cn);
+
+                        cadastraTimeCoracao(obj.ID, ((Timemania)obj).TimeCoracao, cn);
+
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Convert.ToInt32(id);
+        }
+
+        internal Concurso Buscar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IList<Concurso> Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Existe(int id)
+        {
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoTimemania", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
+        }
+
+
+        internal Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region Métodos Privados
 
         private Concurso deserializaConcurso(dynamic obj)
         {
@@ -84,30 +144,59 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        internal int Inserir(Concurso obj)
+        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@IdConcurso", obj.ID);
+            paramList.Add("@Data", obj.Data);
+            paramList.Add("@Cidade", obj.Cidade);
+            paramList.Add("@Local", obj.Local);
+            paramList.Add("@ValorAcumulado", obj.ValorAcumulado);
+            paramList.Add("@ArrecadacaoTotal", obj.ArrecadacaoTotal);
+            paramList.Add("@EspecialValorAcumulado", obj.EspecialValorAcumulado);
+            paramList.Add("@ProximoConcursoData", obj.ProximoConcurso.Data);
+            paramList.Add("@ProximoConcursoValorEstimado", obj.ProximoConcurso.ValorEstimado);
+
+            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoTimemania", paramList, commandType: CommandType.StoredProcedure));
+
+            return id;
         }
 
-        internal Concurso Buscar(int id)
+        private void cadastraDezenaConcurso(int idConcurso, byte dezena, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@dezena", dezena);
+
+            cn.Execute("sp_cadastraDezenaTimemania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        internal IList<Concurso> Listar()
+        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@IdConcurso", idConcurso);
+            paramList.Add("@Acertos", premio.Acertos);
+            paramList.Add("@ValorPago", premio.ValorPago);
+            paramList.Add("@Ganhadores", premio.Ganhadores);
+
+            cn.Execute("sp_cadastraPremioTimemania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        internal bool Existe(int id)
+        private void cadastraTimeCoracao(int idConcurso, TimeCoracao time, SqlConnection conn)
         {
-            throw new NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@IdConcurso", idConcurso);
+            paramList.Add("@TimeCoracao", time.Nome);
+            paramList.Add("@ValorPago", time.ValorPago);
+            paramList.Add("@Ganhadores", time.Ganhadores);
+
+            cn.Execute("sp_cadastraTimeCoracaoTimemania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-
-        internal Concurso BuscarMaisRecente()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

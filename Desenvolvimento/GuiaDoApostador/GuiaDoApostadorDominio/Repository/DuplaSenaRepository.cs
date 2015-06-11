@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 
 namespace GuiaDoApostadorDominio.Repository
 {
@@ -21,7 +22,33 @@ namespace GuiaDoApostadorDominio.Repository
 
         internal int Inserir(Concurso obj)
         {
-            throw new NotImplementedException();
+            object id;
+
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+                        id = cadastraConcursoConcurso((DuplaSena)obj, cn);
+
+                        foreach (var dezena in ((DuplaSena)obj).Dezenas)
+                            cadastraDezenaConcurso(obj.ID, dezena, cn);
+
+                        foreach (var premio in ((DuplaSena)obj).Premios)
+                            cadastraPremioConcurso(obj.ID, premio, cn);
+
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Convert.ToInt32(id);
         }
 
         internal Concurso Buscar(int id)
@@ -36,7 +63,7 @@ namespace GuiaDoApostadorDominio.Repository
 
         internal bool Existe(int id)
         {
-            throw new NotImplementedException();
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoDuplaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
 
@@ -59,64 +86,70 @@ namespace GuiaDoApostadorDominio.Repository
                 ArrecadacaoTotal = Convert.ToDecimal(obj.concurso.arrecadacao_total.ToString().Replace(".", ""))
             };
 
-            loteria.Dezenas1 = new List<byte>();
+            loteria.Dezenas = new List<DezenaDuplaSena>();
 
             foreach (byte dezena in obj.concurso.numeros_sorteados_1)
             {
-                loteria.Dezenas1.Add(dezena);
-            }
+                DezenaDuplaSena d = new DezenaDuplaSena()
+                {
+                    Sorteio = 1,
+                    Dezena = dezena
+                };
 
-            loteria.Dezenas2 = new List<byte>();
+                loteria.Dezenas.Add(d);
+            }
 
             foreach (byte dezena in obj.concurso.numeros_sorteados_2)
             {
-                loteria.Dezenas2.Add(dezena);
-            }
+                DezenaDuplaSena d = new DezenaDuplaSena()
+                {
+                    Sorteio = 2,
+                    Dezena = dezena
+                };
 
-            loteria.Premiacao1 = new List<PremioPadrao>()
+                loteria.Dezenas.Add(d);
+            }
+            
+            loteria.Premios = new List<PremioDuplaSena>()
             {
-                new PremioPadrao()
+                new PremioDuplaSena()
                 {
                     Acertos = 6,
                     ValorPago = Convert.ToDecimal(obj.concurso.premiacao_1.sena.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao_1.sena.ganhadores.ToString().Replace(".", ""))
                 },
-                new PremioPadrao()
+                new PremioDuplaSena()
                 {
                     Acertos = 5,
                     ValorPago = Convert.ToDecimal(obj.concurso.premiacao_1.quina.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao_1.quina.ganhadores.ToString().Replace(".", ""))
                 },
-                new PremioPadrao()
+                new PremioDuplaSena()
                 {
                     Acertos = 4,
                     ValorPago = Convert.ToDecimal(obj.concurso.premiacao_1.quadra.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao_1.quadra.ganhadores.ToString().Replace(".", ""))
                 },
-            };
-
-            loteria.Premiacao2 = new List<PremioPadrao>()
-            {
-                new PremioPadrao()
+                new PremioDuplaSena()
                 {
                     Acertos = 6,
                     ValorPago = Convert.ToDecimal(obj.concurso.premiacao_2.sena.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao_2.sena.ganhadores.ToString().Replace(".", ""))
                 },
-                new PremioPadrao()
+                new PremioDuplaSena()
                 {
                     Acertos = 5,
                     ValorPago = Convert.ToDecimal(obj.concurso.premiacao_2.quina.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao_2.quina.ganhadores.ToString().Replace(".", ""))
                 },
-                new PremioPadrao()
+                new PremioDuplaSena()
                 {
                     Acertos = 4,
                     ValorPago = Convert.ToDecimal(obj.concurso.premiacao_2.quadra.valor_pago.ToString().Replace(".", "")),
                     Ganhadores = Convert.ToInt32(obj.concurso.premiacao_2.quadra.ganhadores.ToString().Replace(".", ""))
-                },
+                }
             };
-
+            
             loteria.ProximoConcurso = new ProximoConcurso()
             {
                 Data = DateTime.ParseExact(obj.proximo_concurso.data.ToString(), "dd/MM/yyyy", new CultureInfo("pt-BR")),
@@ -126,7 +159,7 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        private int cadastraConcursoDuplaSena(DuplaSena obj, SqlConnection conn)
+        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
         {
             var paramList = new DynamicParameters();
 
@@ -140,31 +173,33 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@ProximoConcursoData", obj.ProximoConcurso.Data);
             paramList.Add("@ProximoConcursoValorEstimado", obj.ProximoConcurso.ValorEstimado);
 
-            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoMegaSena", paramList, commandType: CommandType.StoredProcedure));
+            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoDuplaSena", paramList, commandType: CommandType.StoredProcedure));
 
             return id;
         }
 
-        private void cadastraDezenaDuplaSena(int idConcurso, byte dezena, SqlConnection conn)
+        private void cadastraDezenaConcurso(int idConcurso, DezenaDuplaSena dezena, SqlConnection conn)
         {
             var paramList = new DynamicParameters();
 
             paramList.Add("@idConcurso", idConcurso);
-            paramList.Add("@dezena", dezena);
+            paramList.Add("@Sorteio", dezena.Sorteio);
+            paramList.Add("@dezena", dezena.Dezena);
 
-            cn.Execute("sp_cadastraDezenaMegaSena", paramList, commandType: CommandType.StoredProcedure);
+            cn.Execute("sp_cadastraDezenaDuplaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        private void cadastraPremioDuplaSena(int idConcurso, PremioPadrao premio, SqlConnection conn)
+        private void cadastraPremioConcurso(int idConcurso, PremioDuplaSena premio, SqlConnection conn)
         {
             var paramList = new DynamicParameters();
 
             paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@Sorteio", premio.Acertos);
             paramList.Add("@Acertos", premio.Acertos);
             paramList.Add("@ValorPago", premio.ValorPago);
             paramList.Add("@Ganhadores", premio.Ganhadores);
 
-            cn.Execute("sp_cadastraPremioMegaSena", paramList, commandType: CommandType.StoredProcedure);
+            cn.Execute("sp_cadastraPremioDuplaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
         #endregion

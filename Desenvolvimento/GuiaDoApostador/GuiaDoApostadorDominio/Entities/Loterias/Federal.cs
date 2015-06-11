@@ -13,7 +13,6 @@ namespace GuiaDoApostadorDominio.Entities
         }
 
         public List<PremioFederal> Premios { get; set; }
-
-        public string CidadePrimeiroPremio { get; set; }
+        public string Observacao { get; set; }
     }
 }

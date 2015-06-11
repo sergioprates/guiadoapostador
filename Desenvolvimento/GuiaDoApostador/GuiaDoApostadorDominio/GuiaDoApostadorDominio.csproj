@@ -59,6 +59,7 @@
     <Compile Include="Controllers\QuinaController.cs" />
     <Compile Include="Controllers\TimemaniaController.cs" />
     <Compile Include="Entities\ConcursoFinalCinco.cs" />
+    <Compile Include="Entities\DezenaDuplaSena.cs" />
     <Compile Include="Entities\JogoLotogol.cs" />
     <Compile Include="Entities\JogoTimePadrao.cs" />
     <Compile Include="Entities\Concurso.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Entities\Enumerators.cs" />
     <Compile Include="Entities\Loterias\Lotogol.cs" />
     <Compile Include="Entities\Loterias\Lotomania.cs" />
+    <Compile Include="Entities\PremioDuplaSena.cs" />
     <Compile Include="Entities\PremioFederal.cs" />
     <Compile Include="Entities\ProximoConcurso.cs" />
     <Compile Include="Entities\Loterias\Quina.cs" />

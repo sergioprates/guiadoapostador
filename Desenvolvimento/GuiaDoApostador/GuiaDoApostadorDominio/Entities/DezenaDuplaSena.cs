@@ -5,9 +5,9 @@ using System.Text;
 
 namespace GuiaDoApostadorDominio.Entities
 {
-    public class ConcursoFinalCinco
+    public class DezenaDuplaSena
     {
-        public int Numero { get; set; }
-        public decimal ValorAcumulado { get; set; }
+        public byte Sorteio { get; set; }
+        public byte Dezena { get; set; }
     }
 }

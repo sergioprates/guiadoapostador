@@ -1,8 +1,12 @@
-﻿using GuiaDoApostadorDominio.Entities;
+﻿using Dapper;
+using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorInfra.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
+using System.Transactions;
 namespace GuiaDoApostadorDominio.Repository
 {
     internal class LotomaniaRepository : RepositoryBase
@@ -13,6 +17,60 @@ namespace GuiaDoApostadorDominio.Repository
             return deserializaConcurso(obj);
         }
 
+        internal int Inserir(Concurso obj)
+        {
+            object id;
+
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+                        id = cadastraConcursoConcurso((Lotomania)obj, cn);
+
+                        foreach (var dezena in ((Lotomania)obj).Dezenas)
+                            cadastraDezenaConcurso(obj.ID, dezena, cn);
+
+                        foreach (var premio in ((Lotomania)obj).Premios)
+                            cadastraPremioConcurso(obj.ID, premio, cn);
+
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Convert.ToInt32(id);
+        }
+
+        internal Concurso Buscar(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        internal System.Collections.Generic.IList<Concurso> Listar()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        internal bool Existe(int id)
+        {
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoLotomania", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
+        }
+
+
+        internal Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region Métodos Privados
+        
         private Concurso deserializaConcurso(dynamic obj)
         {
             Lotomania loteria = new Lotomania()
@@ -81,30 +139,47 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        internal int Inserir(Concurso obj)
+        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
         {
-            throw new System.NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@IdConcurso", obj.ID);
+            paramList.Add("@Data", obj.Data);
+            paramList.Add("@Cidade", obj.Cidade);
+            paramList.Add("@Local", obj.Local);
+            paramList.Add("@ValorAcumulado", obj.ValorAcumulado);
+            paramList.Add("@ArrecadacaoTotal", obj.ArrecadacaoTotal);
+            paramList.Add("@EspecialValorAcumulado", obj.EspecialValorAcumulado);
+            paramList.Add("@ProximoConcursoData", obj.ProximoConcurso.Data);
+            paramList.Add("@ProximoConcursoValorEstimado", obj.ProximoConcurso.ValorEstimado);
+
+            int id = Convert.ToInt32(cn.ExecuteScalar("sp_cadastraConcursoLotomania", paramList, commandType: CommandType.StoredProcedure));
+
+            return id;
         }
 
-        internal Concurso Buscar(int id)
+        private void cadastraDezenaConcurso(int idConcurso, byte dezena, SqlConnection conn)
         {
-            throw new System.NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@dezena", dezena);
+
+            cn.Execute("sp_cadastraDezenaLotomania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        internal System.Collections.Generic.IList<Concurso> Listar()
+        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio, SqlConnection conn)
         {
-            throw new System.NotImplementedException();
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@IdConcurso", idConcurso);
+            paramList.Add("@Acertos", premio.Acertos);
+            paramList.Add("@ValorPago", premio.ValorPago);
+            paramList.Add("@Ganhadores", premio.Ganhadores);
+
+            cn.Execute("sp_cadastraPremioLotomania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        internal bool Existe(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
-        internal Concurso BuscarMaisRecente()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
