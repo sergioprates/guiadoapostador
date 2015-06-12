@@ -6,7 +6,7 @@
                 PushProcessingService.initialize();
             }
             catch (e) {
-                alert('Erro ao inicializar push');
+                alert('Erro ao inicializar push: ' + JSON.stringify(e));
             }
 
         });
