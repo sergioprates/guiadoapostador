@@ -9,11 +9,11 @@
     <script type="text/javascript" src="js/index.js"></script>
 
 
-    
+
     <!--Plugins-->
-    <script src="js/Plugins/ng-cordova.js"></script>  
-    <script src="js/Plugins/cordova.js"></script>    
-    <script src="js/Plugins/SQLitePlugin.js"></script>  
+    <script src="js/Plugins/ng-cordova.js"></script>
+    <script src="js/Plugins/cordova.js"></script>
+    <script src="js/Plugins/SQLitePlugin.js"></script>
     <script src="js/Plugins/sqlite.js"></script>
     <script src="js/Plugins/splashscreen.js"></script>
     <script src="js/Plugins/toastOriginal.js"></script>
@@ -33,14 +33,12 @@
     <script src="js/Factorys/bilheteFactory.js"></script>
     <script src="js/Factorys/timeDoCoracaoFactory.js"></script>
     <!--Fim Factorys-->
-
     <!--Controllers-->
     <script src="js/Controllers/homeController.js"></script>
     <script src="js/Controllers/minhasApostasController.js"></script>
     <script src="js/Controllers/selecionarLoteriaParaApostarController.js"></script>
     <script src="js/Controllers/cadastrarApostaController.js"></script>
     <!--FimControllers-->
-
     <!--Diretivas-->
     <script src="js/Directives/utilDirectives.js"></script>
     <!--Fim Diretivas-->
@@ -61,11 +59,14 @@
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
                     Minhas Apostas
                 </button>
-                <button class="button button-block button-positive" ui-sref="minhasApostas">
+                <button class="button button-block button-positive">
                     Push!
                 </button>
-                <input type="text" ng-model="regID" />
+
                 <div class="list">
+                    <label class="item item-input">
+                        <input type="text" ng-model="regID" placeholder="Bla" ng-click="registrarPush()" />
+                    </label>
                     <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left">
                         <img ng-src="{{ item.image }}">
                         <h2>{{ item.loteria }}</h2>
