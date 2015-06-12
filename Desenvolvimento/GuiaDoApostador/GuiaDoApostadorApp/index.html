@@ -59,13 +59,13 @@
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
                     Minhas Apostas
                 </button>
-                <button class="button button-block button-positive">
+                <button class="button button-block button-positive" ng-click="registrarPush()">
                     Push!
                 </button>
 
                 <div class="list">
                     <label class="item item-input">
-                        <input type="text" ng-model="regID" placeholder="Bla" ng-click="registrarPush()" />
+                        <input type="text" ng-model="regID" placeholder="Bla"  />
                     </label>
                     <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left">
                         <img ng-src="{{ item.image }}">
