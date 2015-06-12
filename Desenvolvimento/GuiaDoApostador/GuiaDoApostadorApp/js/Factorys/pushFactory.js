@@ -1,9 +1,6 @@
 ﻿
 guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", function ($window, $ionicPopup) {
-    function onDeviceReady() {
-        
-    }
-
+   
     function gcmSuccessHandler(result) {
         alert("Register push notification successfully : " + result);
         if (ionic.Platform.isIOS()) {
@@ -24,6 +21,15 @@ guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", func
             alert('Dentro do metodo initialize');
             alert('Criando objeto pushNotification!');
             var pushNotification = window.plugins.pushNotification;
+
+            if (window.plugins == undefined) {
+                alert('plugins estão undefined');
+            }
+
+            if (pushNotification == undefined) {
+                alert('PushNotification está undefined');
+            }
+
             if (ionic.Platform.isAndroid()) {
                 alert('Registrando');
                 pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
