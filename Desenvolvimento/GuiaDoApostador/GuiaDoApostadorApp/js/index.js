@@ -1,20 +1,22 @@
-﻿//variavel da base de dados
-var _db = null;
-var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaStatusbar) {
-        $ionicPlatform.ready(function () {
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                $ionicPlatform.showStatusBar(false);
+﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
+    .run(function ($ionicPlatform, $cordovaPush) {
 
-                $cordovaStatusbar.hide();
-            }
-            
+        $ionicPlatform.ready(function () {
+
+
+
+            // WARNING: dangerous to unregister (results in loss of tokenID)
+            //    $cordovaPush.unregister(options).then(function (result) {
+            //        // Success!
+            //    }, function (err) {
+            //        // Error
+            //    })
+
+            //}, false);
+
         });
     });
 
-function onDeviceReady() {
-    alert('Device Ready!');
-}
 
 function replaceAll(find, replace, str) {
     return str.replace(new RegExp(find, 'g'), replace);

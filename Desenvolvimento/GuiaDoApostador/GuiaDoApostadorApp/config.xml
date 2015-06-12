@@ -9,7 +9,7 @@
   <!-- versionCode is optional and Android only -->
 
   <name>Guia do Apostador</name>
-  <preference name="SplashScreenDelay" value="3000" />
+  <preference name="SplashScreenDelay" value="10000" />
   <preference name="fullscreen" value="true" />
   <preference name="phonegap-version" value="3.7.0" />
   <preference name="StatusBarOverlaysWebView" value="true" />
@@ -55,4 +55,5 @@
   <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
   <gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
   <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
+  <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />
 </widget>

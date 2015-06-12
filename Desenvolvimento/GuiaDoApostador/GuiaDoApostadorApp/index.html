@@ -18,7 +18,8 @@
     <script src="js/Plugins/splashscreen.js"></script>
     <script src="js/Plugins/toastOriginal.js"></script>
     <script src="js/Plugins/toast.js"></script>
-    <script src="js/Plugins/statusBar.js"></script>
+    <script src="js/Plugins/PushNotification.js"></script>
+    <script src="js/Plugins/pushNgCordova.js"></script>
     <!--FimPlugins-->
 
     <script src="js/Services/ionicServices.js"></script>
@@ -60,6 +61,10 @@
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
                     Minhas Apostas
                 </button>
+                <button class="button button-block button-positive" ui-sref="minhasApostas">
+                    Push!
+                </button>
+                <input type="text" ng-model="regID" />
                 <div class="list">
                     <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left">
                         <img ng-src="{{ item.image }}">
