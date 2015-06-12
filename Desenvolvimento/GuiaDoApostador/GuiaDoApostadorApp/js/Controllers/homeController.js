@@ -1,5 +1,4 @@
-﻿var _db;
-guiaDoApostador.controller('homeController', ['$scope', '$cordovaPush', '$rootScope', function ($scope, $cordovaPush, $rootScope) {
+﻿guiaDoApostador.controller('homeController', ['$scope', '$cordovaPush', '$rootScope', function ($scope, $cordovaPush, $rootScope) {
     
     $scope.items = [
     {
@@ -11,41 +10,31 @@ guiaDoApostador.controller('homeController', ['$scope', '$cordovaPush', '$rootSc
     }];
 
     $scope.registrarPush = function () {
-        try{
-            var androidConfig = {
-                "senderID": "497093213372",
-            };
-            $cordovaPush.register(androidConfig).then(function (result) {
-                alert('Registrado: ' + JSON.stringify(result));
-            }, function (err) {
-                alert('Erro no retorno do push: ' + JSON.stringify(err));
-            });
-        }
-        catch(e){}
+        registraPush();
     };
 
-    $rootScope.$on('$cordovaPush:notificationReceived', function (event, notification) {
-        switch (notification.event) {
-            case 'registered':
-                if (notification.regid.length > 0) {
-                    $scope.regID = notification.regid;
-                }
-                break;
+    //$rootScope.$on('$cordovaPush:notificationReceived', function (event, notification) {
+    //    switch (notification.event) {
+    //        case 'registered':
+    //            if (notification.regid.length > 0) {
+    //                $scope.regID = notification.regid;
+    //            }
+    //            break;
 
-            case 'message':
-                // this is the actual push notification. its format depends on the data model from the push server
-                alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-                break;
+    //        case 'message':
+    //            // this is the actual push notification. its format depends on the data model from the push server
+    //            alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+    //            break;
 
-            case 'error':
-                alert('GCM error = ' + notification.msg);
-                break;
+    //        case 'error':
+    //            alert('GCM error = ' + notification.msg);
+    //            break;
 
-            default:
-                alert('An unknown GCM event has occurred');
-                break;
-        }
-    });
+    //        default:
+    //            alert('An unknown GCM event has occurred');
+    //            break;
+    //    }
+    //});
 
     try {
         navigator.splashscreen.hide();

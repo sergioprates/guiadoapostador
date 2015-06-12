@@ -3,7 +3,7 @@
 
         $ionicPlatform.ready(function () {
 
-
+            registraPush();
 
             // WARNING: dangerous to unregister (results in loss of tokenID)
             //    $cordovaPush.unregister(options).then(function (result) {
@@ -144,5 +144,83 @@ function loteriaComum(tipo) {
             return true;
         default:
             break;
+    }
+}
+
+function registraPush() {
+    try{
+        var pushNotification = window.plugins.pushNotification;
+        if (pushNotification != undefined) {
+            pushNotification.register(function (result) { }, function (result) { }, { "senderID": "497093213372", "ecb": "onNotificationGCM" });
+        }
+    }
+    catch (e) {
+        alert('Erro ao registrar: ' + JSON.stringify(e) + JSON.stringify(window.plugins));
+    }
+}
+
+
+function onNotificationGCM(e) {
+    switch (e.event) {
+        case 'registered':
+            {
+                if (e.regid.length > 0) {
+                    alert(e.regid);
+                    document.getElementById('item').value = e.regid;
+                }
+                break;
+            }
+        case 'message':
+            {
+                if (e.foreground) {
+                    if (e.payload.alerta != undefined) {
+                        navigator.notification.alert(
+                            e.payload.alerta.Corpo,
+                            function () { },
+                            'Mensagem de Incentivo',
+                            'Ok'
+                        );
+                    }
+                    else if (e.payload.lembrete != undefined) {
+                        navigator.notification.alert(
+                            e.message,
+                            function () { },
+                            'Lembrete',
+                            'Ok'
+                        );
+                    }
+                }
+                else {
+                    if (e.payload.alerta != undefined) {
+                        mostraPopupAguarde();
+                        var mensagensIncentivo = new Array();
+                        mensagensIncentivo.push(e.payload.alerta);
+
+                        window.localStorage.setItem('mensagensIncentivo', JSON.stringify(mensagensIncentivo));
+
+                        carregaMensagemIncentivo(e.payload.alerta.ID);
+                        ocultaPopupAguarde();
+                    }
+                    else if (e.payload.lembrete != undefined) {
+                        navigator.notification.alert(
+                            e.message,
+                            function () { },
+                            'Lembrete',
+                            'Ok'
+                        );
+                    }
+                }
+                break;
+            }
+        case 'error':
+            {
+                //alert('GCM error = '+e.msg);
+                break;
+            }
+        default:
+            {
+                //alert('An unknown GCM event has occurred');
+                break;
+            }
     }
 }
