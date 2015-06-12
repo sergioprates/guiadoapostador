@@ -1,27 +1,7 @@
 ﻿
 guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", function ($window, $ionicPopup) {
     function onDeviceReady() {
-        alert('Device ready!');
-        var pushNotification = window.plugins.pushNotification;
-        if (ionic.Platform.isAndroid()) {
-            alert('Registrando');
-            pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
-        } else if (ionic.Platform.isIOS()) {
-            var config = {
-                "badge": "true",
-                "sound": "true",
-                "alert": "true",
-                "ecb": "pushCallbacks.onNotificationAPN"
-            };
-            pushNotification.register(gcmSuccessHandler, gcmErrorHandler, config);
-        }
-
-        var addCallback = function addCallback(key, callback){
-            if(window.pushCallbacks == undefined){
-                window.pushCallbacks = {};
-            }
-            window.pushCallbacks[key] = callback({registered:true});
-        }
+        
     }
 
     function gcmSuccessHandler(result) {
@@ -42,8 +22,27 @@ guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", func
     return {
         initialize: function () {
             alert('Dentro do metodo initialize');
-            document.addEventListener('deviceready', onDeviceReady, false);
-            alert('device ready bindado');
+            alert('Criando objeto pushNotification!');
+            var pushNotification = window.plugins.pushNotification;
+            if (ionic.Platform.isAndroid()) {
+                alert('Registrando');
+                pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
+            } else if (ionic.Platform.isIOS()) {
+                var config = {
+                    "badge": "true",
+                    "sound": "true",
+                    "alert": "true",
+                    "ecb": "pushCallbacks.onNotificationAPN"
+                };
+                pushNotification.register(gcmSuccessHandler, gcmErrorHandler, config);
+            }
+
+            var addCallback = function addCallback(key, callback) {
+                if (window.pushCallbacks == undefined) {
+                    window.pushCallbacks = {};
+                }
+                window.pushCallbacks[key] = callback({ registered: true });
+            }
         },
         registerID: function (id) {
             var mobileType = "android";

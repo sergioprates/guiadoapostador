@@ -3,8 +3,10 @@
 
         $ionicPlatform.ready(function () {
             try {
-                alert('Iniciando carregamento do push');
-                PushProcessingService.initialize();
+                var pushNotification = window.plugins.pushNotification;
+                if (pushNotification != undefined) {
+                    pushNotification.register(successHandler, errorHandler, { "senderID": "948387944923", "ecb": "onNotificationGCM" });
+                }
             }
             catch (e) {
                 alert('Erro ao inicializar push');
