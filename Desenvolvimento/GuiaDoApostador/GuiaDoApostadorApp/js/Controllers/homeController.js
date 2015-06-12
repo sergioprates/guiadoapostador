@@ -1,5 +1,5 @@
 ﻿guiaDoApostador.controller('homeController', ['$scope', '$cordovaPush', '$rootScope', function ($scope, $cordovaPush, $rootScope) {
-    
+
     $scope.items = [
     {
         id: 1, concurso: '1234',
@@ -9,9 +9,9 @@
         proximoSorteio: 'dois dias'
     }];
 
-    $scope.registrarPush = function () {
-        registraPush();
-    };
+    if (window.localStorage.getItem('registerID') != undefined) {
+        $scope.regID = window.localStorage.getItem('registerID');
+    }
 
     //$rootScope.$on('$cordovaPush:notificationReceived', function (event, notification) {
     //    switch (notification.event) {
