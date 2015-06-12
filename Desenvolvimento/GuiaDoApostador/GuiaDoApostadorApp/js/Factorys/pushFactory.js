@@ -1,6 +1,7 @@
-﻿guiaDoApostador
-.factory('PushProcessingService', ["$window", "$ionicPopup", function ($window, $ionicPopup) {
+﻿
+guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", function ($window, $ionicPopup) {
     function onDeviceReady() {
+        alert('Device ready!');
         var pushNotification = window.plugins.pushNotification;
         if (ionic.Platform.isAndroid()) {
             pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
