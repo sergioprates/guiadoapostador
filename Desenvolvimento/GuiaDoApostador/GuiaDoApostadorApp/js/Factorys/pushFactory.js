@@ -4,6 +4,7 @@ guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", func
         alert('Device ready!');
         var pushNotification = window.plugins.pushNotification;
         if (ionic.Platform.isAndroid()) {
+            alert('Registrando');
             pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
         } else if (ionic.Platform.isIOS()) {
             var config = {
@@ -40,11 +41,14 @@ guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", func
 
     return {
         initialize: function () {
+            alert('Dentro do metodo initialize');
             document.addEventListener('deviceready', onDeviceReady, false);
+            alert('device ready bindado');
         },
         registerID: function (id) {
             var mobileType = "android";
             // Save the android mobile register Id in your server database
+            alert('Registrando id');
             window.localStorage.setItem('registerID', id);
             alert("RegisterId saved successfully.");
         },
@@ -67,6 +71,7 @@ guiaDoApostador.factory('PushProcessingService', ["$window", "$ionicPopup", func
 
 onNotificationAPN = function(event) {
     if (!event.registered) {
+        alert('onNotificationAPN: ' + JSON.stringify(event));
         var elem = angular.element(document.querySelector('[ng-app]'));
         var injector = elem.injector();
         var myService = injector.get('PushProcessingService');

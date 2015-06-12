@@ -2,7 +2,8 @@
     .run(function ($ionicPlatform, $cordovaPush, PushProcessingService) {
 
         $ionicPlatform.ready(function () {
-            try{
+            try {
+                alert('Iniciando carregamento do push');
                 PushProcessingService.initialize();
             }
             catch (e) {
