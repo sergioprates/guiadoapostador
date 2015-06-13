@@ -6,27 +6,24 @@ function gcmSuccessHandler(result) {
 function gcmErrorHandler(error) {
     alert('NOTIFY  '+error);
 }
-function onDeviceReady() {
-    alert('NOTIFY  Device is ready.  Registering with GCM server');
-    //register with google GCM server
-    try {
-        var pushNotification = window.plugins.pushNotification;
-    }
-    catch (e) {
-        alert('Falha ao pegar objeto push');
-    }
-    try {
-        pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
-    }
-    catch (e) {
-        alert('Falha ao registrar' + JSON.stringify(e));
-    }
-}
 return {
 
     initialize : function () {
         alert('NOTIFY  initializing');
-        document.addEventListener('deviceready', onDeviceReady, false);
+        alert('NOTIFY  Device is ready.  Registering with GCM server');
+        //register with google GCM server
+        try {
+            var pushNotification = window.plugins.pushNotification;
+        }
+        catch (e) {
+            alert('Falha ao pegar objeto push');
+        }
+        try {
+            pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
+        }
+        catch (e) {
+            alert('Falha ao registrar' + JSON.stringify(e));
+        }
     },
     registerID : function (id) {
         //Insert code here to store the user's ID on your notification server.

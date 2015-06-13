@@ -1,15 +1,19 @@
 ﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService, $rootScope) {        
+    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService, $rootScope) {
         $ionicPlatform.ready(function () {
-            try {
-                PushProcessingService.initialize();
-            }
-            catch (e) {
-                alert('Erro ao inicializar push: ' + JSON.stringify(e));
-            }
-            $rootScope.$apply();
+            
+            setTimeout(function () {
+                try {
+                    PushProcessingService.initialize();
+                }
+                catch (e) {
+                    alert('Erro ao inicializar push: ' + JSON.stringify(e));
+                }
+            }, 6000)
         });
     });
+
+
 
 
 function replaceAll(find, replace, str) {
