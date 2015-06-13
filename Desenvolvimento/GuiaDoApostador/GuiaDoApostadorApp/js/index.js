@@ -1,6 +1,5 @@
 ﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService) {
-
+    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService, $rootScope) {        
         $ionicPlatform.ready(function () {
             try {
                 PushProcessingService.initialize();
@@ -8,7 +7,7 @@
             catch (e) {
                 alert('Erro ao inicializar push: ' + JSON.stringify(e));
             }
-
+            $rootScope.$apply();
         });
     });
 
@@ -138,6 +137,66 @@ function loteriaComum(tipo) {
         case 'Lotofacil':
             return true;
         default:
+            break;
+    }
+}
+
+
+// ALL GCM notifications come through here.
+function onNotificationGCM(e) {
+    alert('EVENT -> RECEIVED:' + e.event + '');
+    switch( e.event )
+    {
+        case 'registered':
+            if ( e.regid.length > 0 )
+            {
+                alert('REGISTERED with GCM Server -> REGID:' + e.regid);
+ 
+                //call back to web service in Angular.
+                //This works for me because in my code I have a factory called
+                //      PushProcessingService with method registerID
+                var elem = angular.element(document.querySelector('[ng-app]'));
+                var injector = elem.injector();
+                var myService = injector.get('PushProcessingService');
+                myService.registerID(e.regid);
+            }
+            break;
+ 
+        case 'message':
+            // if this flag is set, this notification happened while we were in the foreground.
+            // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+            if (e.foreground)
+            {
+                //we're using the app when a message is received.
+                alert('--INLINE NOTIFICATION--' + '');
+ 
+                // if the notification contains a soundname, play it.
+                //var my_media = new Media(&quot;/android_asset/www/&quot;+e.soundname);
+                //my_media.play();
+                alert(e.payload.message);
+            }
+            else
+            {
+                // otherwise we were launched because the user touched a notification in the notification tray.
+                if (e.coldstart)
+                    alert('--COLDSTART NOTIFICATION--' + '');
+                else
+                    alert('--BACKGROUND NOTIFICATION--' + '');
+ 
+                // direct user here:
+               // window.location = &quot;#/tab/featured&quot;;
+            }
+ 
+            alert('MESSAGE -> MSG: ' + e.payload.message + '');
+            alert('MESSAGE: '+ JSON.stringify(e.payload));
+            break;
+ 
+        case 'error':
+            alert('ERROR -> MSG:' + e.msg + '');
+            break;
+ 
+        default:
+            alert('EVENT -> Unknown, an event was received and we do not know what it is');
             break;
     }
 }
