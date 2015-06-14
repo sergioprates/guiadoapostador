@@ -50,7 +50,7 @@
     return function (mensagem, duracao, posicao) {
         try {
             $cordovaToast.showShortBottom(mensagem).then(function (success) {
-                alert('Exibiu');
+                //alert('Exibiu');
             }, function (error) {
                 alert('erro na mensagem temporaria: ' + JSON.stringify(error));
             });

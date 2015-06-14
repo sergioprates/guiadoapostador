@@ -25,17 +25,19 @@ return {
             alert('Falha ao registrar' + JSON.stringify(e));
         }
     },
-    registerID : function (id) {
+    registerID: function (id) {
+
+        window.localStorage.setItem('pushID', id);
         //Insert code here to store the user's ID on your notification server.
         //You'll probably have a web service (wrapped in an Angular service of course) set up for this.
         //For example:
-        MyService.registerNotificationID(id).then(function(response){
-            if (response.data.Result) {
-                alert('NOTIFY  Registration succeeded');
-            } else {
-                alert('NOTIFY  Registration failed');
-            }
-        });
+        //MyService.registerNotificationID(id).then(function(response){
+        //    if (response.data.Result) {
+        //        alert('NOTIFY  Registration succeeded');
+        //    } else {
+        //        alert('NOTIFY  Registration failed');
+        //    }
+        //});
     },
     //unregister can be called from a settings area.
     unregister : function () {

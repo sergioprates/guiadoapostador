@@ -1,4 +1,4 @@
-﻿guiaDoApostador.factory('DBA', function ($cordovaSQLite, openDb, mostraPopUpErro) {
+﻿guiaDoApostador.factory('DBA', function ($cordovaSQLite, openDb, mostraPopUpErro, ocultaAguarde) {
     var self = this;
     var db = openDb();
     // Handle query's and potential errors
@@ -8,11 +8,12 @@
             parameters = parameters || [];
 
             $cordovaSQLite.execute(db, query, parameters).then(funcaoCallback, function (err) {
-                mostraPopUpErro('Não foi possível conectar à base de dados, Repositorio. Erro: ' + JSON.stringify(err));
+                ocultaAguarde();
+                mostraPopUpErro('Ocorreu um erro ao executar a transação: ' + err.message);
             });
         }
         catch(e){
-
+            mostraPopUpErro('Ocorreu um erro no banco de dados: ' + e.message + ', Stack: ' + e.stack);
         }
     }
 

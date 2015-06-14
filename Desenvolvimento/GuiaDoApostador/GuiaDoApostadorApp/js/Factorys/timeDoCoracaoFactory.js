@@ -24,9 +24,9 @@
         return DBA.query("DELETE FROM timeDoCoracao WHERE idAposta = (?)", parameters);
     }
 
-    self.update = function (origMember, editMember) {
-        //var parameters = [editMember.id, editMember.name, origMember.id];
-        //return DBA.query("UPDATE team SET id = (?), name = (?) WHERE id = (?)", parameters);
+    self.update = function (aposta, time, funcaoCallback) {
+        var parameters = [time, aposta.ID];
+        return DBA.query("UPDATE timeDoCoracao SET time = (?) WHERE idAposta = (?)", parameters, funcaoCallback);
     }
 
     return self;

@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="list" ng-show="apostas.length > 0">
-            <a collection-repeat="item in apostas track by item.idAposta" href="#/{{item.idAposta}}" class="item item-thumbnail-left">
+            <a ng-repeat="item in apostas track by item.idAposta" ui-sref="cadastrarAposta" ng-click="setaIdEdicao('{{ item.idAposta }}', '{{item.TipoConcurso}}')" class="item item-thumbnail-left">
                 <img ng-src="{{ item.ImagemLoteria }}">
                 <h2>{{ item.Nome}} </h2>
                 <h4>Concurso: {{ item.idConcurso }}</h4>

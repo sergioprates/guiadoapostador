@@ -2,6 +2,11 @@
 
     //Page Load
 
+    $scope.setaIdEdicao = function (id, tipo) {
+        window.localStorage.setItem('idApostaEdicao', id);
+        window.localStorage.setItem('tipoLoteriaClicada', tipo);
+    };
+
     $scope.$on('$ionicView.beforeEnter', function () {
         try {
             mostraAguarde();

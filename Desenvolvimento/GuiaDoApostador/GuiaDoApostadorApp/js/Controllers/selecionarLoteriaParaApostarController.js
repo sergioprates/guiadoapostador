@@ -36,14 +36,14 @@
         tipo: 'LoteriaFederal'
     },
     {
-        loteria: 'Loteca',
-        image: retornaCaminhoDaImagemPorTipoLoteria('Loteca'),
-        tipo: 'Loteca'
-    },
-    {
         loteria: 'Lotofácil',
         image: retornaCaminhoDaImagemPorTipoLoteria('Lotofacil'),
         tipo: 'Lotofacil'
+    },
+    {
+        loteria: 'Loteca',
+        image: retornaCaminhoDaImagemPorTipoLoteria('Loteca'),
+        tipo: 'Loteca'
     },
     {
         loteria: 'Lotogol',

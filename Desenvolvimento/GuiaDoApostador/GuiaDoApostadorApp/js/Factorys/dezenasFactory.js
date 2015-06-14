@@ -19,9 +19,9 @@
         DBA.query(query, parameters, funcaoCallback);
     }
 
-    self.remove = function (aposta) {
-        var parameters = [aposta.ID];
-        return DBA.query("DELETE FROM dezenas WHERE idAposta = (?)", parameters);
+    self.remove = function (idAposta, funcaoCallback) {
+        var parameters = [idAposta];
+        return DBA.query("DELETE FROM dezenas WHERE idAposta = (?)", parameters, funcaoCallback);
     }
 
     self.update = function (origMember, editMember) {
