@@ -3,31 +3,31 @@
         $ionicPlatform.ready(function () {
 
             setTimeout(function () {
-                try {
-                    PushProcessingService.initialize();
-                }
-                catch (e) {
-                    alert('Erro ao inicializar push: ' + JSON.stringify(e));
-                }
+                //try {
+                //    PushProcessingService.initialize();
+                //}
+                //catch (e) {
+                //    alert('Erro ao inicializar push: ' + JSON.stringify(e));
+                //}
 
                 try {
                     // Android customization
-                    window.plugins.backgroundMode.setDefaults({ text: 'Doing heavy tasks.' });
+                    window.plugin.backgroundMode.setDefaults({ text: 'Doing heavy tasks.' });
                     // Enable background mode
-                    window.plugins.backgroundMode.enable();
+                    window.plugin.backgroundMode.enable();
 
                     // Called when background mode has been activated
-                    window.plugins.backgroundMode.onactivate = function () {
+                    window.plugin.backgroundMode.onactivate = function () {
                         setTimeout(function () {
                             // Modify the currently displayed notification
-                            window.plugins.backgroundMode.configure({
+                            window.plugin.backgroundMode.configure({
                                 text: 'Running in background for more than 5s now.'
                             });
                         }, 5000);
                     }
                 }
                 catch (e) {
-                    alert('Erro ao inicializar background: ' + JSON.stringify(e));
+                    alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
                 }
             }, 6000);
         })
