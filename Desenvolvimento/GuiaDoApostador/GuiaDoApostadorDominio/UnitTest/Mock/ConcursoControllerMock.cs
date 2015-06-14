@@ -84,6 +84,11 @@ namespace GuiaDoApostadorDominio.Interfaces
             return con;
         }
 
+        public Concurso BuscarMaisRecente()
+        {
+            throw new NotImplementedException();
+        }
+
         public Concurso Buscar(int id)
         {
             throw new NotImplementedException();

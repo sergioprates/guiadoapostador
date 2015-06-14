@@ -49,9 +49,14 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToInt32(id);
         }
 
+        internal Concurso BuscarMaisRecente()
+        {
+            return buscar(null);
+        }
+
         internal Concurso Buscar(int id)
         {
-            throw new NotImplementedException();
+            return buscar(id);
         }
 
         internal IList<Concurso> Listar()
@@ -61,12 +66,7 @@ namespace GuiaDoApostadorDominio.Repository
 
         internal bool Existe(int id)
         {
-            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoMegaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
-        }
-
-        internal Concurso BuscarMaisRecente()
-        {
-            throw new NotImplementedException();
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoMegaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
         #region Métodos Privados
@@ -160,6 +160,73 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@Ganhadores", premio.Ganhadores);
 
             cn.Execute("sp_cadastraPremioMegaSena", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private Concurso buscar(int? id)
+        {
+            MegaSena con = new MegaSena();
+
+            try
+            {
+                using (cn)
+                {
+                    cn.Open();
+
+                    using (IDataReader dr = cn.ExecuteReader("sp_buscaConcursoMegaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure))
+                    {
+                        if (dr.Read())
+                        {
+                            con.ProximoConcurso = new ProximoConcurso();
+
+                            con.ID = Convert.ToInt32(dr["idConcurso"]);
+                            con.Data = Convert.ToDateTime(dr["data"]);
+                            con.Cidade = Convert.ToString(dr["cidade"]);
+                            con.Local = Convert.ToString(dr["local"]);
+                            con.ValorAcumulado = Convert.ToDecimal(dr["valorAcumulado"]);
+                            con.ArrecadacaoTotal = Convert.ToDecimal(dr["arrecadacaoTotal"]);
+                            con.ProximoConcurso.Data = Convert.ToDateTime(dr["proximoConcursoData"]);
+                            con.ProximoConcurso.ValorEstimado = Convert.ToDecimal(dr["proximoConcursoValorEstimado"]);
+                            con.EspecialValorAcumulado = Convert.ToDecimal(dr["especialValorAcumulado"]);
+                        }
+                    }
+
+                    if (con.ID != 0)
+                    {
+                        using (IDataReader dr = cn.ExecuteReader("sp_buscaDezenasMegaSena", new { @IdConcurso = con.ID }, commandType: CommandType.StoredProcedure))
+                        {
+                            con.Dezenas = new List<byte>();
+
+                            while (dr.Read())
+                            {
+                                con.Dezenas.Add(Convert.ToByte(dr["dezena"]));
+                            }
+                        }
+
+                        using (IDataReader dr = cn.ExecuteReader("sp_buscaPremiosMegaSena", new { @IdConcurso = con.ID }, commandType: CommandType.StoredProcedure))
+                        {
+                            con.Premios = new List<PremioPadrao>();
+
+                            while (dr.Read())
+                            {
+                                PremioPadrao premio = new PremioPadrao()
+                                {
+                                    Acertos = Convert.ToByte(dr["acertos"]),
+                                    Ganhadores = Convert.ToInt32(dr["ganhadores"]),
+                                    ValorPago = Convert.ToDecimal(dr["valorPago"])
+                                };
+
+                                con.Premios.Add(premio);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {   
+                throw ex;
+            }
+
+            return con;
         }
 
         #endregion

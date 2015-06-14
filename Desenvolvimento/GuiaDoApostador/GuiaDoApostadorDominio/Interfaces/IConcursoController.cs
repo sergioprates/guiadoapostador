@@ -10,6 +10,7 @@ namespace GuiaDoApostadorDominio.Interfaces
     public interface IConcursoController
     {
         Concurso ConsultaApi();
+        Concurso BuscarMaisRecente();
         Concurso Buscar(int id);
         int Inserir(Concurso entidade);
         IList<Concurso> Listar();

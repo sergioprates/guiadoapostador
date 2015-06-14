@@ -15,7 +15,7 @@ namespace GuiaDoApostadorDominio.Entities
             Data = data;
             ValorEstimado = valorEstimado;
         }
-        public DateTime Data { get; set; }
-        public decimal ValorEstimado { get; set; }
+        public DateTime? Data { get; set; }
+        public decimal? ValorEstimado { get; set; }
     }
 }

@@ -47,9 +47,14 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToInt32(id);
         }
 
+        internal Concurso BuscarMaisRecente()
+        {
+            return buscar(null);
+        }
+
         internal Concurso Buscar(int id)
         {
-            throw new NotImplementedException();
+            return buscar(id);
         }
 
         internal IList<Concurso> Listar()
@@ -59,13 +64,7 @@ namespace GuiaDoApostadorDominio.Repository
 
         internal bool Existe(int id)
         {
-            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoFederal", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
-        }
-
-
-        internal Concurso BuscarMaisRecente()
-        {
-            throw new NotImplementedException();
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoFederal", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
         #region Métodos Privados
@@ -123,6 +122,59 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@ValorPago", premio.ValorPago);
 
             cn.Execute("sp_cadastraPremioFederal", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private Concurso buscar(int? id)
+        {
+            Federal con = new Federal();
+
+            try
+            {
+                using (cn)
+                {
+                    cn.Open();
+
+                    using (IDataReader dr = cn.ExecuteReader("sp_buscaConcursoFederal", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure))
+                    {
+                        if (dr.Read())
+                        {
+                            con.ProximoConcurso = new ProximoConcurso();
+
+                            con.ID = Convert.ToInt32(dr["idConcurso"]);
+                            con.Data = Convert.ToDateTime(dr["data"]);
+                            con.Cidade = Convert.ToString(dr["cidade"]);
+                            con.Local = Convert.ToString(dr["local"]);
+                            con.Observacao = Convert.ToString(dr["observacao"]);
+                        }
+                    }
+
+                    if (con.ID != 0)
+                    {
+                        using (IDataReader dr = cn.ExecuteReader("sp_buscaPremiosFederal", new { @IdConcurso = con.ID }, commandType: CommandType.StoredProcedure))
+                        {
+                            con.Premios = new List<PremioFederal>();
+
+                            while (dr.Read())
+                            {
+                                PremioFederal premio = new PremioFederal()
+                                {
+                                    Premio = Convert.ToByte(dr["premio"]),
+                                    Bilhete = Convert.ToInt32(dr["bilhete"]),
+                                    ValorPago = Convert.ToDecimal(dr["valorPago"])
+                                };
+
+                                con.Premios.Add(premio);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return con;
         }
 
         #endregion

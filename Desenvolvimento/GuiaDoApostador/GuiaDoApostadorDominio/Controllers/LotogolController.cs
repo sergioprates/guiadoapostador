@@ -20,6 +20,11 @@ namespace GuiaDoApostadorDominio.Controllers
             return _repository.ConsultaApi();
         }
 
+       public Concurso BuscarMaisRecente()
+       {
+           return _repository.BuscarMaisRecente();
+       }
+
        public Concurso Buscar(int id)
         {
             return _repository.Buscar(id);

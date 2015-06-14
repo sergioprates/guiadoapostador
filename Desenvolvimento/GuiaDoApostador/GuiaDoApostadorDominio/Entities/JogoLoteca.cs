@@ -17,9 +17,19 @@ namespace GuiaDoApostadorDominio.Entities
         }
 
         public JogoTimePadrao Coluna1 { get; set; }
-        public bool Empate { get; set; }
         public JogoTimePadrao Coluna2 { get; set; }
         public Semana DiaDaSemana { get; set; }
+
+        public bool Empate
+        {
+            get
+            {
+                if (Coluna1 == null || Coluna2 == null)
+                    return false;
+                else
+                    return Coluna1.Gols == Coluna2.Gols ? true : false;
+            }
+        }
 
         public void IdentificaDiaDaSemana(string dia)
         {

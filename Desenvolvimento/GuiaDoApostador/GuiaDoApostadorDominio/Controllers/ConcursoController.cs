@@ -49,7 +49,11 @@ namespace GuiaDoApostadorDominio.Controllers
             }
         }
 
-
+        public Concurso BuscarMaisRecente()
+        {
+            return _controller.BuscarMaisRecente();
+        }
+        
         public Concurso Buscar(int id)
         {
             return _controller.Buscar(id);

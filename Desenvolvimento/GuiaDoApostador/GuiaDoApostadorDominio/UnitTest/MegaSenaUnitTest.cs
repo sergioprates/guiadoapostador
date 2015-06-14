@@ -12,8 +12,8 @@ namespace GuiaDoApostadorDominio.UnitTest
     [TestFixture]
     public class MegaSenaUnitTest
     {
-        IMegaSenaController _repository = new MegaSenaControllerMock();
-        //IMegaSenaController _repository = new MegaSenaController();
+        //IMegaSenaController _repository = new MegaSenaControllerMock();
+        IMegaSenaController _repository = new MegaSenaController();
 
         [Test]
         public void ConsultaApi()
@@ -37,6 +37,23 @@ namespace GuiaDoApostadorDominio.UnitTest
             var concurso = _repository.Existe(_repository.ConsultaApi().ID);
 
             Assert.AreEqual(true, concurso);
+        }
+
+        [Test]
+        public void Buscar()
+        {
+            int id = 1711;
+            var concurso = _repository.Buscar(id);
+
+            Assert.AreNotEqual(null, concurso);
+        }
+
+        [Test]
+        public void BuscarMaisRecente()
+        {
+            var concurso = _repository.BuscarMaisRecente();
+
+            Assert.AreNotEqual(null, concurso);
         }
     }
 }

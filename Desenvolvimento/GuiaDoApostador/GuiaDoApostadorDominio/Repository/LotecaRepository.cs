@@ -51,9 +51,14 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToInt32(id);
         }
 
+        internal Concurso BuscarMaisRecente()
+        {
+            return buscar(null);
+        }
+
         internal Concurso Buscar(int id)
         {
-            throw new NotImplementedException();
+            return buscar(id);
         }
 
         internal IList<Concurso> Listar()
@@ -63,13 +68,7 @@ namespace GuiaDoApostadorDominio.Repository
 
         internal bool Existe(int id)
         {
-            return Convert.ToBoolean(cn.ExecuteScalar("sp_ExisteConcursoLoteca", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
-        }
-
-
-        internal Concurso BuscarMaisRecente()
-        {
-            throw new NotImplementedException();
+            return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoLoteca", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
         #region Métodos privados
@@ -97,8 +96,7 @@ namespace GuiaDoApostadorDominio.Repository
                 JogoLoteca jogoLoteca = new JogoLoteca((string)jogo.data)
                 {
                     Coluna1 = new JogoTimePadrao((string)jogo.coluna_1.time, (byte)jogo.coluna_1.gols),
-                    Coluna2 = new JogoTimePadrao((string)jogo.coluna_2.time, (byte)jogo.coluna_2.gols),
-                    Empate = (byte)jogo.coluna_1.gols == (byte)jogo.coluna_2.gols ? true : false,
+                    Coluna2 = new JogoTimePadrao((string)jogo.coluna_2.time, (byte)jogo.coluna_2.gols)
                 };
                 loteria.Jogos.Add(jogoLoteca);
             }
@@ -170,6 +168,90 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@Ganhadores", premio.Ganhadores);
 
             cn.Execute("sp_cadastraPremioLoteca", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private Concurso buscar(int? id)
+        {
+            Loteca con = new Loteca();
+
+            try
+            {
+                using (cn)
+                {
+                    cn.Open();
+
+                    using (IDataReader dr = cn.ExecuteReader("sp_buscaConcursoLoteca", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure))
+                    {
+                        if (dr.Read())
+                        {
+                            con.ProximoConcurso = new ProximoConcurso();
+
+                            con.ID = Convert.ToInt32(dr["idConcurso"]);
+                            con.Data = Convert.ToDateTime(dr["data"]);
+                            con.ValorAcumulado = Convert.ToDecimal(dr["valorAcumulado"]);
+                            con.ArrecadacaoTotal = Convert.ToDecimal(dr["arrecadacaoTotal"]);
+                            con.ProximoConcurso.Data = Convert.ToDateTime(dr["proximoConcursoData"]);
+                            con.ProximoConcurso.ValorEstimado = Convert.ToDecimal(dr["proximoConcursoValorEstimado"]);
+                            con.ProximoConcursoFinalCinco = new ConcursoFinalCinco()
+                            {
+                                Numero = Convert.ToInt32(dr["especialNumero"]),
+                                ValorAcumulado = Convert.ToInt32(dr["especialValorAcumulado"])
+                            };
+                        }
+                    }
+
+                    if (con.ID != 0)
+                    {
+                        using (IDataReader dr = cn.ExecuteReader("sp_buscaDezenasLoteca", new { @IdConcurso = con.ID }, commandType: CommandType.StoredProcedure))
+                        {
+                            con.Jogos = new List<JogoLoteca>();
+
+                            while (dr.Read())
+                            {
+                                JogoLoteca jogo = new JogoLoteca()
+                                {   
+                                    Coluna1 = new JogoTimePadrao()
+                                    {
+                                        Time = Convert.ToString(dr["time1"]),
+                                        Gols = Convert.ToByte(dr["gols1"]),
+                                    },
+                                    Coluna2 = new JogoTimePadrao()
+                                    {
+                                        Time = Convert.ToString(dr["time2"]),
+                                        Gols = Convert.ToByte(dr["gols2"]),
+                                    },
+                                    DiaDaSemana = (Semana)Convert.ToInt32(dr["diaSemana"])
+                                };
+
+                                con.Jogos.Add(jogo);
+                            }
+                        }
+
+                        using (IDataReader dr = cn.ExecuteReader("sp_buscaPremiosLoteca", new { @IdConcurso = con.ID }, commandType: CommandType.StoredProcedure))
+                        {
+                            con.Premios = new List<PremioPadrao>();
+
+                            while (dr.Read())
+                            {
+                                PremioPadrao premio = new PremioPadrao()
+                                {
+                                    Acertos = Convert.ToByte(dr["acertos"]),
+                                    Ganhadores = Convert.ToInt32(dr["ganhadores"]),
+                                    ValorPago = Convert.ToDecimal(dr["valorPago"])
+                                };
+
+                                con.Premios.Add(premio);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return con;
         }
 
         #endregion
