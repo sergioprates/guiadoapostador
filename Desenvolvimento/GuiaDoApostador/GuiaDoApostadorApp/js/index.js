@@ -2,14 +2,34 @@
     .run(function ($ionicPlatform, $cordovaPush, PushProcessingService) {
         $ionicPlatform.ready(function () {
             
-            //setTimeout(function () {
-            //    try {
-            //        PushProcessingService.initialize();
-            //    }
-            //    catch (e) {
-            //        alert('Erro ao inicializar push: ' + JSON.stringify(e));
-            //    }
-            //}, 6000)
+            setTimeout(function () {
+                try {
+                    PushProcessingService.initialize();
+                }
+                catch (e) {
+                    alert('Erro ao inicializar push: ' + JSON.stringify(e));
+                }
+
+                try
+                {
+                    // Android customization
+                    cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
+                    // Enable background mode
+                    cordova.plugins.backgroundMode.enable();
+
+                    // Called when background mode has been activated
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        setTimeout(function () {
+                            // Modify the currently displayed notification
+                            cordova.plugins.backgroundMode.configure({
+                                text:'Running in background for more than 5s now.'
+                            });
+                        }, 5000);
+                    }
+                }
+                catch (e) {
+                    alert('Erro ao inicializar background: ' + JSON.stringify(e));
+                }
         });
     });
 
