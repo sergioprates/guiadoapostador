@@ -16,9 +16,15 @@ namespace GuiaDoApostadorWebApp
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{loteria}/{id}",
-                defaults: new { id = RouteParameter.Optional, loteria = RouteParameter.Optional }
+                name: "ConcursoApi",
+                routeTemplate: "api/Concurso/{loteria}/{id}",
+                defaults: new { controller = "Concurso", id = RouteParameter.Optional, loteria = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "EstatisticaApi",
+                routeTemplate: "api/Estatistica/{estatistica}/{loteria}",
+                defaults: new { controller = "Estatistica" }
             );
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));

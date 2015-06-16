@@ -72,6 +72,24 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoLotofacil", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
+        internal List<byte> GetNumerosQueMenosSairam()
+        {
+            List<byte> numeros = new List<byte>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMenosSairamLotofacil", null, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        numeros.Add(Convert.ToByte(dr["dezena"]));
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
         #region Métodos Privados
 
         private Concurso deserializaConcurso(dynamic obj)

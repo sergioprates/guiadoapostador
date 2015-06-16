@@ -3,13 +3,14 @@ using System.Net;
 using System.IO;
 using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Repository;
+using System.Collections.Generic;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
     public class MegaSenaController : IMegaSenaController
     {
         private MegaSenaRepository _repository = new MegaSenaRepository();
-
+        
         public MegaSenaController()
         { }
 
@@ -35,7 +36,7 @@ namespace GuiaDoApostadorDominio.Controllers
             return entidade.ID;
         }
 
-        public System.Collections.Generic.IList<Concurso> Listar()
+        public IList<Concurso> Listar()
         {
             return _repository.Listar();
         }
@@ -43,6 +44,20 @@ namespace GuiaDoApostadorDominio.Controllers
         public bool Existe(int id)
         {
             return _repository.Existe(id);
+        }
+
+        public object ObtemEstatistica(Estatistica estat)
+        {
+            object estatistica = null;
+
+            switch (estat)
+            {
+                case Estatistica.NumerosQueMenosSairam:
+                    estatistica = _repository.GetNumerosQueMenosSairam();
+                    break;
+            }
+
+            return estatistica;
         }
     }
 }

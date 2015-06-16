@@ -109,8 +109,12 @@ namespace GuiaDoApostadorDominio.Interfaces
             throw new NotImplementedException();
         }
 
-
         public bool Existe(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ObtemEstatistica(Estatistica estat)
         {
             throw new NotImplementedException();
         }

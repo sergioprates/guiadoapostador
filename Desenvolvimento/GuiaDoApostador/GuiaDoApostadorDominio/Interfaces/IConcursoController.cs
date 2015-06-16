@@ -15,5 +15,6 @@ namespace GuiaDoApostadorDominio.Interfaces
         int Inserir(Concurso entidade);
         IList<Concurso> Listar();
         bool Existe(int id);
+        object ObtemEstatistica(Estatistica estatistica);
     }
 }

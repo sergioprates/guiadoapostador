@@ -70,6 +70,7 @@
     <Compile Include="Entities\Enumerators.cs" />
     <Compile Include="Entities\Loterias\Lotogol.cs" />
     <Compile Include="Entities\Loterias\Lotomania.cs" />
+    <Compile Include="Entities\NumerosQueMenosSairam.cs" />
     <Compile Include="Entities\PremioDuplaSena.cs" />
     <Compile Include="Entities\PremioFederal.cs" />
     <Compile Include="Entities\ProximoConcurso.cs" />
@@ -117,6 +118,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

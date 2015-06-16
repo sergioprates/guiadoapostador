@@ -14,6 +14,11 @@ namespace GuiaDoApostadorDominio.Entities
         Timemania
     };
 
+    public enum Estatistica
+    {
+        NumerosQueMenosSairam
+    };
+
     public enum Semana
     {
         Domingo = 1,

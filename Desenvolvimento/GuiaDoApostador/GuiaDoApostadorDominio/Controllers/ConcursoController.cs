@@ -78,10 +78,14 @@ namespace GuiaDoApostadorDominio.Controllers
             return _controller.ConsultaApi();
         }
 
-
         public bool Existe(int id)
         {
             return _controller.Existe(id);
+        }
+
+        public object ObtemEstatistica(Estatistica estatistica)
+        {   
+            return _controller.ObtemEstatistica(estatistica);
         }
     }
 }

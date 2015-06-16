@@ -12,13 +12,13 @@ namespace GuiaDoApostadorDominio.UnitTest
     [TestFixture]
     public class MegaSenaUnitTest
     {
-        //IMegaSenaController _repository = new MegaSenaControllerMock();
-        IMegaSenaController _repository = new MegaSenaController();
+        //IMegaSenaController _controller = new MegaSenaControllerMock();
+        IMegaSenaController _controller = new MegaSenaController();
 
         [Test]
         public void ConsultaApi()
         {
-            var concurso = _repository.ConsultaApi();
+            var concurso = _controller.ConsultaApi();
 
             Assert.AreNotEqual(concurso, null);
         }
@@ -26,7 +26,7 @@ namespace GuiaDoApostadorDominio.UnitTest
         [Test]
         public void Inserir()
         {
-            var concurso = _repository.Inserir(_repository.ConsultaApi());
+            var concurso = _controller.Inserir(_controller.ConsultaApi());
 
             Assert.AreNotEqual(0, concurso);
         }
@@ -34,7 +34,7 @@ namespace GuiaDoApostadorDominio.UnitTest
         [Test]
         public void Existe()
         {
-            var concurso = _repository.Existe(_repository.ConsultaApi().ID);
+            var concurso = _controller.Existe(_controller.ConsultaApi().ID);
 
             Assert.AreEqual(true, concurso);
         }
@@ -43,7 +43,7 @@ namespace GuiaDoApostadorDominio.UnitTest
         public void Buscar()
         {
             int id = 1711;
-            var concurso = _repository.Buscar(id);
+            var concurso = _controller.Buscar(id);
 
             Assert.AreNotEqual(null, concurso);
         }
@@ -51,9 +51,17 @@ namespace GuiaDoApostadorDominio.UnitTest
         [Test]
         public void BuscarMaisRecente()
         {
-            var concurso = _repository.BuscarMaisRecente();
+            var concurso = _controller.BuscarMaisRecente();
 
             Assert.AreNotEqual(null, concurso);
+        }
+
+        [Test]
+        public void ObtemEstatistica()
+        {
+            var estatistica = _controller.ObtemEstatistica(Entities.Estatistica.NumerosQueMenosSairam);
+
+            Assert.AreNotEqual(null, estatistica);
         }
     }
 }

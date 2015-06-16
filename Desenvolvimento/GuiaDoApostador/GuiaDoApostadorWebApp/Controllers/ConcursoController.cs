@@ -29,7 +29,7 @@ namespace GuiaDoApostadorWebApp.Controllers
             return concursos.OrderByDescending(x=> x.Data).ToList();
         }
 
-        // GET: api/Concurso
+        // GET: api/Concurso/Loteria
         public Concurso Get(Loteria loteria)
         {
             GuiaDoApostadorDominio.Controllers.ConcursoController controller = new GuiaDoApostadorDominio.Controllers.ConcursoController(loteria);
@@ -39,7 +39,7 @@ namespace GuiaDoApostadorWebApp.Controllers
             return con;
         }
 
-        // GET: api/Concurso/5
+        // GET: api/Concurso/Loteria/id
         public Concurso Get(Loteria loteria, int id)
         {
             GuiaDoApostadorDominio.Controllers.ConcursoController controller = new GuiaDoApostadorDominio.Controllers.ConcursoController(loteria);

@@ -51,5 +51,10 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
         {
             throw new NotImplementedException();
         }
+
+        public object ObtemEstatistica(Estatistica estatistica)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

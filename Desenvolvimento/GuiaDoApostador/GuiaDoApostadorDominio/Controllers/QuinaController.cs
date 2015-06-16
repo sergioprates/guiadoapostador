@@ -40,10 +40,23 @@ namespace GuiaDoApostadorDominio.Controllers
             return _repository.Listar();
         }
 
-
         public bool Existe(int id)
         {
             return _repository.Existe(id);
+        }
+
+        public object ObtemEstatistica(Estatistica estat)
+        {
+            object estatistica = null;
+
+            switch (estat)
+            {
+                case Estatistica.NumerosQueMenosSairam:
+                    estatistica = _repository.GetNumerosQueMenosSairam();
+                    break;
+            }
+
+            return estatistica;
         }
     }
 }
