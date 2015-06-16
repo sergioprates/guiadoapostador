@@ -1,10 +1,36 @@
-﻿guiaDoApostador.controller('minhasApostasController', ['$scope', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'bilheteFactory', function ($scope, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, bilheteFactory) {
+﻿guiaDoApostador.controller('minhasApostasController', ['$scope', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'bilheteFactory', '$ionicActionSheet', '$timeout', function ($scope, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, bilheteFactory, $ionicActionSheet, $timeout) {
 
     //Page Load
 
     $scope.setaIdEdicao = function (id, tipo) {
         window.localStorage.setItem('idApostaEdicao', id);
         window.localStorage.setItem('tipoLoteriaClicada', tipo);
+    };
+
+    $scope.onHold = function (aposta) {
+        var hideSheet = $ionicActionSheet.show({
+
+            buttons: [
+                  { text: 'Excluir aposta' }
+            ],
+            titleText: 'Aposta',
+            cancelText: 'Cancelar',
+            cancel: function () {
+                hideSheet();
+            },
+            buttonClicked: function (index) {
+
+                if (index == 0) {
+                    alert(aposta.idConcurso);
+                }
+                return true;
+            }
+        });
+
+        // For example's sake, hide the sheet after two seconds
+        //$timeout(function () {
+        //    hideSheet();
+        //}, 2000);
     };
 
     $scope.$on('$ionicView.beforeEnter', function () {

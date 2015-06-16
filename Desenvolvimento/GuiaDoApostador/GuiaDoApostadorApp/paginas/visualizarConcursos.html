@@ -1,0 +1,154 @@
+﻿<!-- The title of the ion-view will be shown on the navbar -->
+
+<ion-view ng-init="consultar=0" title="{{ loteria }}" ng-controller="visualizarConcursosController">
+    <ion-content class="padding">
+        <div class="card">
+            <div class="item item-divider text-center">
+                Cidade do Sorteio / Local
+            </div>
+            <div class="item item-text-wrap text-center">
+                {{ concurso.Cidade }} / {{concurso.Local}}
+            </div>
+        </div>
+
+
+        <div class="card" ng-show="loteriaFederal == 1">
+            <div class="item item-divider text-center">
+                INFORMATIVO
+            </div>
+            <div class="item item-text-wrap text-center">
+                {{ concurso.Observacao }}
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaFederal != 1">
+            <div class="item item-divider text-center">
+                Arrecadação Total
+            </div>
+            <div class="item item-text-wrap text-center">
+                {{ concurso.ArrecadacaoTotal }}
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider text-center">
+                Cidade do Sorteio
+            </div>
+            <div class="item item-text-wrap text-center">
+                {{ concurso.Cidade }}
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaTimeMania == 1 || loteriaComum == 1">
+            <div class="list">
+                <div class="item item-divider text-center">
+                    Números Sorteados
+                </div>
+                <div class="row item">
+                    <div class="col" ng-repeat="item in concurso.Dezenas">{{item}}</div>
+                </div>
+                <div class="item item-divider text-center" ng-show="concurso.ProximoConcurso.Data != null">
+                    Próximo Concurso - {{ concurso.ProximoConcurso.Data }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaDuplaSena == 1">
+            <div class="list">
+                <div class="item item-divider text-center">
+                    Números Sorteados no 1° Sorteio
+                </div>
+                <div class="row item">
+                    <div class="col" ng-repeat="item in concurso.DezenasPrimeiroSorteio">{{item.Dezena}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaDuplaSena == 1">
+            <div class="list">
+                <div class="item item-divider text-center">
+                    Números Sorteados no 2° Sorteio
+                </div>
+                <div class="row item">
+                    <div class="col" ng-repeat="item in concurso.DezenaSegundoSorteio">{{item.Dezena}}</div>
+                </div>
+                <div class="item item-divider text-center" ng-show="concurso.ProximoConcurso.Data != null">
+                    Próximo Concurso - {{ concurso.ProximoConcurso.Data }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaFederal != 1">
+            <div class="item item-divider text-center">
+                Prêmio Estimado
+            </div>
+            <div class="item item-text-wrap text-center">
+                <h1>{{ concurso.ProximoConcurso.ValorEstimado }}</h1>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaTimeMania == 1 || loteriaComum == 1">
+            <div class="list">
+                <div class="item item-divider text-center">
+                    Premiação
+                </div>
+                <div class="row item">
+                    <div class="col">Acertos</div>
+                    <div class="col">Ganhadores</div>
+                    <div class="col">Prêmio(R$)</div>
+                </div>
+                <div class="item row" ng-repeat="item in concurso.Premios">
+                    <div class="col">{{item.Acertos}}</div>
+                    <div class="col">{{item.Ganhadores}}</div>
+                    <div class="col">{{item.ValorPago}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaFederal == 1">
+            <div class="list">
+                <div class="item item-divider text-center">
+                   Prêmios Principais
+                </div>
+                <div class="row item">
+                    <div class="col">Faixa</div>
+                    <div class="col">Bilhete</div>
+                    <div class="col">Prêmio(R$)</div>
+                </div>
+                <div class="item row" ng-repeat="item in concurso.Premios">
+                    <div class="col">{{item.Premio}}</div>
+                    <div class="col">{{item.Bilhete}}</div>
+                    <div class="col">{{item.ValorPago}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaTimeMania == 1">
+            <div class="item item-divider text-center">
+                Time do Coração
+            </div>
+            <div class="item item-text-wrap text-center">
+                {{ concurso.TimeCoracao.Nome }}
+            </div>
+        </div>
+        <br />
+        <br />
+    </ion-content>
+
+    <!--Footer-->
+    <div class="bar bar-footer bar-calm item-input-inset">
+        <div class="title" ng-show="consultar == 0">{{ TituloConcurso }}</div>
+
+        <label class="item-input-wrapper" style="width:70%" ng-show="consultar == 1">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" ng-model="idConcurso" placeholder="Digite o número do concurso para consultar">
+        </label>
+        <div>
+            <button ng-show="consultar == 1" ng-click="consultar=0" class="button button-clear">
+                Cancelar
+            </button>
+        </div>
+        <div>
+            <button class="button button-icon icon ion-search" ng-click="consultarAPI()" />
+        </div>
+    </div>
+</ion-view>

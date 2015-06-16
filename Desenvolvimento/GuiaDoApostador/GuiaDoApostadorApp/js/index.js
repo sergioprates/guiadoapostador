@@ -12,27 +12,26 @@
 
                 try {
                     // Android customization
-                    window.plugin.backgroundMode.setDefaults({ text: 'Doing heavy tasks.' });
+
+                    var options = {
+                        //text: '',
+                        silent: true
+                    };
+                    window.plugin.backgroundMode.setDefaults(options);
                     // Enable background mode
                     window.plugin.backgroundMode.enable();
 
                     // Called when background mode has been activated
                     window.plugin.backgroundMode.onactivate = function () {
-                        setTimeout(function () {
-                            // Modify the currently displayed notification
-                            window.plugin.backgroundMode.configure({
-                                text: 'Running in background for more than 5s now.'
-                            });
-                        }, 5000);
-                    }
+                        
+                    };
                 }
                 catch (e) {
-                    alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
+                    //alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
                 }
             }, 6000);
         })
     });
-
 
 
 
@@ -91,7 +90,7 @@ function retornaCaminhoDaImagemPorTipoLoteria(Tipo) {
             return "img/loteriaslogo/lotogol.png";
             break;
         case 'Lotofacil':
-            return "img/loteriaslogo/lotoFacil.png";
+            return "img/loteriaslogo/lotofacil.png";
             break;
         default:
 
@@ -163,6 +162,10 @@ function loteriaComum(tipo) {
         default:
             break;
     }
+}
+
+function pegaURLAPI() {
+    return 'http://localhost:3215/api/';
 }
 
 

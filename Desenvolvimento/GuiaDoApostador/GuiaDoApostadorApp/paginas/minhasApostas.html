@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="list" ng-show="apostas.length > 0">
-            <a ng-repeat="item in apostas track by item.idAposta" ui-sref="cadastrarAposta" ng-click="setaIdEdicao('{{ item.idAposta }}', '{{item.TipoConcurso}}')" class="item item-thumbnail-left">
+            <a ng-repeat="item in apostas track by item.idAposta" on-hold="onHold(item)" ui-sref="cadastrarAposta" ng-click="setaIdEdicao('{{ item.idAposta }}', '{{item.TipoConcurso}}')" class="item item-thumbnail-left item-icon-right">
                 <img ng-src="{{ item.ImagemLoteria }}">
                 <h2>{{ item.Nome}} </h2>
                 <h4>Concurso: {{ item.idConcurso }}</h4>
@@ -24,8 +24,8 @@
                 <h4 ng-show="item.TipoConcurso == 'Timemania'">Time do Cora&ccedil;&atilde;o: {{item.time}}</h4>
                 <h4 ng-show="item.Verificado == 0">Aguardando sorteio</h4>
                 <h4 ng-show="item.Verificado == 1">Conferido</h4>
-                <!--<h4>Ocorre em: {{ item.proximoSorteio }}</h4>-->
             </a>
+            
         </div>
     </ion-content>
 </ion-view>

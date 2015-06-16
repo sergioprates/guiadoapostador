@@ -6,6 +6,7 @@
     <link href="frameworks/ionic/css/ionic.css" rel="stylesheet" />
     <script type="text/javascript" src="frameworks/ionic/js/ionic.bundle.min.js"></script>
     <script src="js/scripts/lodash.js"></script>
+    <script src="js/scripts/accounting.js"></script>
 
     <!--Plugins-->
     <script src="js/Plugins/ng-cordova.js"></script>
@@ -30,6 +31,7 @@
     <script src="js/Controllers/minhasApostasController.js"></script>
     <script src="js/Controllers/selecionarLoteriaParaApostarController.js"></script>
     <script src="js/Controllers/cadastrarApostaController.js"></script>
+    <script src="js/Controllers/visualizarConcursosController.js"></script>
     <!--FimControllers-->
     <!--Diretivas-->
     <script src="js/Directives/utilDirectives.js"></script>
@@ -51,20 +53,13 @@
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
                     Minhas Apostas
                 </button>
-                <button class="button button-block button-positive" ng-click="registrarPush()">
-                    Push!
-                </button>
-
                 <div class="list">
-                    <label class="item item-input">
-                        <input id="item" type="text" ng-model="regID" placeholder="Bla"  />
-                    </label>
-                    <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left">
+                    <a ng-repeat="item in concursos" ui-sref="visualizarConcursos" ng-click="selecionarLoteria({{item}})" class="item item-thumbnail-left">
                         <img ng-src="{{ item.image }}">
-                        <h2>{{ item.loteria }}</h2>
-                        <h4>Concurso: {{ item.concurso }}</h4>
-                        <h4>Prêmio: {{ item.premio }}</h4>
-                        <h4>Ocorre em: {{ item.proximoSorteio }}</h4>
+                        <h2>{{ item.Nome }}</h2>
+                        <h4>Concurso: {{ item.ID }}</h4>
+                        <h4 ng-show="item.ProximoConcurso.ValorEstimado != 'R$0.00'">Prêmio: {{  item.ProximoConcurso.ValorEstimado }}</h4>
+                        <h4 ng-show="item.ProximoConcurso.Data != null">Ocorre em: {{ item.ProximoConcurso.Data }}</h4>
                     </a>
                 </div>
             </ion-content>

@@ -11,6 +11,16 @@
             tipo: window.localStorage.getItem('tipoLoteriaClicada')
         };
 
+        var concursosRecentes = window.localStorage.getItem('concursosRecentes');
+
+        if (concursosRecentes != undefined && concursosRecentes != null) {
+            var concursoAtual = _.filter(concursosRecentes, function (concurso) {
+                return concurso.TipoConcurso == $scope.loteria.tipo;
+            });
+
+            $scope.aposta.Loteria.ID = concurso.ID;
+        }
+
         var idApostaEdicao = window.localStorage.getItem('idApostaEdicao');
 
         if (idApostaEdicao != undefined && idApostaEdicao != null) {

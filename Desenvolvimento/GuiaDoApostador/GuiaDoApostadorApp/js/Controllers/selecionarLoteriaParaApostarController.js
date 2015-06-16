@@ -39,15 +39,17 @@
         loteria: 'Lotofácil',
         image: retornaCaminhoDaImagemPorTipoLoteria('Lotofacil'),
         tipo: 'Lotofacil'
-    },
-    {
-        loteria: 'Loteca',
-        image: retornaCaminhoDaImagemPorTipoLoteria('Loteca'),
-        tipo: 'Loteca'
-    },
-    {
-        loteria: 'Lotogol',
-        image: retornaCaminhoDaImagemPorTipoLoteria('Lotogol'),
-        tipo: 'Lotogol'
-    }];
+    }
+    //,
+    //{
+    //    loteria: 'Loteca',
+    //    image: retornaCaminhoDaImagemPorTipoLoteria('Loteca'),
+    //    tipo: 'Loteca'
+    //},
+    //{
+    //    loteria: 'Lotogol',
+    //    image: retornaCaminhoDaImagemPorTipoLoteria('Lotogol'),
+    //    tipo: 'Lotogol'
+    //}
+    ];
 }]);
