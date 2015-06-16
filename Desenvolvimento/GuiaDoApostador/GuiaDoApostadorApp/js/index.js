@@ -165,7 +165,7 @@ function loteriaComum(tipo) {
 }
 
 function pegaURLAPI() {
-    return 'http://localhost:3215/api/';
+    return 'http://claudiosajr-001-site1.smarterasp.net/API/';
 }
 
 
