@@ -193,7 +193,7 @@ namespace GuiaDoApostadorDominio.Repository
             var paramList = new DynamicParameters();
 
             paramList.Add("@idConcurso", idConcurso);
-            paramList.Add("@Sorteio", premio.Acertos);
+            paramList.Add("@Sorteio", premio.Sorteio);
             paramList.Add("@Acertos", premio.Acertos);
             paramList.Add("@ValorPago", premio.ValorPago);
             paramList.Add("@Ganhadores", premio.Ganhadores);
