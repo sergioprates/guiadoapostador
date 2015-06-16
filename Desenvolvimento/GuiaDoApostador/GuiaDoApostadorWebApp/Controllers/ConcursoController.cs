@@ -18,15 +18,15 @@ namespace GuiaDoApostadorWebApp.Controllers
 
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.DuplaSena).BuscarMaisRecente());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Federal).BuscarMaisRecente());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Loteca).BuscarMaisRecente());
+            //concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Loteca).BuscarMaisRecente());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotofacil).BuscarMaisRecente());
-            concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotogol).BuscarMaisRecente());
+            //concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotogol).BuscarMaisRecente());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Lotomania).BuscarMaisRecente());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.MegaSena).BuscarMaisRecente());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Quina).BuscarMaisRecente());
             concursos.Add(new GuiaDoApostadorDominio.Controllers.ConcursoController(Loteria.Timemania).BuscarMaisRecente());
 
-            return concursos;
+            return concursos.OrderByDescending(x=> x.Data).ToList();
         }
 
         // GET: api/Concurso
