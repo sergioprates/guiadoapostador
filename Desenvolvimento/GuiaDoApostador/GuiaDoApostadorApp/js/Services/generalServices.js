@@ -66,71 +66,44 @@
         }
     }
 })
-
-.service('onLoadApp', function (PushProcessingService, mostraPopUpErro) {
+.service('onLoadApp', function (mostraPopUpErro, apostasFactory, $http) {
     return function () {
         try {
-            PushProcessingService.initialize();
-        }
-        catch (e) {
-            alert('Erro ao inicializar push: ' + JSON.stringify(e));
-        }
 
-        try {
-            // Android customization
-
-            var options = {
-                title: 'Guia do Apostador',
-                text: 'O aplicativo Guia do Apostador está executando.',
-                silent: false
-            };
-            window.plugin.backgroundMode.setDefaults(options);
-            // Enable background mode
-            window.plugin.backgroundMode.enable();
-
-            // Called when background mode has been activated
-            window.plugin.backgroundMode.onactivate = function () {
-
-                setInterval(function () {
-                    alert('Chamou o método');
-
-                    var elem = angular.element(document.querySelector('[ng-app]'));
-                    var injector = elem.injector();
-                    var apostasFactory = injector.get('apostasFactory');
-                    apostasFactory.listaApostasNaoVerificadas(function (results) {
-                        alert('Verificou as apostas. Linhas: ' + results.rows.length);
-                        var data = new Object();
-                        data.Apostas = new Array();
-                        if (results.rows != undefined && results.rows.length > 0) {
-                            for (var i = 0; i < results.rows.length; i++) {
-                                var aposta = results.rows.item(i);
-                                aposta.ApostaID = aposta.idAposta;
-                                aposta.ConcursoID = aposta.idConcurso;
-                                aposta.TipoConcurso = retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
-                                data.Apostas.push(aposta);
-                            }
-                            data.RegistrationID = window.localStorage.getItem('pushID');
+            setInterval(function () {
+                apostasFactory.listaApostasNaoVerificadas(function (results) {
+                    alert('Verificou as apostas. Linhas: ' + results.rows.length);
+                    var data = new Object();
+                    data.Apostas = new Array();
+                    if (results.rows != undefined && results.rows.length > 0) {
+                        for (var i = 0; i < results.rows.length; i++) {
+                            var aposta = results.rows.item(i);
+                            aposta.ApostaID = aposta.idAposta;
+                            aposta.ConcursoID = aposta.idConcurso;
+                            aposta.TipoConcurso = retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
+                            data.Apostas.push(aposta);
                         }
-                        if (data.Apostas.length > 0) {
-                            $http.post(
-                            pegaURLAPI() + 'concurso',
-                            JSON.stringify(data),
-                            {
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
+                        data.RegistrationID = window.localStorage.getItem('pushID');
+                    }
+                    if (data.Apostas.length > 0) {
+                        $http.post(
+                        pegaURLAPI() + 'concurso',
+                        JSON.stringify(data),
+                        {
+                            headers: {
+                                'Content-Type': 'application/json'
                             }
-                        ).success(function (data) {
-                            alert('Sucesso');
-                        }).error(function () {
-                            alert('erro');
-                        });
                         }
-
-
+                    ).success(function (data) {
+                        alert('Sucesso');
+                    }).error(function () {
+                        alert('erro');
                     });
-                }, 30000);
-            };
+                    }
+
+
+                });
+            }, 30000);
         }
         catch (e) {
             alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
