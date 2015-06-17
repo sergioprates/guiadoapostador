@@ -67,7 +67,7 @@
     }
 })
 
-.service('onLoadApp', function (PushProcessingService, mostraPopUpErro, apostasFactory) {
+.service('onLoadApp', function (PushProcessingService, mostraPopUpErro) {
     return function () {
         try {
             PushProcessingService.initialize();
