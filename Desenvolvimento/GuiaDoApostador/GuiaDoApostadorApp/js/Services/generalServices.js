@@ -98,7 +98,7 @@
                     var injector = elem.injector();
                     var apostasFactory = injector.get('apostasFactory');
                     apostasFactory.listaApostasNaoVerificadas(function (results) {
-                        alert('Verificou as apostas');
+                        alert('Verificou as apostas. Linhas: ' + results.rows.length);
                         var data = new Object();
                         data.Apostas = new Array();
                         if (results.rows != undefined && results.rows.length > 0) {
@@ -121,9 +121,9 @@
                                 }
                             }
                         ).success(function (data) {
-                            //alert('Sucesso');
+                            alert('Sucesso');
                         }).error(function () {
-                            //alert('erro');
+                            alert('erro');
                         });
                         }
 
