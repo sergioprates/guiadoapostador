@@ -46,6 +46,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="PushNotification.Dominio">
+      <HintPath>..\GuiaDoApostadorDominio\dll\PushNotification.Dominio.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -110,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    
     <Content Include="Web.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -145,10 +147,6 @@
     <ProjectReference Include="..\GuiaDoApostadorDominio\GuiaDoApostadorDominio.csproj">
       <Project>{153e5282-c079-4eb7-a626-6cf4a79ab2ac}</Project>
       <Name>GuiaDoApostadorDominio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Push.Dominio\PushNotification.Dominio.csproj">
-      <Project>{d4306204-f315-44be-96c9-cbf7a0109e42}</Project>
-      <Name>PushNotification.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
