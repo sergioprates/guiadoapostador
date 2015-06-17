@@ -1,0 +1,21 @@
+﻿<!-- The title of the ion-view will be shown on the navbar -->
+<ion-view title="Sorteio Realizado!" ng-controller="sorteioRealizadoController">
+
+    <ion-content class="padding">
+        <!-- The content of the page -->
+
+        <div class="card">
+            <div class="list">
+                <div class="item item-divider text-center">
+                    Números Sorteados
+                </div>
+                <div class="row item">
+                    <div class="col" ng-repeat="item in concurso.Dezenas">{{item}}</div>
+                </div>
+                <div class="item item-divider text-center" ng-show="concurso.ProximoConcurso.Data != null">
+                    Próximo Concurso - {{ concurso.ProximoConcurso.Data }}
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

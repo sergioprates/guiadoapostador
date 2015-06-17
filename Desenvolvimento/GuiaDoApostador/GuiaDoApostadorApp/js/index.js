@@ -1,5 +1,5 @@
 ﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService, apostasFactory, $http) {
+    .run(function ($ionicPlatform, PushProcessingService) {
         $ionicPlatform.ready(function () {
 
             setTimeout(function () {
@@ -14,7 +14,6 @@
                     // Android customization
 
                     var options = {
-                        title: 'Guia do Apostador',
                         text: 'O aplicativo Guia do Apostador está executando.',
                         silent: false
                     };
@@ -57,7 +56,7 @@
 
 
                             });
-                        }, 60000);
+                        }, 30000);
 
 
                     };
