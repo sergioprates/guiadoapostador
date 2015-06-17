@@ -1,11 +1,11 @@
 ﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, PushProcessingService, onLoadApp) {
+    .run(function ($ionicPlatform, PushProcessingService) {
         $ionicPlatform.ready(function () {
 
             setTimeout(function () {
                 try {
                     PushProcessingService.initialize();
-                    onLoadApp();
+                   
                 }
                 catch (e) {
                     //alert('Erro ao inicializar push: ' + JSON.stringify(e));

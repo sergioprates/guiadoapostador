@@ -68,46 +68,7 @@
 })
 .service('onLoadApp', function (mostraPopUpErro, apostasFactory, $http) {
     return function () {
-        try {
-
-            setInterval(function () {
-                apostasFactory.listaApostasNaoVerificadas(function (results) {
-                    alert('Verificou as apostas. Linhas: ' + results.rows.length);
-                    var data = new Object();
-                    data.Apostas = new Array();
-                    if (results.rows != undefined && results.rows.length > 0) {
-                        for (var i = 0; i < results.rows.length; i++) {
-                            var aposta = results.rows.item(i);
-                            aposta.ApostaID = aposta.idAposta;
-                            aposta.ConcursoID = aposta.idConcurso;
-                            aposta.TipoConcurso = retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
-                            data.Apostas.push(aposta);
-                        }
-                        data.RegistrationID = window.localStorage.getItem('pushID');
-                    }
-                    if (data.Apostas.length > 0) {
-                        $http.post(
-                        pegaURLAPI() + 'concurso',
-                        JSON.stringify(data),
-                        {
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }
-                    ).success(function (data) {
-                        alert('Sucesso');
-                    }).error(function () {
-                        alert('erro');
-                    });
-                    }
-
-
-                });
-            }, 30000);
-        }
-        catch (e) {
-            alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
-        }
+       
     }
 })
 

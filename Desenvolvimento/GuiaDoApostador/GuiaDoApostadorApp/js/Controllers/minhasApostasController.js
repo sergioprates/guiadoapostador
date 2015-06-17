@@ -1,10 +1,49 @@
-﻿guiaDoApostador.controller('minhasApostasController', ['$scope', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'bilheteFactory', '$ionicActionSheet', '$timeout', 'timeDoCoracaoFactory', 'mostraMensagemTemporaria', function ($scope, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, bilheteFactory, $ionicActionSheet, $timeout, timeDoCoracaoFactory, mostraMensagemTemporaria) {
+﻿guiaDoApostador.controller('minhasApostasController', ['$scope', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'bilheteFactory', '$ionicActionSheet', '$timeout', 'timeDoCoracaoFactory', 'mostraMensagemTemporaria', '$http', function ($scope, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, bilheteFactory, $ionicActionSheet, $timeout, timeDoCoracaoFactory, mostraMensagemTemporaria, $http) {
 
     //Page Load
 
     $scope.setaIdEdicao = function (id, tipo) {
         window.localStorage.setItem('idApostaEdicao', id);
         window.localStorage.setItem('tipoLoteriaClicada', tipo);
+    };
+
+    $scope.buscarResultados = function(){
+        try {
+            apostasFactory.listaApostasNaoVerificadas(function (results) {
+                //alert('Verificou as apostas. Linhas: ' + results.rows.length);
+                var data = new Object();
+                data.Apostas = new Array();
+                if (results.rows != undefined && results.rows.length > 0) {
+                    for (var i = 0; i < results.rows.length; i++) {
+                        var aposta = results.rows.item(i);
+                        aposta.ApostaID = aposta.idAposta;
+                        aposta.ConcursoID = aposta.idConcurso;
+                        aposta.TipoConcurso = retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
+                        data.Apostas.push(aposta);
+                    }
+                    data.RegistrationID = window.localStorage.getItem('pushID');
+                }
+                if (data.Apostas.length > 0) {
+                    $http.post(
+                    pegaURLAPI() + 'concurso',
+                    JSON.stringify(data),
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                ).success(function (data) {
+                    //alert('Sucesso');
+                }).error(function () {
+                    //alert('erro');
+                });
+                }
+            });
+
+        }
+        catch (e) {
+            alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
+        }
     };
 
     $scope.onHold = function (aposta) {
