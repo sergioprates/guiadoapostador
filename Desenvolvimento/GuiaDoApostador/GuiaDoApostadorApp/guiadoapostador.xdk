@@ -3,43 +3,27 @@
     "projectSettingsVersion": "1.2",
     "creationData": {
       "type": "Import",
-      "projectTypeName": "com.intel.xdk.projecttype.jsapp",
+      "projectTypeName": "com.intel.xdk.projecttype.webapp",
       "src": "",
-      "projectGuid": "3df3c99f-dd2c-4662-a58a-ecb5e5d61a5d",
-      "lastModifiedDate": 1432408105533,
-      "creationDate": 1431905914930
+      "projectGuid": "302b87ef-517d-47b7-8a28-2b3edd843fef",
+      "lastModifiedDate": 1434518923411,
+      "creationDate": 1434518923349
     },
     "sourceDirectory": "",
     "cordovaPluginsDirectory": "plugins",
+    "gameAssetDirectory": "asset",
+    "gameMetadata": {},
     "startFile": "index.html",
+    "projectTags": [],
     "projectFiles": {},
     "projectDirectories": {},
     "libraries": [],
-    "cordovaPlugins": [
-      {
-        "id": "org.apache.cordova.device",
-        "version": "0.2.9",
-        "selectedState": "Auto",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.splashscreen",
-        "version": "0.3.0",
-        "selectedState": "Auto",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      }
-    ],
+    "cordovaPlugins": [],
     "serviceMethods": [],
     "buildConfigurations": {
       "Android": {
         "platform_": "android",
-        "runtime_": "Cordova 3.x",
+        "runtime_": "W3C on Cordova",
         "name_": "Android",
         "preferences_": {
           "android-minSdkVersion": "10",
@@ -58,15 +42,14 @@
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "iosProvs_": [],
-        "cordovaCLIVersion_": "3.5",
         "appVersion_": "0.0.1",
         "appVersionCode_": "1",
-        "crosswalkVersion_": "stable"
+        "crosswalkVersion_": "11",
+        "cordovaCLIVersion_": "4.1.2"
       },
       "Android-Crosswalk": {
         "platform_": "android",
-        "runtime_": "Crosswalk with Cordova 3.x",
+        "runtime_": "W3C on Crosswalk",
         "name_": "Android-Crosswalk",
         "preferences_": {
           "android-minSdkVersion": "14",
@@ -85,18 +68,17 @@
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "iosProvs_": [],
-        "cordovaCLIVersion_": "3.5",
         "appVersion_": "0.0.1",
         "appVersionCode_": "1",
-        "crosswalkVersion_": "11"
+        "crosswalkVersion_": "11",
+        "cordovaCLIVersion_": "4.1.2"
       },
       "iOS": {
         "platform_": "ios",
-        "runtime_": "Cordova 3.x",
+        "runtime_": "W3C on Cordova",
         "name_": "iOS",
         "preferences_": {
-          "ios-target": "5",
+          "ios-target": "6",
           "ios-configuration": "adhoc"
         },
         "isActive_": true,
@@ -111,13 +93,13 @@
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "iosProvs_": [],
-        "cordovaCLIVersion_": "3.5",
-        "appVersion_": "0.0.1"
+        "appVersion_": "0.0.1",
+        "cordovaCLIVersion_": "4.1.2",
+        "iosProvs_": []
       },
       "Windows8": {
         "platform_": "windows8",
-        "runtime_": "Cordova 3.x",
+        "runtime_": "W3C on Cordova",
         "name_": "Windows8",
         "preferences_": {},
         "isActive_": true,
@@ -132,16 +114,15 @@
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "iosProvs_": [],
-        "cordovaCLIVersion_": "3.5",
-        "appVersion_": "0.0.0.1"
+        "appVersion_": "0.0.0.1",
+        "cordovaCLIVersion_": "4.1.2"
       },
       "WebApp": {
         "platform_": "webapp",
         "runtime_": "W3C",
         "name_": "WebApp",
         "preferences_": {},
-        "isActive_": false,
+        "isActive_": true,
         "appName_": "guiadoapostador",
         "appID_": "not.yet.specified",
         "appAccess_": [
@@ -160,7 +141,7 @@
         "runtime_": "W3C on Firefox OS",
         "name_": "Firefox",
         "preferences_": {},
-        "isActive_": false,
+        "isActive_": true,
         "appName_": "guiadoapostador",
         "appID_": "not.yet.specified",
         "appAccess_": [
@@ -179,7 +160,7 @@
         "runtime_": "W3C on Chrome OS",
         "name_": "Chrome",
         "preferences_": {},
-        "isActive_": false,
+        "isActive_": true,
         "appName_": "guiadoapostador",
         "appID_": "not.yet.specified",
         "appAccess_": [
@@ -198,7 +179,7 @@
         "runtime_": "W3C on Facebook",
         "name_": "Facebook",
         "preferences_": {},
-        "isActive_": false,
+        "isActive_": true,
         "appName_": "guiadoapostador",
         "appID_": "not.yet.specified",
         "appAccess_": [
@@ -212,12 +193,6 @@
         "excludedLibraries_": "",
         "appVersion_": "0.0.1"
       }
-    },
-    "gameAssetDirectory": "asset",
-    "gameMetadata": {},
-    "projectTags": []
-  },
-  "emulator": {
-    "mediaCache": []
+    }
   }
 }

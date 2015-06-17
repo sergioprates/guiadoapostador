@@ -4,7 +4,7 @@
     <ion-content class="padding">
         <!-- The content of the page -->
 
-        <div class="card">
+        <div class="card" ng-show="loteriaComum == 1">
             <div class="list">
                 <div class="item item-divider text-center">
                     Números Sorteados
@@ -14,6 +14,33 @@
                 </div>
                 <div class="item item-divider text-center" ng-show="concurso.ProximoConcurso.Data != null">
                     Próximo Concurso - {{ concurso.ProximoConcurso.Data }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaTimeMania == 1">
+            <div class="item item-divider text-center">
+                Time do Coração
+            </div>
+            <div class="item item-text-wrap text-center">
+                {{ concurso.TimeCoracao.Nome }}
+            </div>
+        </div>
+
+        <div class="card" ng-show="loteriaFederal == 1">
+            <div class="list">
+                <div class="item item-divider text-center">
+                    Prêmios Principais
+                </div>
+                <div class="row item">
+                    <div class="col">Faixa</div>
+                    <div class="col">Bilhete</div>
+                    <div class="col">Prêmio(R$)</div>
+                </div>
+                <div class="item row" ng-repeat="item in concurso.Premios">
+                    <div class="col">{{item.Premio}}</div>
+                    <div class="col">{{item.Bilhete}}</div>
+                    <div class="col">{{item.ValorPago}}</div>
                 </div>
             </div>
         </div>
