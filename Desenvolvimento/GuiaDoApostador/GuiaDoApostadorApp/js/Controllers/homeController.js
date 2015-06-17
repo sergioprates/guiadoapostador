@@ -53,7 +53,7 @@
                     ocultaAguarde();
 
                 }).error(function (data, status, headers, config) {
-                    if (window.localStorage.getItem('concursosRecentes') != undefined && window.localStorage.setItem('concursosRecentes') != null) {
+                    if (window.localStorage.getItem('concursosRecentes') != undefined && window.localStorage.getItem('concursosRecentes') != null) {
 
                         $scope.concursos = _.map(JSON.parse(window.localStorage.getItem('concursosRecentes')), function (concurso) {
                             concurso.ProximoConcurso.ValorEstimado = accounting.formatMoney(concurso.ProximoConcurso.ValorEstimado).replace('$', 'R$');
