@@ -93,6 +93,10 @@
 
                 setInterval(function () {
                     alert('Chamou o método');
+
+                    var elem = angular.element(document.querySelector('[ng-app]'));
+                    var injector = elem.injector();
+                    var apostasFactory = injector.get('apostasFactory');
                     apostasFactory.listaApostasNaoVerificadas(function (results) {
                         alert('Verificou as apostas');
                         var data = new Object();
