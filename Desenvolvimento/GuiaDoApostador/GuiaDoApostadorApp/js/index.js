@@ -1,5 +1,5 @@
 ﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService) {
+    .run(function ($ionicPlatform, $cordovaPush, PushProcessingService, apostasFactory, $http) {
         $ionicPlatform.ready(function () {
 
             setTimeout(function () {
@@ -14,6 +14,7 @@
                     // Android customization
 
                     var options = {
+                        title: 'Guia do Apostador',
                         text: 'O aplicativo Guia do Apostador está executando.',
                         silent: false
                     };
@@ -33,7 +34,7 @@
                                         var aposta = results.rows.item(i);
                                         aposta.ApostaID = aposta.idAposta;
                                         aposta.ConcursoID = aposta.idConcurso;
-                                        aposta.TipoConcurso = $scope.retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
+                                        aposta.TipoConcurso = retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
                                         data.Apostas.push(aposta);
                                     }
                                     data.RegistrationID = window.localStorage.getItem('pushID');
@@ -58,11 +59,11 @@
                             });
                         }, 60000);
 
-                        
+
                     };
                 }
                 catch (e) {
-                    //alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
+                    alert('Erro ao inicializar background: ' + e.message + '  ' + e.stack);
                 }
             }, 6000);
         })

@@ -120,10 +120,10 @@
                 return false;
             }
 
-            if ($scope.concursoAtual.ID > $scope.aposta.Loteria.ID) {
-                mostraMensagemTemporaria('O número do concurso atual é ' + $scope.concursoAtual.ID + ', não é possível apostar para um concurso anterior.', '', '');
-                return false;
-            }
+            //if ($scope.concursoAtual.ID > $scope.aposta.Loteria.ID) {
+            //    mostraMensagemTemporaria('O número do concurso atual é ' + $scope.concursoAtual.ID + ', não é possível apostar para um concurso anterior.', '', '');
+            //    return false;
+            //}
 
             mostraAguarde();
             switch (window.localStorage.getItem('tipoLoteriaClicada')) {
