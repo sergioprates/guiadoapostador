@@ -5,6 +5,17 @@
 
         $scope.concurso.TipoConcurso = retornaTipoLoteriaMobilePorWeb($scope.concurso.TipoConcurso);
         $scope.loteria = retornaTituloLoteria($scope.concurso.TipoConcurso);
+
+        if ($scope.concurso.ProximoConcurso.Data != null) {
+            $scope.concurso.ProximoConcurso.Data = $scope.concurso.ProximoConcurso.Data.replace('T00:00:00', '');
+            var dataSplit = $scope.concurso.ProximoConcurso.Data.split('-');
+            $scope.concurso.ProximoConcurso.Data = dataSplit[2] + '/' + dataSplit[1] + '/' + dataSplit[0];
+
+            if ($scope.concurso.ProximoConcurso.Data.indexOf('undefined/') > 0) {
+                $scope.concurso.ProximoConcurso.Data = $scope.concurso.ProximoConcurso.Data.replace('undefined/', '').replace('undefined/', '');
+            }
+        }
+
         if (loteriaComum($scope.concurso.TipoConcurso) == true) {
             $scope.loteriaComum = 1;
         }
