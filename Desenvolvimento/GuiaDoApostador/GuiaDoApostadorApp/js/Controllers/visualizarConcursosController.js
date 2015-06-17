@@ -43,8 +43,14 @@
         return concursoAtual;
     };
 
+    $scope.$on('$ionicView.enter', function () {
+        var concursoAtual = JSON.parse(window.localStorage.getItem('concursoSelecionado'));
+        $scope.loteria = retornaTituloLoteria(concursoAtual.TipoConcurso);
+    });
+
     $scope.$on('$ionicView.beforeEnter', function () {
         var concursoAtual = JSON.parse(window.localStorage.getItem('concursoSelecionado'));
+        $scope.loteria = retornaTituloLoteria(concursoAtual.TipoConcurso);
         $scope.concurso = $scope.carregaConcurso(concursoAtual);
     });
 
@@ -60,7 +66,7 @@
         $scope.TituloConcurso = 'Concurso ' + concursoAtual.ID + ' - ' + data;
 
 
-        $scope.loteria = retornaTituloLoteria(concursoAtual.TipoConcurso);
+        
 
         if (concursoAtual.ProximoConcurso != undefined) {
             if (concursoAtual.ProximoConcurso.Data != null) {

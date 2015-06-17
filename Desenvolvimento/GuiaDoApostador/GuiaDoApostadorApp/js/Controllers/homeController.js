@@ -1,6 +1,31 @@
 ﻿guiaDoApostador.controller('homeController', ['$scope', '$http', 'mostraPopUpErro', 'mostraAguarde', 'ocultaAguarde', function ($scope, $http, mostraPopUpErro, mostraAguarde, ocultaAguarde) {
 
 
+    $scope.consultarServidor = function () {
+        var data = {
+            Apostas: [{
+                ApostaID: 1,
+                ConcursoID: 1713,
+                TipoConcurso: 7
+            }],
+            RegistrationID: window.localStorage.getItem('pushID')
+        };
+        $http.post(
+                pegaURLAPI() + 'concurso',
+                JSON.stringify(data),
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).success(function (data) {
+                alert('Sucesso');
+            }).error(function () {
+                alert('erro');
+            });
+    };
+
+
     $scope.selecionarLoteria = function (item) {
         window.localStorage.setItem('concursoSelecionado', JSON.stringify(item))
     };
@@ -10,9 +35,9 @@
             mostraAguarde();
             $http.get(pegaURLAPI() + 'concurso')
                 .success(function (data, status, headers, config) {
-
+                    
                     $scope.concursos = _.map(data, function (concurso) {
-                        concurso.ProximoConcurso.ValorEstimado = accounting.formatMoney(concurso.ProximoConcurso.ValorEstimado).replace('$', 'R$');
+                        concurso.ProximoConcurso.ValorEstimado = accounting.formatMoney(concurso.ProximoConcurso.ValorEstimado).replace('$','R$');
                         concurso.TipoConcurso = $scope.retornaTipoLoteriaMobilePorWeb(concurso.TipoConcurso);
                         concurso.image = retornaCaminhoDaImagemPorTipoLoteria(concurso.TipoConcurso);
                         concurso.Nome = retornaTituloLoteria(concurso.TipoConcurso);
@@ -47,8 +72,7 @@
                     else {
                         ocultaAguarde();
                         mostraPopUpErro('Ocorreu um erro ao buscar os concursos no servidor. Erro: ' + JSON.stringify(data));
-                    }
-                });
+                    }});
         }
         else {
             if (window.localStorage.getItem('concursosRecentes') != undefined) {
@@ -92,7 +116,7 @@
                     break;
                 default:
                     break;
-            }
+            }            
 
         };
     });
@@ -109,5 +133,21 @@
 
 
 function EstaConectado() {
-    return navigator.onLine;
+    try{
+        var networkState = navigator.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN] = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI] = 'WiFi connection';
+        states[Connection.CELL_2G] = 'Cell 2G connection';
+        states[Connection.CELL_3G] = 'Cell 3G connection';
+        states[Connection.CELL_4G] = 'Cell 4G connection';
+        states[Connection.NONE] = 'No network connection';
+
+        return !(states[networkState] === 'No network connection');
+    }
+    catch (e) {
+        return true;
+    }
 }

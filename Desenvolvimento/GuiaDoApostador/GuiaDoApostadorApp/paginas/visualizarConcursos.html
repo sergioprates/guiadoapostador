@@ -1,6 +1,9 @@
 ﻿<!-- The title of the ion-view will be shown on the navbar -->
 
-<ion-view ng-init="consultar=0" title="{{ loteria }}" ng-controller="visualizarConcursosController">
+<ion-view ng-init="consultar=0" ng-controller="visualizarConcursosController">
+    <ion-nav-title>
+        {{loteria}}
+    </ion-nav-title>
     <ion-content class="padding">
         <div class="card">
             <div class="item item-divider text-center">
@@ -107,7 +110,7 @@
         <div class="card" ng-show="loteriaFederal == 1">
             <div class="list">
                 <div class="item item-divider text-center">
-                   Prêmios Principais
+                    Prêmios Principais
                 </div>
                 <div class="row item">
                     <div class="col">Faixa</div>

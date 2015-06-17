@@ -53,6 +53,9 @@
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
                     Minhas Apostas
                 </button>
+                <button class="button button-block button-balanced" ng-click="consultarServidor()">
+                    Consultar
+                </button>
                 <div class="list">
                     <a ng-repeat="item in concursos" ui-sref="visualizarConcursos" ng-click="selecionarLoteria({{item}})" class="item item-thumbnail-left">
                         <img ng-src="{{ item.image }}">

@@ -3,12 +3,12 @@
         $ionicPlatform.ready(function () {
 
             setTimeout(function () {
-                //try {
-                //    PushProcessingService.initialize();
-                //}
-                //catch (e) {
-                //    alert('Erro ao inicializar push: ' + JSON.stringify(e));
-                //}
+                try {
+                    PushProcessingService.initialize();
+                }
+                catch (e) {
+                    alert('Erro ao inicializar push: ' + JSON.stringify(e));
+                }
 
                 try {
                     // Android customization
@@ -165,8 +165,9 @@ function loteriaComum(tipo) {
 }
 
 function pegaURLAPI() {
-    return 'http://claudiosajr-001-site1.smarterasp.net/API/';
+    return 'http://localhost:3215/API/';
 }
+
 
 
 // ALL GCM notifications come through here.

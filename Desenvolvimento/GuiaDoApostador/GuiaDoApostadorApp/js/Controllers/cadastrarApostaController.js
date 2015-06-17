@@ -11,19 +11,21 @@
             tipo: window.localStorage.getItem('tipoLoteriaClicada')
         };
 
-        var concursosRecentes = window.localStorage.getItem('concursosRecentes');
+        var concursosRecentes = JSON.parse(window.localStorage.getItem('concursosRecentes'));
 
         if (concursosRecentes != undefined && concursosRecentes != null) {
-            var concursoAtual = _.filter(concursosRecentes, function (concurso) {
+            $scope.concursoAtual = _.find(concursosRecentes, function (concurso) {
                 return concurso.TipoConcurso == $scope.loteria.tipo;
             });
-
-            $scope.aposta.Loteria.ID = concurso.ID;
+            
+            $scope.concursoAtual.ID = $scope.concursoAtual.ID + 1;
+            $scope.aposta.Loteria.ID = $scope.concursoAtual.ID;
         }
 
         var idApostaEdicao = window.localStorage.getItem('idApostaEdicao');
 
-        if (idApostaEdicao != undefined && idApostaEdicao != null) {
+        if (idApostaEdicao != undefined && idApostaEdicao != null && idApostaEdicao != 'null') {
+            window.localStorage.setItem('idApostaEdicao', null);
             //carregar dados da aposta.
             $scope.aposta.ID = idApostaEdicao;
             apostasFactory.get(idApostaEdicao, function (results) {
@@ -115,6 +117,11 @@
         try {
             if ($scope.aposta.Loteria.ID == undefined || $scope.aposta.Loteria.ID == "") {
                 mostraMensagemTemporaria('Informe qual o número do concurso.', '', '');
+                return false;
+            }
+
+            if ($scope.concursoAtual.ID > $scope.aposta.Loteria.ID) {
+                mostraMensagemTemporaria('O número do concurso atual é ' + $scope.concursoAtual.ID + ', não é possível apostar para um concurso anterior.', '', '');
                 return false;
             }
 

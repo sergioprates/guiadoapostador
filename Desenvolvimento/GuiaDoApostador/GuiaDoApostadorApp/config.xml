@@ -56,4 +56,6 @@
   <gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
   <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
   <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />
+  <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
+  <gap:plugin name="com.ionic.keyboard" version="1.0.3" />
 </widget>

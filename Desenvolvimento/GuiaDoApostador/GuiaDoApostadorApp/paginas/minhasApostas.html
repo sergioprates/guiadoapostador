@@ -8,11 +8,11 @@
     </ion-nav-buttons>
 
     <ion-content class="padding" >
-        <div class="card" ng-show="apostas.length == 0">
-            <div class="item item-text-wrap">
-                Ainda n&atilde;o  apostou? Selecione o bot&atilde;o <i class="icon ion-android-add-circle"></i> no topo do app
-                para aumentar suas chances de ganhar!
-            </div>
+        <div class="card" ng-show="apostas.length == 0" ui-sref="selecionarLoteriaParaApostar">
+            <div class=" item item-text-wrap">
+            Ainda n&atilde;o  apostou? Selecione o bot&atilde;o <i class="icon ion-android-add-circle"></i> no topo do app
+            para aumentar suas chances de ganhar!
+        </div>
         </div>
         <div class="list" ng-show="apostas.length > 0">
             <a ng-repeat="item in apostas track by item.idAposta" on-hold="onHold(item)" ui-sref="cadastrarAposta" ng-click="setaIdEdicao('{{ item.idAposta }}', '{{item.TipoConcurso}}')" class="item item-thumbnail-left item-icon-right">
