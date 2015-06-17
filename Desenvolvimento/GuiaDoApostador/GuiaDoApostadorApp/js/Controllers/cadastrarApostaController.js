@@ -29,7 +29,7 @@
             //carregar dados da aposta.
             $scope.aposta.ID = idApostaEdicao;
             apostasFactory.get(idApostaEdicao, function (results) {
-                $scope.apostaEditavel = results.rows[0];
+                $scope.apostaEditavel = results.rows.item(0);
                 $scope.aposta.Loteria.ID = $scope.apostaEditavel.idConcurso;
 
                 if (loteriaComum($scope.apostaEditavel.TipoConcurso) == true) {

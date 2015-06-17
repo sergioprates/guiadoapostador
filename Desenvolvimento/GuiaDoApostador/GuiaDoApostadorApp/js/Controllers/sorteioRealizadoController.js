@@ -3,8 +3,8 @@
     $scope.$on('$ionicView.enter', function () {
         $scope.concurso = JSON.parse(window.localStorage.getItem('concursoRealizado'));
 
-        $scope.concurso.TipoConcurso = retornaTipoLoteriaMobilePorWeb();
-
+        $scope.concurso.TipoConcurso = retornaTipoLoteriaMobilePorWeb($scope.concurso.TipoConcurso);
+        $scope.loteria = retornaTituloLoteria($scope.concurso.TipoConcurso);
         if (loteriaComum($scope.concurso.TipoConcurso) == true) {
             $scope.loteriaComum = 1;
         }

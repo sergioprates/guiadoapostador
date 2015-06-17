@@ -183,19 +183,16 @@ function onNotificationGCM(e) {
             }
             else {
                 // otherwise we were launched because the user touched a notification in the notification tray.
-                if (e.coldstart)
-                    alert('--COLDSTART NOTIFICATION--' + '');
-                else
-                    alert('--BACKGROUND NOTIFICATION--' + '');
+              //  if (e.coldstart)
+                    //alert('--COLDSTART NOTIFICATION--' + '');
+                //else
+                    //alert('--BACKGROUND NOTIFICATION--' + '');
 
                 // direct user here:
                 // window.location = &quot;#/tab/featured&quot;;
             }
-
-
-
-            alert('MESSAGE -> MSG: ' + e.payload.message + '');
-            alert('MESSAGE: ' + JSON.stringify(e.payload));
+            window.localStorage.setItem('concursoRealizado', e.payload.data);
+            $location.path("/6");
             break;
 
         case 'error':
