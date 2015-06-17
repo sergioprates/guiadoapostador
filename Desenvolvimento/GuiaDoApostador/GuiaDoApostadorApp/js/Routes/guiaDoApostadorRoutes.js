@@ -20,6 +20,12 @@
         url: '/5',
         templateUrl: 'paginas/visualizarConcursos.html'
     })
+    .state('sorteioRealizado', {
+        url: '/6',
+        templateUrl: 'paginas/sorteioRealizado.html'
+    })
+
+    
 
     $urlRouterProvider.otherwise("/1");
 }).config(function ($httpProvider) {
