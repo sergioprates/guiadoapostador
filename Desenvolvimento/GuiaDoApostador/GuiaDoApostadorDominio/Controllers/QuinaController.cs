@@ -52,7 +52,9 @@ namespace GuiaDoApostadorDominio.Controllers
             switch (estat)
             {
                 case Estatistica.NumerosQueMenosSairam:
-                    estatistica = _repository.GetNumerosQueMenosSairam();
+                    var valor = _repository.GetNumerosQueMenosSairam();
+                    valor.Sort();
+                    estatistica = valor;
                     break;
             }
 

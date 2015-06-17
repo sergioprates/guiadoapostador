@@ -85,7 +85,7 @@ namespace GuiaDoApostadorDominio.Repository
                     }
                 }
             }
-
+            
             return numeros;
         }
 

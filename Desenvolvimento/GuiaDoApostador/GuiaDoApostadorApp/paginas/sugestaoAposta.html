@@ -1,0 +1,23 @@
+﻿<!-- The title of the ion-view will be shown on the navbar -->
+
+<ion-view title="Números da Sorte" ng-controller="sugestaoApostaController">    
+    <ion-content class="padding">
+        <!-- The content of the page -->
+        <div class="card">
+            <div class="item item-text-wrap">
+                Para você que não sabe o que apostar no próximo concurso, aqui você confere nossa sugestão de aposta.
+            </div>
+            <div class="item item-divider text-center">Números da Sorte</div>
+            <div class="row item">
+                <div class="col" ng-repeat="numero in estatistica">
+                    {{numero}}
+                </div>                    
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                Boa Sorte !
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

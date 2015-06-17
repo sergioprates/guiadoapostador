@@ -4,6 +4,11 @@
     <ion-nav-title>
         {{loteria}}
     </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button" ui-sref="sugestaoAposta" ng-show="loteriaComum == 1 || loteriaTimeMania == 1 || loteriaDuplaSena == 1">
+            <i class="icon ion-ios-lightbulb-outline"></i>
+        </button>
+    </ion-nav-buttons>
     <ion-content class="padding">
         <div class="card">
             <div class="item item-divider text-center">

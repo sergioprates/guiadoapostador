@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Entities;
@@ -50,7 +51,9 @@ namespace GuiaDoApostadorDominio.Controllers
             switch (estat)
             {
                 case Estatistica.NumerosQueMenosSairam:
-                    estatistica = _repository.GetNumerosQueMenosSairam();
+                    var valor = _repository.GetNumerosQueMenosSairam();
+                    valor.Sort();
+                    estatistica = valor;
                     break;
             }
 
