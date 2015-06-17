@@ -8,7 +8,7 @@
                     onLoadApp();
                 }
                 catch (e) {
-                    alert('Erro ao inicializar push: ' + JSON.stringify(e));
+                    //alert('Erro ao inicializar push: ' + JSON.stringify(e));
                 }
             }, 6000);
         })
