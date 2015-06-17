@@ -1,4 +1,4 @@
-﻿guiaDoApostador.controller('minhasApostasController', ['$scope', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'bilheteFactory', '$ionicActionSheet', '$timeout', 'timeDoCoracaoFactory', 'mostraMensagemTemporaria', '$http', function ($scope, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, bilheteFactory, $ionicActionSheet, $timeout, timeDoCoracaoFactory, mostraMensagemTemporaria, $http) {
+﻿guiaDoApostador.controller('minhasApostasController', ['$scope', 'mostraAguarde', 'ocultaAguarde', 'mostraPopUpSucesso', 'apostasFactory', 'dezenasFactory', 'bilheteFactory', '$ionicActionSheet', '$timeout', 'timeDoCoracaoFactory', 'mostraMensagemTemporaria', '$http', '$ionicPopup', function ($scope, mostraAguarde, ocultaAguarde, mostraPopUpSucesso, apostasFactory, dezenasFactory, bilheteFactory, $ionicActionSheet, $timeout, timeDoCoracaoFactory, mostraMensagemTemporaria, $http, $ionicPopup) {
 
     //Page Load
 
@@ -46,6 +46,60 @@
         }
     };
 
+    $scope.showConfirm = function (aposta) {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Confirma exclusão',
+            template: 'Tem certeza que deseja excluir essa aposta?'
+        });
+        confirmPopup.then(function (res) {
+            if (res) {
+                mostraAguarde();
+                apostasFactory.remove(aposta.idAposta, function (results) {
+                    //deletar as dezenas
+
+                    if (loteriaComum(aposta.TipoConcurso) == true) {
+                        dezenasFactory.remove(aposta.idAposta, function (results) {
+                            ocultaAguarde();
+                            $scope.listarApostas();
+                            mostraMensagemTemporaria('Aposta excluída com sucesso.');
+                        });
+                    }
+                    else {
+                        switch (aposta.TipoConcurso) {
+                            case 'Timemania':
+                                dezenasFactory.remove(aposta.idAposta, function (results) {
+                                    timeDoCoracaoFactory.remove(aposta.idAposta, function (results) {
+                                        ocultaAguarde();
+                                        $scope.listarApostas();
+                                        mostraMensagemTemporaria('Aposta excluída com sucesso.');
+                                    });
+                                });
+
+                                break;
+                            case 'LoteriaFederal':
+                                bilheteFactory.remove(aposta.idAposta, function (results) {
+                                    ocultaAguarde();
+                                    $scope.listarApostas();
+                                    mostraMensagemTemporaria('Aposta excluída com sucesso.');
+                                });
+                                break;
+                            case 'Loteca':
+                                return "Loteca";
+                                break;
+                            case 'Lotogol':
+                                return "Lotogol";
+                                break;
+
+                        }
+                    }
+
+                });
+            } else {
+                
+            }
+        });
+    };
+
     $scope.onHold = function (aposta) {
         var hideSheet = $ionicActionSheet.show({
 
@@ -60,47 +114,7 @@
             buttonClicked: function (index) {
 
                 if (index == 0) {
-                    mostraAguarde();
-                    apostasFactory.remove(aposta.idAposta, function (results) {
-                        //deletar as dezenas
-
-                        if (loteriaComum(aposta.TipoConcurso) == true) {
-                            dezenasFactory.remove(aposta.idAposta, function (results) {
-                                ocultaAguarde();
-                                $scope.listarApostas();
-                                mostraMensagemTemporaria('Aposta excluída com sucesso.');
-                            });
-                        }
-                        else {
-                            switch (aposta.TipoConcurso) {
-                                case 'Timemania':
-                                    dezenasFactory.remove(aposta.idAposta, function (results) {
-                                        timeDoCoracaoFactory.remove(aposta.idAposta, function (results) {
-                                            ocultaAguarde();
-                                            $scope.listarApostas();
-                                            mostraMensagemTemporaria('Aposta excluída com sucesso.');
-                                        });
-                                    });
-                                    
-                                    break;
-                                case 'LoteriaFederal':
-                                    bilheteFactory.remove(aposta.idAposta, function (results) {
-                                            ocultaAguarde();
-                                            $scope.listarApostas();
-                                            mostraMensagemTemporaria('Aposta excluída com sucesso.');
-                                    });
-                                    break;
-                                case 'Loteca':
-                                    return "Loteca";
-                                    break;
-                                case 'Lotogol':
-                                    return "Lotogol";
-                                    break;
-
-                            }
-                        }
-                       
-                    });
+                   
                 }
                 return true;
             }

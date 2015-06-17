@@ -174,12 +174,12 @@ function onNotificationGCM(e) {
             // you might want to play a sound to get the user's attention, throw up a dialog, etc.
             if (e.foreground) {
                 //we're using the app when a message is received.
-                alert('--INLINE NOTIFICATION--' + '');
+               // alert('--INLINE NOTIFICATION--' + '');
 
                 // if the notification contains a soundname, play it.
                 //var my_media = new Media(&quot;/android_asset/www/&quot;+e.soundname);
                 //my_media.play();
-                alert(e.payload.message);
+                //alert(e.payload.message);
             }
             else {
                 // otherwise we were launched because the user touched a notification in the notification tray.
@@ -192,7 +192,11 @@ function onNotificationGCM(e) {
                 // window.location = &quot;#/tab/featured&quot;;
             }
             window.localStorage.setItem('concursoRealizado', e.payload.data);
-            $location.path("/6");
+
+            var elem = angular.element(document.querySelector('[ng-app]'));
+            var injector = elem.injector();
+            var myService = injector.get('$state');
+            myService.go('sorteioRealizado');
             break;
 
         case 'error':

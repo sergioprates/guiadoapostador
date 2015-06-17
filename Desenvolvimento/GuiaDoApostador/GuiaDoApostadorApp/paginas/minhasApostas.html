@@ -18,7 +18,7 @@
             Atualizar
         </button>
         <div class="list" ng-show="apostas.length > 0">
-            <a ng-repeat="item in apostas track by item.idAposta" on-hold="onHold(item)" ui-sref="cadastrarAposta" ng-click="setaIdEdicao('{{ item.idAposta }}', '{{item.TipoConcurso}}')" class="item item-thumbnail-left item-icon-right">
+            <a ng-repeat="item in apostas track by item.idAposta" on-swipe-right="showConfirm(item)" ui-sref="cadastrarAposta" ng-click="setaIdEdicao('{{ item.idAposta }}', '{{item.TipoConcurso}}')" class="item item-thumbnail-left item-icon-right">
                 <img ng-src="{{ item.ImagemLoteria }}">
                 <h2>{{ item.Nome}} </h2>
                 <h4>Concurso: {{ item.idConcurso }}</h4>
