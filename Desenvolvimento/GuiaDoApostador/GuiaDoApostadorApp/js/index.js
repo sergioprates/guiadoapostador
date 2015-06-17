@@ -1,5 +1,5 @@
 ﻿var guiaDoApostador = angular.module('guiadoapostador', ['ionic', 'ngCordova'])
-    .run(function ($ionicPlatform, PushProcessingService) {
+    .run(function ($ionicPlatform, PushProcessingService, apostasFactory, $http) {
         $ionicPlatform.ready(function () {
 
             setTimeout(function () {
@@ -14,6 +14,7 @@
                     // Android customization
 
                     var options = {
+                        title: 'Guia do Apostador',
                         text: 'O aplicativo Guia do Apostador está executando.',
                         silent: false
                     };
@@ -25,7 +26,9 @@
                     window.plugin.backgroundMode.onactivate = function () {
 
                         setInterval(function () {
+                            alert('Chamou o método');
                             apostasFactory.listaApostasNaoVerificadas(function (results) {
+                                alert('Verificou as apostas');
                                 var data = new Object();
                                 data.Apostas = new Array();
                                 if (results.rows != undefined && results.rows.length > 0) {
@@ -57,8 +60,6 @@
 
                             });
                         }, 30000);
-
-
                     };
                 }
                 catch (e) {
