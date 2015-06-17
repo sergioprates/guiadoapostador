@@ -191,7 +191,7 @@ function onNotificationGCM(e) {
                 // direct user here:
                 // window.location = &quot;#/tab/featured&quot;;
             }
-            window.localStorage.setItem('concursoRealizado', e.payload.data);
+            window.localStorage.setItem('concursoRealizado', JSON.stringify(e.payload.data));
 
             var elem = angular.element(document.querySelector('[ng-app]'));
             var injector = elem.injector();
