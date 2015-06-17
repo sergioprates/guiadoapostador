@@ -1,9 +1,5 @@
 ﻿guiaDoApostador.controller('homeController', ['$scope', '$http', 'mostraPopUpErro', 'mostraAguarde', 'ocultaAguarde', 'apostasFactory', function ($scope, $http, mostraPopUpErro, mostraAguarde, ocultaAguarde, apostasFactory) {
-
-
-    };
-
-
+    
     $scope.selecionarLoteria = function (item) {
         window.localStorage.setItem('concursoSelecionado', JSON.stringify(item))
     };
