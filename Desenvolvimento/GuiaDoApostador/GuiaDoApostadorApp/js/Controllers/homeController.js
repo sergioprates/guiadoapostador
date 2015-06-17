@@ -1,28 +1,6 @@
-﻿guiaDoApostador.controller('homeController', ['$scope', '$http', 'mostraPopUpErro', 'mostraAguarde', 'ocultaAguarde', function ($scope, $http, mostraPopUpErro, mostraAguarde, ocultaAguarde) {
+﻿guiaDoApostador.controller('homeController', ['$scope', '$http', 'mostraPopUpErro', 'mostraAguarde', 'ocultaAguarde', 'apostasFactory', function ($scope, $http, mostraPopUpErro, mostraAguarde, ocultaAguarde, apostasFactory) {
 
 
-    $scope.consultarServidor = function () {
-        var data = {
-            Apostas: [{
-                ApostaID: 1,
-                ConcursoID: 1713,
-                TipoConcurso: 7
-            }],
-            RegistrationID: window.localStorage.getItem('pushID')
-        };
-        $http.post(
-                pegaURLAPI() + 'concurso',
-                JSON.stringify(data),
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            ).success(function (data) {
-                alert('Sucesso');
-            }).error(function () {
-                alert('erro');
-            });
     };
 
 
@@ -33,29 +11,11 @@
     $scope.$on('$ionicView.enter', function () {
         if (EstaConectado() == true) {
             mostraAguarde();
-            $http.get(pegaURLAPI() + 'concurso')
-                .success(function (data, status, headers, config) {
-                    
-                    $scope.concursos = _.map(data, function (concurso) {
-                        concurso.ProximoConcurso.ValorEstimado = accounting.formatMoney(concurso.ProximoConcurso.ValorEstimado).replace('$','R$');
-                        concurso.TipoConcurso = $scope.retornaTipoLoteriaMobilePorWeb(concurso.TipoConcurso);
-                        concurso.image = retornaCaminhoDaImagemPorTipoLoteria(concurso.TipoConcurso);
-                        concurso.Nome = retornaTituloLoteria(concurso.TipoConcurso);
+            try {
+                $http.get(pegaURLAPI() + 'concurso')
+                    .success(function (data, status, headers, config) {
 
-                        if (concurso.ProximoConcurso.Data != null) {
-                            concurso.ProximoConcurso.Data = concurso.ProximoConcurso.Data.replace('T00:00:00', '');
-                            var dataSplit = concurso.ProximoConcurso.Data.split('-');
-                            concurso.ProximoConcurso.Data = dataSplit[2] + '/' + dataSplit[1] + '/' + dataSplit[0];
-                        }
-                        return concurso;
-                    });
-                    window.localStorage.setItem('concursosRecentes', JSON.stringify($scope.concursos));
-                    ocultaAguarde();
-
-                }).error(function (data, status, headers, config) {
-                    if (window.localStorage.getItem('concursosRecentes') != undefined && window.localStorage.getItem('concursosRecentes') != null) {
-
-                        $scope.concursos = _.map(JSON.parse(window.localStorage.getItem('concursosRecentes')), function (concurso) {
+                        $scope.concursos = _.map(data, function (concurso) {
                             concurso.ProximoConcurso.ValorEstimado = accounting.formatMoney(concurso.ProximoConcurso.ValorEstimado).replace('$', 'R$');
                             concurso.TipoConcurso = $scope.retornaTipoLoteriaMobilePorWeb(concurso.TipoConcurso);
                             concurso.image = retornaCaminhoDaImagemPorTipoLoteria(concurso.TipoConcurso);
@@ -65,14 +25,31 @@
                                 concurso.ProximoConcurso.Data = concurso.ProximoConcurso.Data.replace('T00:00:00', '');
                                 var dataSplit = concurso.ProximoConcurso.Data.split('-');
                                 concurso.ProximoConcurso.Data = dataSplit[2] + '/' + dataSplit[1] + '/' + dataSplit[0];
+
+                                if (concurso.ProximoConcurso.Data.indexOf('undefined/') > 0) {
+                                    concurso.ProximoConcurso.Data = concurso.ProximoConcurso.Data.replace('undefined/', '').replace('undefined/', '');
+                                }
                             }
                             return concurso;
                         });
-                    }
-                    else {
+                        window.localStorage.setItem('concursosRecentes', JSON.stringify($scope.concursos));
                         ocultaAguarde();
-                        mostraPopUpErro('Ocorreu um erro ao buscar os concursos no servidor. Erro: ' + JSON.stringify(data));
-                    }});
+
+                    }).error(function (data, status, headers, config) {
+                        if (window.localStorage.getItem('concursosRecentes') != undefined && window.localStorage.getItem('concursosRecentes') != null) {
+                            $scope.concursos = JSON.parse(window.localStorage.getItem('concursosRecentes'));
+                            ocultaAguarde();
+                        }
+                        else {
+                            ocultaAguarde();
+                            mostraPopUpErro('Ocorreu um erro ao buscar os concursos no servidor. Erro: ' + JSON.stringify(data));
+                        }
+                    });
+            }
+            catch (e) {
+                ocultaAguarde();
+                console.log(e.message + ' / ' + e.stack);
+            }
         }
         else {
             if (window.localStorage.getItem('concursosRecentes') != undefined) {
@@ -116,7 +93,44 @@
                     break;
                 default:
                     break;
-            }            
+            }
+
+        };
+
+        $scope.retornaTipoLoteriaWebPorMobile = function (tipoMobile) {
+
+
+            switch (tipoMobile) {
+                case 'DuplaSena':
+                    return 1;
+                    break;
+                case 'LoteriaFederal':
+                    return 2;
+                    break;
+                case "Loteca":
+                    return 3;
+                    break;
+                case 'Lotofacil':
+                    return 4;
+                    break;
+                case "Lotogol":
+                    return 5;
+                    break;
+                case 'Lotomania':
+                    return 6;
+                    break;
+                case 'MegaSena':
+                    return 7;
+                    break;
+                case 'Quina':
+                    return 8;
+                    break;
+                case 'Timemania':
+                    return 9;
+                    break;
+                default:
+                    break;
+            }
 
         };
     });
@@ -133,7 +147,7 @@
 
 
 function EstaConectado() {
-    try{
+    try {
         var networkState = navigator.connection.type;
 
         var states = {};

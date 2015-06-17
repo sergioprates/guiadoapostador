@@ -1,7 +1,7 @@
 ﻿guiaDoApostador.factory('PushProcessingService', function() {
     
 function gcmSuccessHandler(result) {
-    alert('NOTIFY  pushNotification.register succeeded.  Result = '+result)
+    //alert('NOTIFY  pushNotification.register succeeded.  Result = '+result)
 }
 function gcmErrorHandler(error) {
     alert('NOTIFY  '+error);
@@ -9,8 +9,8 @@ function gcmErrorHandler(error) {
 return {
 
     initialize : function () {
-        alert('NOTIFY  initializing');
-        alert('NOTIFY  Device is ready.  Registering with GCM server');
+        //alert('NOTIFY  initializing');
+        //alert('NOTIFY  Device is ready.  Registering with GCM server');
         //register with google GCM server
         try {
             var pushNotification = window.plugins.pushNotification;
@@ -41,7 +41,7 @@ return {
     },
     //unregister can be called from a settings area.
     unregister : function () {
-        alert('unregister')
+       // alert('unregister')
         var push = window.plugins.pushNotification;
         if (push) {
             push.unregister(function () {

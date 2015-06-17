@@ -13,6 +13,20 @@
         query += 'ORDER BY a.datCadastro desc';
         DBA.query(query, [], funcaoCallback);
     }
+
+    self.listaApostasNaoVerificadas = function (funcaoCallback) {
+
+        var query = new String();
+        query += 'SELECT a.idAposta, a.idConcurso, a.TipoConcurso ';
+        query += 'FROM apostas a ';
+        query += 'LEFT JOIN timeDoCoracao b ';
+        query += 'on a.idAposta = b.idAposta ';
+        query += 'LEFT JOIN bilhete c ';
+        query += 'on a.idAposta = c.idAposta ';
+        query += 'WHERE a.Verificado = 0 ';
+        query += 'ORDER BY a.datCadastro desc';
+        DBA.query(query, [], funcaoCallback);
+    }
  
     self.get = function (memberId, funcaoCallback) {
         var parameters = [memberId];

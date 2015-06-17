@@ -14,8 +14,8 @@
                     // Android customization
 
                     var options = {
-                        //text: '',
-                        silent: true
+                        text: 'O aplicativo Guia do Apostador está executando.',
+                        silent: false
                     };
                     window.plugin.backgroundMode.setDefaults(options);
                     // Enable background mode
@@ -23,6 +23,41 @@
 
                     // Called when background mode has been activated
                     window.plugin.backgroundMode.onactivate = function () {
+
+                        setInterval(function () {
+                            apostasFactory.listaApostasNaoVerificadas(function (results) {
+                                var data = new Object();
+                                data.Apostas = new Array();
+                                if (results.rows != undefined && results.rows.length > 0) {
+                                    for (var i = 0; i < results.rows.length; i++) {
+                                        var aposta = results.rows.item(i);
+                                        aposta.ApostaID = aposta.idAposta;
+                                        aposta.ConcursoID = aposta.idConcurso;
+                                        aposta.TipoConcurso = $scope.retornaTipoLoteriaWebPorMobile(aposta.TipoConcurso);
+                                        data.Apostas.push(aposta);
+                                    }
+                                    data.RegistrationID = window.localStorage.getItem('pushID');
+                                }
+                                if (data.Apostas.length > 0) {
+                                    $http.post(
+                                    pegaURLAPI() + 'concurso',
+                                    JSON.stringify(data),
+                                    {
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        }
+                                    }
+                                ).success(function (data) {
+                                    //alert('Sucesso');
+                                }).error(function () {
+                                    //alert('erro');
+                                });
+                                }
+
+
+                            });
+                        }, 60000);
+
                         
                     };
                 }
@@ -166,17 +201,18 @@ function loteriaComum(tipo) {
 
 function pegaURLAPI() {
     return 'http://claudiosajr-001-site1.smarterasp.net/API/';
+    //return 'http://localhost:3215/API/';
 }
 
 
 
 // ALL GCM notifications come through here.
 function onNotificationGCM(e) {
-    alert('EVENT -> RECEIVED:' + e.event + '');
+    //    alert('EVENT -> RECEIVED:' + e.event + '');
     switch (e.event) {
         case 'registered':
             if (e.regid.length > 0) {
-                alert('REGISTERED with GCM Server -> REGID:' + e.regid);
+                //alert('REGISTERED with GCM Server -> REGID:' + e.regid);
 
                 //call back to web service in Angular.
                 //This works for me because in my code I have a factory called
@@ -187,7 +223,6 @@ function onNotificationGCM(e) {
                 myService.registerID(e.regid);
             }
             break;
-
         case 'message':
             // if this flag is set, this notification happened while we were in the foreground.
             // you might want to play a sound to get the user's attention, throw up a dialog, etc.
@@ -210,6 +245,8 @@ function onNotificationGCM(e) {
                 // direct user here:
                 // window.location = &quot;#/tab/featured&quot;;
             }
+
+
 
             alert('MESSAGE -> MSG: ' + e.payload.message + '');
             alert('MESSAGE: ' + JSON.stringify(e.payload));
