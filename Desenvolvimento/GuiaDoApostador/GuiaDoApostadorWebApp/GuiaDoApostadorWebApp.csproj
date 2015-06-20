@@ -112,6 +112,78 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bootstrap\css\bootstrap-theme.css" />
+    <Content Include="bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="bootstrap\css\bootstrap.css" />
+    <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bootstrap\js\bootstrap.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\npm.js" />
+    <Content Include="css\AjaxLoader.gif" />
+    <Content Include="css\blog-1.css" />
+    <Content Include="css\contact-1.css" />
+    <Content Include="css\contact-2.css" />
+    <Content Include="css\contact-3.css" />
+    <Content Include="css\content1-1.css" />
+    <Content Include="css\content1-2.css" />
+    <Content Include="css\content1-3.css" />
+    <Content Include="css\content1-4.css" />
+    <Content Include="css\content1-5.css" />
+    <Content Include="css\content1-6.css" />
+    <Content Include="css\content1-7.css" />
+    <Content Include="css\content1-8.css" />
+    <Content Include="css\content1-9.css" />
+    <Content Include="css\content2-1.css" />
+    <Content Include="css\content2-10.css" />
+    <Content Include="css\content2-2.css" />
+    <Content Include="css\content2-3.css" />
+    <Content Include="css\content2-4.css" />
+    <Content Include="css\content2-5.css" />
+    <Content Include="css\content2-6.css" />
+    <Content Include="css\content2-7.css" />
+    <Content Include="css\content2-8.css" />
+    <Content Include="css\content2-9.css" />
+    <Content Include="css\content3-1.css" />
+    <Content Include="css\content3-10.css" />
+    <Content Include="css\content3-11.css" />
+    <Content Include="css\content3-2.css" />
+    <Content Include="css\content3-3.css" />
+    <Content Include="css\content3-4.css" />
+    <Content Include="css\content3-5.css" />
+    <Content Include="css\content3-6.css" />
+    <Content Include="css\content3-7.css" />
+    <Content Include="css\content3-8.css" />
+    <Content Include="css\content3-9.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\footer-1.css" />
+    <Content Include="css\footer-2.css" />
+    <Content Include="css\footer-3.css" />
+    <Content Include="css\footer-4.css" />
+    <Content Include="css\footer-5.css" />
+    <Content Include="css\footer-6.css" />
+    <Content Include="css\gallery-1.css" />
+    <Content Include="css\gallery-2.css" />
+    <Content Include="css\grabbing.png" />
+    <Content Include="css\header-1.css" />
+    <Content Include="css\header-2.css" />
+    <Content Include="css\header-3.css" />
+    <Content Include="css\linecons.css" />
+    <Content Include="css\magnific-popup.css" />
+    <Content Include="css\owl.carousel.css" />
+    <Content Include="css\owl.theme.css" />
+    <Content Include="css\owl.transitions.css" />
+    <Content Include="css\pricing-tables-1.css" />
+    <Content Include="css\pricing-tables-2.css" />
+    <Content Include="css\promo-1.css" />
+    <Content Include="css\promo-2.css" />
+    <Content Include="css\promo-3.css" />
+    <Content Include="css\style-library-1.css" />
+    <Content Include="css\team-1.css" />
+    <Content Include="css\team-2.css" />
+    <Content Include="fonts\Flat-UI-Icons.dev.svg" />
+    <Content Include="fonts\Flat-UI-Icons.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -131,6 +203,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Smarter.pubxml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
