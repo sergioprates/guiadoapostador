@@ -146,8 +146,7 @@ function loteriaComum(tipo) {
 }
 
 function pegaURLAPI() {
-    return 'http://claudiosajr-001-site1.smarterasp.net/API/';
-    //return 'http://localhost:3215/API/';
+    return 'http://guia-apostador.com.br/api/';    
 }
 
 
