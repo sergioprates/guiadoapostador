@@ -9,20 +9,25 @@ function gcmErrorHandler(error) {
 return {
 
     initialize : function () {
-        //alert('NOTIFY  initializing');
-        //alert('NOTIFY  Device is ready.  Registering with GCM server');
-        //register with google GCM server
-        try {
-            var pushNotification = window.plugins.pushNotification;
-        }
-        catch (e) {
-            alert('Falha ao pegar objeto push');
-        }
-        try {
-            pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
-        }
-        catch (e) {
-            alert('Falha ao registrar' + JSON.stringify(e));
+        
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+        if(isAndroid) {
+            //alert('NOTIFY  initializing');
+            //alert('NOTIFY  Device is ready.  Registering with GCM server');
+            //register with google GCM server
+            try {
+                var pushNotification = window.plugins.pushNotification;
+            }
+            catch (e) {
+                alert('Falha ao pegar objeto push');
+            }
+            try {
+                pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
+            }
+            catch (e) {
+                alert('Falha ao registrar' + JSON.stringify(e));
+            }
         }
     },
     registerID: function (id) {
