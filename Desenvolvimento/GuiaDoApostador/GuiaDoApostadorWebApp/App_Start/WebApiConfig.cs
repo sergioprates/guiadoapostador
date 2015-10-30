@@ -17,13 +17,13 @@ namespace GuiaDoApostadorWebApp
 
             config.Routes.MapHttpRoute(
                 name: "ConcursoApi",
-                routeTemplate: "api/Concurso/{loteria}/{id}",
+                routeTemplate: "Concurso/{loteria}/{id}",
                 defaults: new { controller = "Concurso", id = RouteParameter.Optional, loteria = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "EstatisticaApi",
-                routeTemplate: "api/Estatistica/{estatistica}/{loteria}",
+                routeTemplate: "Estatistica/{estatistica}/{loteria}",
                 defaults: new { controller = "Estatistica" }
             );
 

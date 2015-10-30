@@ -204,6 +204,7 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Smarter.pubxml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\Uol Host.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
