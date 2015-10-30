@@ -24,9 +24,9 @@
         url: '/6',
         templateUrl: 'paginas/sorteioRealizado.html'
     })
-    .state('sugestaoAposta', {
+    .state('estatistica', {
         url: '/7',
-        templateUrl: 'paginas/sugestaoAposta.html'
+        templateUrl: 'paginas/estatistica.html'
     })
 
     

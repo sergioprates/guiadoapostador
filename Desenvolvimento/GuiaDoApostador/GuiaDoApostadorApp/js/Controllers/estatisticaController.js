@@ -1,4 +1,4 @@
-﻿guiaDoApostador.controller('sugestaoApostaController', ['$scope', '$http', 'mostraPopUpErro', 'mostraAguarde', 'ocultaAguarde', function ($scope, $http, mostraPopUpErro, mostraAguarde, ocultaAguarde) {
+﻿guiaDoApostador.controller('estatisticaController', ['$scope', '$http', 'mostraPopUpErro', 'mostraAguarde', 'ocultaAguarde', function ($scope, $http, mostraPopUpErro, mostraAguarde, ocultaAguarde) {
     
     $scope.selecionarLoteria = function (item) {
         window.localStorage.setItem('concursoSelecionado', JSON.stringify(item))
@@ -11,7 +11,7 @@
                 var concursoAtual = JSON.parse(window.localStorage.getItem('concursoSelecionado'));
                 $scope.loteria = retornaTituloLoteria(concursoAtual.TipoConcurso);
                 
-                $http.get(pegaURLAPI() + 'Estatistica/' + 'NumerosQueMenosSairam/' + concursoAtual.TipoConcurso.replace('Loteria',''))
+                $http.get(pegaURLAPI() + 'Estatistica/' + 'PalpiteProximoSorteio/' + concursoAtual.TipoConcurso.replace('Loteria',''))
                     .success(function (data, status, headers, config) {
 
                         $scope.estatistica = _.map(data, function (estatistica) {
