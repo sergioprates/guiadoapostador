@@ -12,6 +12,8 @@ namespace GuiaDoApostadorDominio.Entities
             base.TipoConcurso = Loteria.Quina;
         }
 
+        public static byte TotalNumerosLoteria = 80;
+        public static byte QuantidadePadraoAposta = 5;
         public List<byte> Dezenas { get; set; }
         public List<PremioPadrao> Premios { get; set; }
     }

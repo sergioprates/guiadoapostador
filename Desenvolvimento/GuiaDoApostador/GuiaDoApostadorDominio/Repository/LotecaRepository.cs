@@ -31,13 +31,13 @@ namespace GuiaDoApostadorDominio.Repository
                     using (cn)
                     {
                         cn.Open();
-                        id = cadastraConcursoConcurso((Loteca)obj, cn);
+                        id = cadastraConcursoConcurso((Loteca)obj);
 
                         foreach (var jogo in ((Loteca)obj).Jogos)
-                            cadastraJogoConcurso(obj.ID, jogo, cn);
+                            cadastraJogoConcurso(obj.ID, jogo);
 
                         foreach (var premio in ((Loteca)obj).Premios)
-                            cadastraPremioConcurso(obj.ID, premio, cn);
+                            cadastraPremioConcurso(obj.ID, premio);
 
                         scope.Complete();
                     }
@@ -126,7 +126,7 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
+        private int cadastraConcursoConcurso(Concurso obj)
         {
             var paramList = new DynamicParameters();
 
@@ -144,7 +144,7 @@ namespace GuiaDoApostadorDominio.Repository
             return id;
         }
 
-        private void cadastraJogoConcurso(int idConcurso, JogoLoteca jogo, SqlConnection conn)
+        private void cadastraJogoConcurso(int idConcurso, JogoLoteca jogo)
         {
             var paramList = new DynamicParameters();
 
@@ -158,7 +158,7 @@ namespace GuiaDoApostadorDominio.Repository
             cn.Execute("sp_cadastraJogoLoteca", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio, SqlConnection conn)
+        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio)
         {
             var paramList = new DynamicParameters();
 

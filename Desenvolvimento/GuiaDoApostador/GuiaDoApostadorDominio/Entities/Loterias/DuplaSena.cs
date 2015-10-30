@@ -9,6 +9,8 @@ namespace GuiaDoApostadorDominio.Entities
             base.TipoConcurso = Loteria.DuplaSena;            
         }
 
+        public static byte TotalNumerosLoteria = 60;
+        public static byte QuantidadePadraoAposta = 12;
         public List<DezenaDuplaSena> Dezenas { get; set; }        
         public List<PremioDuplaSena> Premios { get; set; }
     }

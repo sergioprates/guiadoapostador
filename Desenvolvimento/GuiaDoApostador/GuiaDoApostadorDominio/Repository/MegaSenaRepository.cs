@@ -29,20 +29,20 @@ namespace GuiaDoApostadorDominio.Repository
                     using (cn)
                     {
                         cn.Open();
-                        id = cadastraConcursoConcurso((MegaSena)obj, cn);
+                        id = cadastraConcursoConcurso((MegaSena)obj);
 
                         foreach (var dezena in ((MegaSena)obj).Dezenas)
-                            cadastraDezenaConcurso(obj.ID, dezena, cn);
+                            cadastraDezenaConcurso(obj.ID, dezena);
 
                         foreach (var premio in ((MegaSena)obj).Premios)
-                            cadastraPremioConcurso(obj.ID, premio, cn);
-                        
+                            cadastraPremioConcurso(obj.ID, premio);
+
                         scope.Complete();
                     }
                 }
             }
             catch (Exception ex)
-            {   
+            {
                 throw ex;
             }
 
@@ -69,13 +69,49 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoMegaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
-        internal List<byte> GetNumerosQueMenosSairam()
+        internal Dictionary<byte, int> GetNumerosQueMenosSairam()
+        {
+            Dictionary<byte, int> numeros = new Dictionary<byte, int>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMenosSairamMegaSena", null, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        numeros.Add(Convert.ToByte(dr["dezena"]), Convert.ToByte(dr["quantidade"]));
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
+        internal Dictionary<byte, int> GetNumerosQueMaisSairam()
+        {
+            Dictionary<byte, int> numeros = new Dictionary<byte, int>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMaisSairamMegaSena", null, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        numeros.Add(Convert.ToByte(dr["dezena"]), Convert.ToByte(dr["quantidade"]));
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
+        internal List<byte> GetPalpiteProximoSorteio(int? idConcurso)
         {
             List<byte> numeros = new List<byte>();
 
             using (cn)
             {
-                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMenosSairamMegaSena", null, commandType: CommandType.StoredProcedure))
+                using (IDataReader dr = cn.ExecuteReader("sp_palpiteProximoSorteioMegaSena", new { @idConcurso = idConcurso }, commandType: CommandType.StoredProcedure))
                 {
                     while (dr.Read())
                     {
@@ -87,10 +123,55 @@ namespace GuiaDoApostadorDominio.Repository
             return numeros;
         }
 
+        internal Dictionary<byte, byte> GeraPalpiteProxSorteio(int sorteiosAnteriores)
+        {
+            Dictionary<byte, byte> dic = new Dictionary<byte, byte>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_geraPalpiteProximoSorteioMegaSena", new { @sorteiosAnteriores = sorteiosAnteriores }, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        dic.Add
+                        (
+                            Convert.ToByte(dr["dezena"]),
+                            Convert.ToByte(dr["quantidade"])
+                        );
+                    }
+                }
+            }
+
+            return dic;
+        }
+
+        internal void InserirPalpite(int idConcurso, List<byte> palpite)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+
+                        foreach (var dezena in palpite)
+                            cadastraPalpiteConcurso(idConcurso, dezena);
+
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #region Métodos Privados
 
         private Concurso deserializaConcurso(dynamic obj)
-        {    
+        {
             MegaSena loteria = new MegaSena()
             {
                 ID = obj.concurso.numero,
@@ -99,7 +180,7 @@ namespace GuiaDoApostadorDominio.Repository
                 Local = obj.concurso.local,
                 ValorAcumulado = Convert.ToDecimal(obj.concurso.valor_acumulado.ToString().Replace(".", "")),
                 ArrecadacaoTotal = Convert.ToDecimal(obj.concurso.arrecadacao_total.ToString().Replace(".", "")),
-                EspecialValorAcumulado = Convert.ToDecimal(obj.mega_virada_valor_acumulado.ToString().Replace(".", ""))                
+                EspecialValorAcumulado = Convert.ToDecimal(obj.mega_virada_valor_acumulado.ToString().Replace(".", ""))
             };
 
             loteria.Dezenas = new List<byte>();
@@ -139,7 +220,7 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
+        private int cadastraConcursoConcurso(Concurso obj)
         {
             var paramList = new DynamicParameters();
 
@@ -158,7 +239,7 @@ namespace GuiaDoApostadorDominio.Repository
             return id;
         }
 
-        private void cadastraDezenaConcurso(int idConcurso, byte dezena, SqlConnection conn)
+        private void cadastraDezenaConcurso(int idConcurso, byte dezena)
         {
             var paramList = new DynamicParameters();
 
@@ -168,7 +249,7 @@ namespace GuiaDoApostadorDominio.Repository
             cn.Execute("sp_cadastraDezenaMegaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio, SqlConnection conn)
+        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio)
         {
             var paramList = new DynamicParameters();
 
@@ -178,6 +259,16 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@Ganhadores", premio.Ganhadores);
 
             cn.Execute("sp_cadastraPremioMegaSena", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private void cadastraPalpiteConcurso(int idConcurso, byte dezena)
+        {
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@dezena", dezena);
+
+            cn.Execute("sp_cadastraPalpiteMegaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
         private Concurso buscar(int? id)
@@ -240,7 +331,7 @@ namespace GuiaDoApostadorDominio.Repository
                 }
             }
             catch (Exception ex)
-            {   
+            {
                 throw ex;
             }
 

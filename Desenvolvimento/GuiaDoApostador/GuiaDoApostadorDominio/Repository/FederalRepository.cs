@@ -30,10 +30,10 @@ namespace GuiaDoApostadorDominio.Repository
                     using (cn)
                     {
                         cn.Open();
-                        id = cadastraConcursoConcurso((Federal)obj, cn);
+                        id = cadastraConcursoConcurso((Federal)obj);
 
                         foreach (var premio in ((Federal)obj).Premios)
-                            cadastraPremioConcurso(obj.ID, premio, cn);
+                            cadastraPremioConcurso(obj.ID, premio);
 
                         scope.Complete();
                     }
@@ -97,7 +97,7 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
+        private int cadastraConcursoConcurso(Concurso obj)
         {
             var paramList = new DynamicParameters();
 
@@ -112,7 +112,7 @@ namespace GuiaDoApostadorDominio.Repository
             return id;
         }
 
-        private void cadastraPremioConcurso(int idConcurso, PremioFederal premio, SqlConnection conn)
+        private void cadastraPremioConcurso(int idConcurso, PremioFederal premio)
         {
             var paramList = new DynamicParameters();
 

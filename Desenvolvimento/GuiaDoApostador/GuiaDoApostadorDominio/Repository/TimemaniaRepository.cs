@@ -29,15 +29,15 @@ namespace GuiaDoApostadorDominio.Repository
                     using (cn)
                     {
                         cn.Open();
-                        id = cadastraConcursoConcurso((Timemania)obj, cn);
+                        id = cadastraConcursoConcurso((Timemania)obj);
 
                         foreach (var dezena in ((Timemania)obj).Dezenas)
-                            cadastraDezenaConcurso(obj.ID, dezena, cn);
+                            cadastraDezenaConcurso(obj.ID, dezena);
 
                         foreach (var premio in ((Timemania)obj).Premios)
-                            cadastraPremioConcurso(obj.ID, premio, cn);
+                            cadastraPremioConcurso(obj.ID, premio);
 
-                        cadastraTimeCoracao(obj.ID, ((Timemania)obj).TimeCoracao, cn);
+                        cadastraTimeCoracao(obj.ID, ((Timemania)obj).TimeCoracao);
 
                         scope.Complete();
                     }
@@ -161,7 +161,7 @@ namespace GuiaDoApostadorDominio.Repository
             return loteria;
         }
 
-        private int cadastraConcursoConcurso(Concurso obj, SqlConnection conn)
+        private int cadastraConcursoConcurso(Concurso obj)
         {
             var paramList = new DynamicParameters();
 
@@ -180,7 +180,7 @@ namespace GuiaDoApostadorDominio.Repository
             return id;
         }
 
-        private void cadastraDezenaConcurso(int idConcurso, byte dezena, SqlConnection conn)
+        private void cadastraDezenaConcurso(int idConcurso, byte dezena)
         {
             var paramList = new DynamicParameters();
 
@@ -190,7 +190,7 @@ namespace GuiaDoApostadorDominio.Repository
             cn.Execute("sp_cadastraDezenaTimemania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio, SqlConnection conn)
+        private void cadastraPremioConcurso(int idConcurso, PremioPadrao premio)
         {
             var paramList = new DynamicParameters();
 
@@ -202,7 +202,7 @@ namespace GuiaDoApostadorDominio.Repository
             cn.Execute("sp_cadastraPremioTimemania", paramList, commandType: CommandType.StoredProcedure);
         }
 
-        private void cadastraTimeCoracao(int idConcurso, TimeCoracao time, SqlConnection conn)
+        private void cadastraTimeCoracao(int idConcurso, TimeCoracao time)
         {
             var paramList = new DynamicParameters();
 

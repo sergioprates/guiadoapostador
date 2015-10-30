@@ -7,5 +7,6 @@ namespace GuiaDoApostadorDominio.Interfaces
 {
     public interface IMegaSenaController : IConcursoController
     {
+        void GeraPalpiteProximoSorteio(int idConcurso);
     }
 }

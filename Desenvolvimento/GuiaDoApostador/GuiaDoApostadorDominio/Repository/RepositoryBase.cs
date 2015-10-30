@@ -5,11 +5,17 @@ namespace GuiaDoApostadorDominio.Repository
 {
     internal class RepositoryBase
     {
-        protected readonly SqlConnection cn;
+        private SqlConnection _cn;
 
-        internal RepositoryBase()
+        protected SqlConnection cn
         {
-            cn = new SqlConnection(ConfigurationManager.ConnectionStrings["guiadoapostador"].ToString());
+            get
+            {
+                if (_cn == null || _cn.State == System.Data.ConnectionState.Closed)
+                    _cn = new SqlConnection(ConfigurationManager.ConnectionStrings["guiadoapostador"].ToString());
+
+                return _cn;
+            }
         }
     }
 }

@@ -13,6 +13,8 @@ namespace GuiaDoApostadorDominio.Entities
             this.Premios = new List<PremioPadrao>();
         }
 
+        public static byte TotalNumerosLoteria = 60;
+        public static byte QuantidadePadraoAposta = 6;
         public List<byte> Dezenas { get; set; }
         public List<PremioPadrao> Premios { get; set; }
     }

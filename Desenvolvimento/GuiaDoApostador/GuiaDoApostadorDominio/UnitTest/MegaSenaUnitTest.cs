@@ -12,7 +12,7 @@ namespace GuiaDoApostadorDominio.UnitTest
     [TestFixture]
     public class MegaSenaUnitTest
     {
-        //IMegaSenaController _controller = new MegaSenaControllerMock();
+        //MegaSenaController _controller = new MegaSenaControllerMock();
         IMegaSenaController _controller = new MegaSenaController();
 
         [Test]
@@ -62,6 +62,12 @@ namespace GuiaDoApostadorDominio.UnitTest
             var estatistica = _controller.ObtemEstatistica(Entities.Estatistica.NumerosQueMenosSairam);
 
             Assert.AreNotEqual(null, estatistica);
+        }
+
+        [Test]
+        public void GeraPalpiteProximoSorteio()
+        {
+            _controller.GeraPalpiteProximoSorteio(1756);
         }
     }
 }

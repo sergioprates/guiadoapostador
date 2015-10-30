@@ -16,7 +16,9 @@ namespace GuiaDoApostadorDominio.Entities
 
     public enum Estatistica
     {
-        NumerosQueMenosSairam
+        NumerosQueMenosSairam,
+        NumerosQueMaisSairam,
+        PalpiteProximoSorteio
     };
 
     public enum Semana
