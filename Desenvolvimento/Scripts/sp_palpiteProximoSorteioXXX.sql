@@ -1,87 +1,121 @@
-use guiaaposta1
+use guiaaposta1;
 
-go 
+go
 
 create procedure sp_palpiteProximoSorteioMegaSena
-@sorteiosAnteriores tinyint
+@idConcurso int
 as
 begin
-
-	select count(*) as 'quantidade', dezena 
-	from MegasenaDezenas
-	where IdConcurso > (select max(idConcurso) - @sorteiosAnteriores from MegasenaDezenas)
-	group by dezena
-
+	IF (@idConcurso is null)
+	begin
+		select idConcurso, dezena from MegasenaPalpites
+		where idConcurso = (select max(idConcurso) from MegasenaPalpites)
+		order by dezena
+	end
+	ELSE
+	begin
+		select idConcurso, dezena from MegasenaPalpites
+		where idConcurso = @idConcurso
+		order by dezena
+	end
 end
 
 go
 
-create procedure sp_palpiteProximoSorteioLotoFacil
-@sorteiosAnteriores tinyint
+create procedure sp_palpiteProximoSorteioLotofacil
+@idConcurso int
 as
 begin
-
-	select count(*) as 'quantidade', dezena 
-	from LotoFacilDezenas
-	where IdConcurso > (select max(idConcurso) - @sorteiosAnteriores from LotoFacilDezenas)
-	group by dezena
-
-end
-
-go
-
-create procedure sp_palpiteProximoSorteioTimeMania
-@sorteiosAnteriores tinyint
-as
-begin
-
-	select count(*) as 'quantidade', dezena 
-	from TimeManiaDezenas
-	where IdConcurso > (select max(idConcurso) - @sorteiosAnteriores from TimeManiaDezenas)
-	group by dezena
-
-end
-
-go
-
-create procedure sp_palpiteProximoSorteioQuina
-@sorteiosAnteriores tinyint
-as
-begin
-
-	select count(*) as 'quantidade', dezena 
-	from QuinaDezenas
-	where IdConcurso > (select max(idConcurso) - @sorteiosAnteriores from QuinaDezenas)
-	group by dezena
-
+	IF (@idConcurso is null)
+	begin
+		select idConcurso, dezena from LotofacilPalpites
+		where idConcurso = (select max(idConcurso) from LotofacilPalpites)
+		order by dezena
+	end
+	ELSE
+	begin
+		select idConcurso, dezena from LotofacilPalpites
+		where idConcurso = @idConcurso
+		order by dezena
+	end
 end
 
 go
 
 create procedure sp_palpiteProximoSorteioLotomania
-@sorteiosAnteriores tinyint
+@idConcurso int
 as
 begin
-
-	select count(*) as 'quantidade', dezena 
-	from LotomaniaDezenas
-	where IdConcurso > (select max(idConcurso) - @sorteiosAnteriores from LotomaniaDezenas)
-	group by dezena
-
+	IF (@idConcurso is null)
+	begin
+		select idConcurso, dezena from LotomaniaPalpites
+		where idConcurso = (select max(idConcurso) from LotomaniaPalpites)
+		order by dezena
+	end
+	ELSE
+	begin
+		select idConcurso, dezena from LotomaniaPalpites
+		where idConcurso = @idConcurso
+		order by dezena
+	end
 end
 
 go
 
-
-create procedure sp_palpiteProximoSorteioDuplaSena
-@sorteiosAnteriores tinyint
+create procedure sp_palpiteProximoSorteioTimemania
+@idConcurso int
 as
 begin
-
-	select count(*) as 'quantidade', dezena 
-	from DuplaSenaDezenas
-	where IdConcurso > (select max(idConcurso) - @sorteiosAnteriores from DuplaSenaDezenas)
-	group by dezena
-
+	IF (@idConcurso is null)
+	begin
+		select idConcurso, dezena from TimemaniaPalpites
+		where idConcurso = (select max(idConcurso) from TimemaniaPalpites)
+		order by dezena
+	end
+	ELSE
+	begin
+		select idConcurso, dezena from TimemaniaPalpites
+		where idConcurso = @idConcurso
+		order by dezena
+	end
 end
 
+go
+
+create procedure sp_palpiteProximoSorteioQuina
+@idConcurso int
+as
+begin
+	IF (@idConcurso is null)
+	begin
+		select idConcurso, dezena from QuinaPalpites
+		where idConcurso = (select max(idConcurso) from QuinaPalpites)
+		order by dezena
+	end
+	ELSE
+	begin
+		select idConcurso, dezena from QuinaPalpites
+		where idConcurso = @idConcurso
+		order by dezena
+	end
+end
+
+go
+
+create procedure sp_palpiteProximoSorteioDuplaSena
+@idConcurso int
+as
+begin
+	IF (@idConcurso is null)
+	begin
+		select idConcurso, dezena from DuplaSenaPalpites
+		where idConcurso = (select max(idConcurso) from DuplaSenaPalpites)
+		order by dezena
+	end
+	ELSE
+	begin
+		select idConcurso, dezena from DuplaSenaPalpites
+		where idConcurso = @idConcurso
+		order by dezena
+	end
+end
