@@ -35,6 +35,10 @@ namespace ObtemDadosAtuais
                 {
                     mega.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
+
+                    int proxSorteio = concurso.ID + 1;
+                    mega.GeraPalpiteProximoSorteio(proxSorteio);
+                    log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
                 {
