@@ -15,12 +15,12 @@
                     .success(function (data, status, headers, config) {
 
                         $scope.estatistica = _.map(data, function (estatistica) {
-                            
+                                                       
                             estatistica = estatistica;
                             
                             return estatistica;
                         });
-                    
+                                            
                         window.localStorage.setItem('estatistica', JSON.stringify($scope.estatistica));
                         ocultaAguarde();
 
