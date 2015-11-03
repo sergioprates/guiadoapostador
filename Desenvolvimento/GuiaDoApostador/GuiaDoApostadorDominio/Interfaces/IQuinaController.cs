@@ -7,5 +7,6 @@ namespace GuiaDoApostadorDominio.Interfaces
 {
     public interface IQuinaController : IConcursoController
     {
+        void GeraPalpiteProximoSorteio(int idConcurso);
     }
 }

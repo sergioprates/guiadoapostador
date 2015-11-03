@@ -58,5 +58,10 @@ namespace GuiaDoApostadorDominio.UnitTest.Mock
         {
             throw new NotImplementedException();
         }
+
+        public void GeraPalpiteProximoSorteio(int idConcurso)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

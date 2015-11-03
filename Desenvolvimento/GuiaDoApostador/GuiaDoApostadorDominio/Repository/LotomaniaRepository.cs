@@ -68,13 +68,49 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoLotomania", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
-        internal List<byte> GetNumerosQueMenosSairam()
+        internal Dictionary<byte, int> GetNumerosQueMenosSairam()
+        {
+            Dictionary<byte, int> numeros = new Dictionary<byte, int>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMenosSairamLotomania", null, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        numeros.Add(Convert.ToByte(dr["dezena"]), Convert.ToByte(dr["quantidade"]));
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
+        internal Dictionary<byte, int> GetNumerosQueMaisSairam()
+        {
+            Dictionary<byte, int> numeros = new Dictionary<byte, int>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMaisSairamLotomania", null, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        numeros.Add(Convert.ToByte(dr["dezena"]), Convert.ToByte(dr["quantidade"]));
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
+        internal List<byte> GetPalpiteProximoSorteio(int? idConcurso)
         {
             List<byte> numeros = new List<byte>();
 
             using (cn)
             {
-                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMenosSairamLotomania", null, commandType: CommandType.StoredProcedure))
+                using (IDataReader dr = cn.ExecuteReader("sp_palpiteProximoSorteioLotomania", new { @idConcurso = idConcurso }, commandType: CommandType.StoredProcedure))
                 {
                     while (dr.Read())
                     {
@@ -84,6 +120,51 @@ namespace GuiaDoApostadorDominio.Repository
             }
 
             return numeros;
+        }
+
+        internal Dictionary<byte, byte> GeraPalpiteProxSorteio(int sorteiosAnteriores)
+        {
+            Dictionary<byte, byte> dic = new Dictionary<byte, byte>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_geraPalpiteProximoSorteioLotomania", new { @sorteiosAnteriores = sorteiosAnteriores }, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        dic.Add
+                        (
+                            Convert.ToByte(dr["dezena"]),
+                            Convert.ToByte(dr["quantidade"])
+                        );
+                    }
+                }
+            }
+
+            return dic;
+        }
+
+        internal void InserirPalpite(int idConcurso, List<byte> palpite)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+
+                        foreach (var dezena in palpite)
+                            cadastraPalpiteConcurso(idConcurso, dezena);
+
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         
         #region Métodos Privados
@@ -195,6 +276,16 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@Ganhadores", premio.Ganhadores);
 
             cn.Execute("sp_cadastraPremioLotomania", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private void cadastraPalpiteConcurso(int idConcurso, byte dezena)
+        {
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@dezena", dezena);
+
+            cn.Execute("sp_cadastraPalpiteLotomania", paramList, commandType: CommandType.StoredProcedure);
         }
 
         private Concurso buscar(int? id)

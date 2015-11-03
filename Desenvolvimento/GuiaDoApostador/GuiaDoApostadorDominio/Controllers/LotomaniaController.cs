@@ -1,6 +1,8 @@
 ﻿using GuiaDoApostadorDominio.Entities;
 using GuiaDoApostadorDominio.Interfaces;
 using GuiaDoApostadorDominio.Repository;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GuiaDoApostadorDominio.Controllers
 {
@@ -48,13 +50,47 @@ namespace GuiaDoApostadorDominio.Controllers
             switch (estat)
             {
                 case Estatistica.NumerosQueMenosSairam:
-                    var valor = _repository.GetNumerosQueMenosSairam();
-                    valor.Sort();
-                    estatistica = valor;
+                    estatistica = _repository.GetNumerosQueMenosSairam().OrderBy(n => n.Key);
+                    break;
+                case Estatistica.NumerosQueMaisSairam:
+                    estatistica = _repository.GetNumerosQueMaisSairam().OrderBy(n => n.Key);
+                    break;
+                case Estatistica.PalpiteProximoSorteio:
+                    estatistica = _repository.GetPalpiteProximoSorteio(null).OrderBy(n => n);
                     break;
             }
 
             return estatistica;
+        }
+
+        public void GeraPalpiteProximoSorteio(int idConcurso)
+        {
+            int sorteiosAnteriores = 8;
+            int quantidadePalpite = 70;
+            Dictionary<byte, byte> numerosLoteria = new Dictionary<byte, byte>(Lotomania.TotalNumerosLoteria);
+            Dictionary<byte, byte> ultimosNumeros = _repository.GeraPalpiteProxSorteio(sorteiosAnteriores);
+
+            for (byte i = 1; i <= Lotomania.TotalNumerosLoteria; i++)
+            {
+                byte? value = ultimosNumeros.FirstOrDefault(n => n.Key == i).Value;
+                numerosLoteria.Add(i, value == null ? (byte)0 : (byte)value);
+            }
+
+            var primeirosMenosSairam = numerosLoteria.OrderBy(n => n.Value).ToList().Take(quantidadePalpite);
+
+            List<byte> palpite = new List<byte>();
+
+            while (palpite.Count != Lotomania.QuantidadePadraoAposta)
+            {
+                int random = new System.Random().Next(0, quantidadePalpite);
+
+                byte numero = primeirosMenosSairam.ElementAt(random).Key;
+
+                if (!palpite.Contains(numero))
+                    palpite.Add(numero);
+            }
+
+            _repository.InserirPalpite(idConcurso, palpite);
         }
     }
 }

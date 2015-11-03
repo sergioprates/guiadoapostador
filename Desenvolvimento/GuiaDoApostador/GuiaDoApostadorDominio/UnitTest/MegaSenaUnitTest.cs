@@ -13,7 +13,7 @@ namespace GuiaDoApostadorDominio.UnitTest
     public class MegaSenaUnitTest
     {
         //MegaSenaController _controller = new MegaSenaControllerMock();
-        IMegaSenaController _controller = new MegaSenaController();
+        IDuplaSenaController _controller = new DuplaSenaController();
 
         [Test]
         public void ConsultaApi()
@@ -67,7 +67,7 @@ namespace GuiaDoApostadorDominio.UnitTest
         [Test]
         public void GeraPalpiteProximoSorteio()
         {
-            _controller.GeraPalpiteProximoSorteio(1756);
+            _controller.GeraPalpiteProximoSorteio(1434);
         }
     }
 }

@@ -71,9 +71,9 @@ namespace GuiaDoApostadorDominio.Repository
             return Convert.ToBoolean(cn.ExecuteScalar("sp_existeConcursoDuplaSena", new { @IdConcurso = id }, commandType: CommandType.StoredProcedure));
         }
 
-        internal List<byte> GetNumerosQueMenosSairam()
+        internal Dictionary<byte, int> GetNumerosQueMenosSairam()
         {
-            List<byte> numeros = new List<byte>();
+            Dictionary<byte, int> numeros = new Dictionary<byte, int>();
 
             using (cn)
             {
@@ -81,12 +81,97 @@ namespace GuiaDoApostadorDominio.Repository
                 {
                     while (dr.Read())
                     {
-                        numeros.Add(Convert.ToByte(dr["dezena"]));
+                        numeros.Add(Convert.ToByte(dr["dezena"]), Convert.ToByte(dr["quantidade"]));
                     }
                 }
             }
 
             return numeros;
+        }
+
+        internal Dictionary<byte, int> GetNumerosQueMaisSairam()
+        {
+            Dictionary<byte, int> numeros = new Dictionary<byte, int>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_numerosQueMaisSairamDuplaSena", null, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        numeros.Add(Convert.ToByte(dr["dezena"]), Convert.ToByte(dr["quantidade"]));
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
+        internal List<DezenaDuplaSena> GetPalpiteProximoSorteio(int? idConcurso)
+        {
+            List<DezenaDuplaSena> numeros = new List<DezenaDuplaSena>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_palpiteProximoSorteioDuplaSena", new { @idConcurso = idConcurso }, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        DezenaDuplaSena numero = new DezenaDuplaSena();
+                        numero.Dezena = Convert.ToByte(dr["dezena"]);
+                        numero.Sorteio = Convert.ToByte(dr["sorteio"]);
+                        
+                        numeros.Add(numero);
+                    }
+                }
+            }
+
+            return numeros;
+        }
+
+        internal Dictionary<byte, byte> GeraPalpiteProxSorteio(int sorteiosAnteriores)
+        {
+            Dictionary<byte, byte> dic = new Dictionary<byte, byte>();
+
+            using (cn)
+            {
+                using (IDataReader dr = cn.ExecuteReader("sp_geraPalpiteProximoSorteioDuplaSena", new { @sorteiosAnteriores = sorteiosAnteriores }, commandType: CommandType.StoredProcedure))
+                {
+                    while (dr.Read())
+                    {
+                        dic.Add
+                        (
+                            Convert.ToByte(dr["dezena"]),
+                            Convert.ToByte(dr["quantidade"])
+                        );
+                    }
+                }
+            }
+
+            return dic;
+        }
+
+        internal void InserirPalpite(int idConcurso, List<DezenaDuplaSena> palpite)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (cn)
+                    {
+                        cn.Open();
+
+                        foreach (var dezena in palpite)
+                            cadastraPalpiteConcurso(idConcurso, dezena);
+
+                        scope.Complete();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #region Métodos Privados
@@ -223,6 +308,17 @@ namespace GuiaDoApostadorDominio.Repository
             paramList.Add("@Ganhadores", premio.Ganhadores);
 
             cn.Execute("sp_cadastraPremioDuplaSena", paramList, commandType: CommandType.StoredProcedure);
+        }
+
+        private void cadastraPalpiteConcurso(int idConcurso, DezenaDuplaSena dezena)
+        {
+            var paramList = new DynamicParameters();
+
+            paramList.Add("@idConcurso", idConcurso);
+            paramList.Add("@sorteio", dezena.Sorteio);
+            paramList.Add("@dezena", dezena.Dezena);
+
+            cn.Execute("sp_cadastraPalpiteDuplaSena", paramList, commandType: CommandType.StoredProcedure);
         }
 
         private Concurso buscar(int? id)

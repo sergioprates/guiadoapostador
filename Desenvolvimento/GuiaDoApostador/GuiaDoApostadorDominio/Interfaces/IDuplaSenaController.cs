@@ -7,5 +7,6 @@ namespace GuiaDoApostadorDominio.Interfaces
 {
     interface IDuplaSenaController : IConcursoController
     {
+        void GeraPalpiteProximoSorteio(int idConcurso);
     }
 }

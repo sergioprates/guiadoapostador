@@ -52,13 +52,53 @@ namespace GuiaDoApostadorDominio.Controllers
             switch (estat)
             {
                 case Estatistica.NumerosQueMenosSairam:
-                    var valor = _repository.GetNumerosQueMenosSairam();
-                    valor.Sort();
-                    estatistica = valor;
+                    estatistica = _repository.GetNumerosQueMenosSairam().OrderBy(n => n.Key);
+                    break;
+                case Estatistica.NumerosQueMaisSairam:
+                    estatistica = _repository.GetNumerosQueMaisSairam().OrderBy(n => n.Key);
+                    break;
+                case Estatistica.PalpiteProximoSorteio:
+                    estatistica = _repository.GetPalpiteProximoSorteio(null).OrderBy(d => d.Sorteio).ThenBy(d => d.Dezena);                    
                     break;
             }
 
             return estatistica;
+        }
+
+        public void GeraPalpiteProximoSorteio(int idConcurso)
+        {
+            int sorteiosAnteriores = 5;
+            int quantidadePalpite = 40;
+            Dictionary<byte, byte> numerosLoteria = new Dictionary<byte, byte>(DuplaSena.TotalNumerosLoteria);
+            Dictionary<byte, byte> ultimosNumeros = _repository.GeraPalpiteProxSorteio(sorteiosAnteriores);
+
+            for (byte i = 1; i <= DuplaSena.TotalNumerosLoteria; i++)
+            {
+                byte? value = ultimosNumeros.FirstOrDefault(n => n.Key == i).Value;
+                numerosLoteria.Add(i, value == null ? (byte)0 : (byte)value);
+            }
+
+            var primeirosMenosSairam = numerosLoteria.OrderBy(n => n.Value).ToList().Take(quantidadePalpite);
+
+            List<DezenaDuplaSena> palpite = new List<DezenaDuplaSena>();
+
+            while (palpite.Count != DuplaSena.QuantidadePadraoAposta)
+            {
+                int random = new System.Random().Next(0, quantidadePalpite);
+
+                DezenaDuplaSena numero = new DezenaDuplaSena()
+                {
+                    Dezena = primeirosMenosSairam.ElementAt(random).Key                    
+                };
+
+                if (!palpite.Any(p => p.Dezena == numero.Dezena))
+                    palpite.Add(numero);
+            }
+
+            for (int i = 0; i < palpite.Count; i++)
+                palpite[i].Sorteio = i % 2 == 0 ? (byte)1 : (byte)2;
+
+            _repository.InserirPalpite(idConcurso, palpite);
         }
     }
 }

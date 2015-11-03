@@ -60,7 +60,7 @@ namespace GuiaDoApostadorDominio.Controllers
                     estatistica = _repository.GetNumerosQueMaisSairam().OrderBy(n => n.Key);
                     break;
                 case Estatistica.PalpiteProximoSorteio:
-                    estatistica = _repository.GetPalpiteProximoSorteio(null);
+                    estatistica = _repository.GetPalpiteProximoSorteio(null).OrderBy(n => n);
                     break;
             }
 
