@@ -25,19 +25,19 @@ namespace ObtemDadosAtuais
 
             try
             {
-                MegaSenaController mega = new MegaSenaController();
+                MegaSenaController controller = new MegaSenaController();
                 log.Info("Iniciando atualização de Mega Sena.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
 
                     int proxSorteio = concurso.ID + 1;
-                    mega.GeraPalpiteProximoSorteio(proxSorteio);
+                    controller.GeraPalpiteProximoSorteio(proxSorteio);
                     log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
@@ -56,16 +56,20 @@ namespace ObtemDadosAtuais
 
             try
             {
-                LotofacilController mega = new LotofacilController();
+                LotofacilController controller = new LotofacilController();
                 log.Info("Iniciando atualização de Lotofácil.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
+
+                    int proxSorteio = concurso.ID + 1;
+                    controller.GeraPalpiteProximoSorteio(proxSorteio);
+                    log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
                 {
@@ -83,16 +87,20 @@ namespace ObtemDadosAtuais
 
             try
             {
-                QuinaController mega = new QuinaController();
+                QuinaController controller = new QuinaController();
                 log.Info("Iniciando atualização de Quina.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
+
+                    int proxSorteio = concurso.ID + 1;
+                    controller.GeraPalpiteProximoSorteio(proxSorteio);
+                    log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
                 {
@@ -110,16 +118,20 @@ namespace ObtemDadosAtuais
 
             try
             {
-                LotomaniaController mega = new LotomaniaController();
+                LotomaniaController controller = new LotomaniaController();
                 log.Info("Iniciando atualização de Lotomania.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
+
+                    int proxSorteio = concurso.ID + 1;
+                    controller.GeraPalpiteProximoSorteio(proxSorteio);
+                    log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
                 {
@@ -137,16 +149,20 @@ namespace ObtemDadosAtuais
 
             try
             {
-                DuplaSenaController mega = new DuplaSenaController();
+                DuplaSenaController controller = new DuplaSenaController();
                 log.Info("Iniciando atualização de Dupla Sena.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
+
+                    int proxSorteio = concurso.ID + 1;
+                    controller.GeraPalpiteProximoSorteio(proxSorteio);
+                    log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
                 {
@@ -164,15 +180,15 @@ namespace ObtemDadosAtuais
 
             try
             {
-                LotogolController mega = new LotogolController();
+                LotogolController controller = new LotogolController();
                 log.Info("Iniciando atualização de Lotogol.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
                 }
                 else
@@ -191,15 +207,15 @@ namespace ObtemDadosAtuais
 
             try
             {
-                LotecaController mega = new LotecaController();
+                LotecaController controller = new LotecaController();
                 log.Info("Iniciando atualização de Loteca.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
                 }
                 else
@@ -218,16 +234,20 @@ namespace ObtemDadosAtuais
 
             try
             {
-                TimemaniaController mega = new TimemaniaController();
+                TimemaniaController controller = new TimemaniaController();
                 log.Info("Iniciando atualização de Timemania.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
+
+                    int proxSorteio = concurso.ID + 1;
+                    controller.GeraPalpiteProximoSorteio(proxSorteio);
+                    log.InfoFormat("Palpite para o concurso {0} inserido com sucesso.", proxSorteio);
                 }
                 else
                 {
@@ -245,15 +265,15 @@ namespace ObtemDadosAtuais
 
             try
             {
-                FederalController mega = new FederalController();
+                FederalController controller = new FederalController();
                 log.Info("Iniciando atualização de Federal.");
 
-                var concurso = mega.ConsultaApi();
+                var concurso = controller.ConsultaApi();
                 log.InfoFormat("Concurso {0} obtido.", concurso.ID);
 
-                if (mega.Existe(concurso.ID) == false)
+                if (controller.Existe(concurso.ID) == false)
                 {
-                    mega.Inserir(concurso);
+                    controller.Inserir(concurso);
                     log.InfoFormat("Concurso {0} inserido com sucesso.", concurso.ID);
                 }
                 else
