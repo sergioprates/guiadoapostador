@@ -108,13 +108,13 @@ as
 begin
 	IF (@idConcurso is null)
 	begin
-		select idConcurso, dezena from DuplaSenaPalpites
+		select idConcurso, dezena, sorteio from DuplaSenaPalpites
 		where idConcurso = (select max(idConcurso) from DuplaSenaPalpites)
 		order by dezena
 	end
 	ELSE
 	begin
-		select idConcurso, dezena from DuplaSenaPalpites
+		select idConcurso, dezena, sorteio from DuplaSenaPalpites
 		where idConcurso = @idConcurso
 		order by dezena
 	end
