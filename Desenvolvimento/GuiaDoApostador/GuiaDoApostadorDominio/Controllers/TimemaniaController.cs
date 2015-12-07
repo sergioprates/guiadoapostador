@@ -51,10 +51,10 @@ namespace GuiaDoApostadorDominio.Controllers
             switch (estat)
             {
                 case Estatistica.NumerosQueMenosSairam:
-                    estatistica = _repository.GetNumerosQueMenosSairam().OrderBy(n => n.Key);
+                    estatistica = _repository.GetNumerosQueMenosSairam().OrderBy(n => n.Value);
                     break;
                 case Estatistica.NumerosQueMaisSairam:
-                    estatistica = _repository.GetNumerosQueMaisSairam().OrderBy(n => n.Key);
+                    estatistica = _repository.GetNumerosQueMaisSairam().OrderByDescending(n => n.Value);
                     break;
                 case Estatistica.PalpiteProximoSorteio:
                     estatistica = _repository.GetPalpiteProximoSorteio(null).OrderBy(n => n);
