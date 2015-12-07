@@ -28,7 +28,10 @@
         url: '/7',
         templateUrl: 'paginas/estatistica.html'
     })
-
+    .state('sobre', {
+        url: '/8',
+        templateUrl: 'paginas/sobre.html'
+    })
     
 
     $urlRouterProvider.otherwise("/1");

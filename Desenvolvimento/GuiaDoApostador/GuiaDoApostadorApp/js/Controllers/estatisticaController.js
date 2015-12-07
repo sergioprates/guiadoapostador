@@ -14,15 +14,14 @@
                 $http.get(pegaURLAPI() + 'Estatistica/' + 'PalpiteProximoSorteio/' + concursoAtual.TipoConcurso.replace('Loteria',''))
                     .success(function (data, status, headers, config) {
 
-                        $scope.estatistica = _.map(data, function (estatistica) {
+                        $scope.palpite = _.map(data, function (palpite) {
                                                        
-                            estatistica = estatistica;
+                            palpite = palpite;
                             
-                            return estatistica;
+                            return palpite;
                         });
-                                            
-                        window.localStorage.setItem('estatistica', JSON.stringify($scope.estatistica));
-                        ocultaAguarde();
+                    
+                        window.localStorage.setItem('palpite', JSON.stringify($scope.palpite));
 
                     }).error(function (data, status, headers, config) {
                         if (window.localStorage.getItem('estatistica') != undefined && window.localStorage.getItem('estatistica') != null) {
@@ -31,9 +30,59 @@
                         }
                         else {
                             ocultaAguarde();
-                            mostraPopUpErro('Ocorreu um erro ao buscar os concursos no servidor. Erro: ' + JSON.stringify(data));
+                            mostraPopUpErro('Ocorreu um erro ao buscar o nosso palpite no servidor. Erro: ' + JSON.stringify(data));
                         }
                     });
+                
+                $http.get(pegaURLAPI() + 'Estatistica/' + 'NumerosQueMenosSairam/' + concursoAtual.TipoConcurso.replace('Loteria',''))
+                    .success(function (data, status, headers, config) {
+
+                        $scope.menos = _.map(data, function (menos) {
+                                                       
+                            menos.Key = menos.Key;
+                            menos.Value = menos.Value;
+                            
+                            return menos;
+                        });
+                    
+                        window.localStorage.setItem('menos', JSON.stringify($scope.menos));
+
+                    }).error(function (data, status, headers, config) {
+                        if (window.localStorage.getItem('estatistica') != undefined && window.localStorage.getItem('estatistica') != null) {
+                            $scope.concursos = JSON.parse(window.localStorage.getItem('estatistica'));
+                            ocultaAguarde();
+                        }
+                        else {
+                            ocultaAguarde();
+                            mostraPopUpErro('Ocorreu um erro ao buscar os números que menos saíram no servidor. Erro: ' + JSON.stringify(data));
+                        }
+                    });
+                
+                $http.get(pegaURLAPI() + 'Estatistica/' + 'NumerosQueMaisSairam/' + concursoAtual.TipoConcurso.replace('Loteria',''))
+                    .success(function (data, status, headers, config) {
+
+                        $scope.mais = _.map(data, function (mais) {
+                                                       
+                            mais.Key = mais.Key;
+                            mais.Value = mais.Value;
+                            
+                            return mais;
+                        });
+                    
+                        window.localStorage.setItem('mais', JSON.stringify($scope.mais));                        
+
+                    }).error(function (data, status, headers, config) {
+                        if (window.localStorage.getItem('estatistica') != undefined && window.localStorage.getItem('estatistica') != null) {
+                            $scope.concursos = JSON.parse(window.localStorage.getItem('estatistica'));
+                            ocultaAguarde();
+                        }
+                        else {
+                            ocultaAguarde();
+                            mostraPopUpErro('Ocorreu um erro ao buscar os números que mais saíram no servidor. Erro: ' + JSON.stringify(data));
+                        }
+                    });
+                
+                ocultaAguarde();
             }
             catch (e) {
                 ocultaAguarde();
@@ -53,6 +102,18 @@
     catch (e) {
 
     }
+     
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+          $scope.shownGroup = null;
+        } else {
+          $scope.shownGroup = group;
+        }
+    };
+     
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
+    };
 }]);
 
 

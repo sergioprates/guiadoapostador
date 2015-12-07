@@ -1,23 +1,44 @@
 ﻿<!-- The title of the ion-view will be shown on the navbar -->
 
-<ion-view title="Números da Sorte" ng-controller="estatisticaController">    
+<ion-view title="{{loteria}}" ng-controller="estatisticaController">    
     <ion-content class="padding">
         <!-- The content of the page -->
+        <div class="item item-divider text-center">Estatísticas</div>
+        
+        <ion-list>
+            <ion-item class="item-stable" ng-click="toggleGroup('Mais')" ng-class="{active: isGroupShown('Mais')}">
+                <i class="icon" ng-class="isGroupShown('Mais') ? 'ion-minus' : 'ion-plus'"></i>
+                &nbsp;
+                Números que mais saíram
+            </ion-item>
+            <ion-item class="item-accordion" ng-repeat="item in mais" ng-show="isGroupShown('Mais')">
+                Número {{item.Key}}: {{item.Value}} vezes
+            </ion-item>
+            <ion-item class="item-stable" ng-click="toggleGroup('Menos')" ng-class="{active: isGroupShown('Menos')}">
+                <i class="icon" ng-class="isGroupShown('Menos') ? 'ion-minus' : 'ion-plus'"></i>
+                &nbsp;
+                Números que menos saíram
+            </ion-item>
+            <ion-item class="item-accordion" ng-repeat="item in menos" ng-show="isGroupShown('Menos')">
+                Número {{item.Key}}: {{item.Value}} vezes
+            </ion-item>
+        </ion-list>
+        
         <div class="card">
             <div class="item item-text-wrap">
                 Para você que não sabe o que apostar no próximo concurso, aqui você confere nossa sugestão de aposta.
             </div>
             <div class="item item-divider text-center">Números da Sorte</div>
             <div class="row item" ng-show="loteria != 'Dupla Sena'">
-                <div class="col" ng-repeat="numero in estatistica">
+                <div class="col" ng-repeat="numero in palpite">
                     {{numero}}
-                </div>                    
+                </div>
             </div>
             <div class="row item" ng-show="loteria == 'Dupla Sena'">
                 <div class="col">Sorteio 1</div>
             </div>
             <div class="row item" ng-show="loteria == 'Dupla Sena'">                
-                <div ng-repeat="numero in estatistica">
+                <div ng-repeat="numero in palpite">
                     <div class="col" ng-if="$index < 6">
                         {{numero.Dezena}}
                     </div>                
@@ -27,7 +48,7 @@
                 <div class="col">Sorteio 2</div>
             </div>
             <div class="row item" ng-show="loteria == 'Dupla Sena'">                
-                <div ng-repeat="numero in estatistica">
+                <div ng-repeat="numero in palpite">
                     <div class="col" ng-if="$index >= 6">
                         {{numero.Dezena}}
                     </div>                
@@ -39,5 +60,7 @@
                 Boa Sorte !
             </div>
         </div>
+        <br />
+        
     </ion-content>
 </ion-view>

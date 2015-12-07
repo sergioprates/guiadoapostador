@@ -46,10 +46,15 @@
     <ion-nav-bar class="bar-balanced nav-title-slide-ios7" align-title="center">
         <ion-nav-back-button class="button-icon ion-arrow-left-c">
         </ion-nav-back-button>
-    </ion-nav-bar>
+    </ion-nav-bar>    
     <ion-nav-view class="slide-left-right"></ion-nav-view>
     <script id="home.html" type="text/ng-template">
-        <ion-view title="Guia do Apostador" ng-controller="homeController" hide-back-button="true">
+        <ion-view title="Guia do Apostador" ng-controller="homeController" hide-back-button="true">            
+            <ion-nav-buttons side="right">
+                <button class="button" ui-sref="sobre">
+                    <i class="icon ion-help-circled"></i>
+                </button>
+            </ion-nav-buttons>
             <ion-content class="padding">
                 <!-- The content of the page -->
                 <button class="button button-block button-balanced" ui-sref="minhasApostas">
