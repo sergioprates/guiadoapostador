@@ -20,13 +20,13 @@ return {
                 var pushNotification = window.plugins.pushNotification;
             }
             catch (e) {
-                alert('Falha ao pegar objeto push');
+                //alert('Falha ao pegar objeto push');
             }
             try {
                 pushNotification.register(gcmSuccessHandler, gcmErrorHandler, { 'senderID': '497093213372', 'ecb': 'onNotificationGCM' });
             }
             catch (e) {
-                alert('Falha ao registrar' + JSON.stringify(e));
+                //alert('Falha ao registrar' + JSON.stringify(e));
             }
         }
     },
